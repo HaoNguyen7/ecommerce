@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "afe60fc4-0098-4226-b7ac-3c812b353bfa": {
+      "ProjectGuid": "afe60fc4-0098-4226-b7ac-3c812b353bfa",
+      "DisplayName": "backend-dotnet-r06-mall",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
