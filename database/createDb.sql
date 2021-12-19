@@ -85,7 +85,7 @@ create table donhang_sanpham (
 	id_dh int,
 	id_sp int,
 	soluong int,
-	CONSTRAINT PK_DH
+	CONSTRAINT PK_DHSP
 	PRIMARY KEY (id_dh, id_sp)
 )
 create table thongtindiduong (
@@ -100,7 +100,7 @@ create table ketquakiemtra (
 	id_kqkt int,
 	kqkt_ketqua nvarchar(50),
 	kqkt_ngaykiemtra datetime
-	CONSTRAINT PK_TTDD
+	CONSTRAINT PK_KQKT
 	PRIMARY KEY (id_kqkt)
 )
 
@@ -119,7 +119,7 @@ create table nguoigiaohang (
 	CONSTRAINT PK_NGH
 	PRIMARY KEY (id_ngh)
 )
-
+GO
 ALTER TABLE sanpham
 ADD CONSTRAINT FK_SP_LSP
 	FOREIGN KEY (sp_loaisp)
@@ -140,10 +140,6 @@ ADD CONSTRAINT FK_NGH_KQKT
 	FOREIGN KEY (ngh_kqkt)
 	REFERENCES ketquakiemtra
 
-ALTER TABLE nguoigiaohang
-ADD CONSTRAINT FK_NGH_KQKT
-	FOREIGN KEY (ngh_kqkt)
-	REFERENCES ketquakiemtra
 
 ALTER TABLE donhang
 ADD CONSTRAINT FK_DH_HTTT
