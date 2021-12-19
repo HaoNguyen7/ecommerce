@@ -18,7 +18,7 @@ create table loaisanpham (
 create table sanpham (
 	id_sp int,
 	sp_ten nvarchar(50),
-	sp_mota nvarchar(50),
+	sp_mota nvarchar(max),
 	sp_tonkho int,
 	sp_dongia int,
 	sp_donvi int,
@@ -31,7 +31,7 @@ create table sanpham (
 create table cuahang (
 	id_ch int,
 	ch_ten nvarchar(50),
-	ch_mota nvarchar(50),
+	ch_mota nvarchar(max),
 	ch_danhgia nvarchar(50),
 	ch_sdt varchar(10),
 	ch_stk varchar(30),
@@ -71,7 +71,7 @@ create table donhang (
 	id_donhang int,
 	dh_thoigian datetime,
 	dh_tinhtrangthanhtoan bit,
-	dh_danhgia nvarchar(50),
+	dh_danhgia nvarchar(max),
 	dh_soluong int,
 	dh_httt int,
 	dh_khachhang int,
