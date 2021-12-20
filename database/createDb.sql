@@ -29,7 +29,7 @@ create table sanpham (
 )
 
 create table cuahang (
-	id_ch int,
+	id_ch int IDENTITY(1,1),
 	ch_ten nvarchar(50),
 	ch_mota nvarchar(max),
 	ch_danhgia nvarchar(50),
