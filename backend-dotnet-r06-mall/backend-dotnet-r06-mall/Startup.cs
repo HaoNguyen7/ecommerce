@@ -1,7 +1,10 @@
+using backend_dotnet_r06_mall.Data;
+using backend_dotnet_r06_mall.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -32,6 +35,8 @@ namespace backend_dotnet_r06_mall
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "backend_dotnet_r06_mall", Version = "v1" });
             });
+            services.AddDbContext<BanHangContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Database")));
+            services.AddScoped<BanHangServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
