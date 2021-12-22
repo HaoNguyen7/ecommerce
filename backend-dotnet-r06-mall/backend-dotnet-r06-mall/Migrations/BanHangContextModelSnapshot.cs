@@ -29,8 +29,8 @@ namespace backend_dotnet_r06_mall.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<decimal>("KinhDo")
-                        .HasColumnType("decimal(18,10)");
+                    b.Property<double>("KinhDo")
+                        .HasColumnType("float");
 
                     b.Property<string>("MoTa")
                         .HasMaxLength(255)
@@ -50,8 +50,8 @@ namespace backend_dotnet_r06_mall.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<decimal>("ViDo")
-                        .HasColumnType("decimal(18,10)");
+                    b.Property<double>("ViDo")
+                        .HasColumnType("float");
 
                     b.HasKey("CuaHangId");
 

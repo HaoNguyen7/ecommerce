@@ -10,7 +10,7 @@ using backend_dotnet_r06_mall.Data;
 namespace backend_dotnet_r06_mall.Migrations
 {
     [DbContext(typeof(BanHangContext))]
-    [Migration("20211221144844_UpdateCuaHang")]
+    [Migration("20211222023856_UpdateCuaHang")]
     partial class UpdateCuaHang
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,8 +31,8 @@ namespace backend_dotnet_r06_mall.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<decimal>("KinhDo")
-                        .HasColumnType("decimal(18,10)");
+                    b.Property<double>("KinhDo")
+                        .HasColumnType("float");
 
                     b.Property<string>("MoTa")
                         .HasMaxLength(255)
@@ -52,8 +52,8 @@ namespace backend_dotnet_r06_mall.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<decimal>("ViDo")
-                        .HasColumnType("decimal(18,10)");
+                    b.Property<double>("ViDo")
+                        .HasColumnType("float");
 
                     b.HasKey("CuaHangId");
 

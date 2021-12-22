@@ -6,19 +6,19 @@ namespace backend_dotnet_r06_mall.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<decimal>(
+            migrationBuilder.AddColumn<double>(
                 name: "KinhDo",
                 table: "CuaHang",
-                type: "decimal(18,10)",
+                type: "float",
                 nullable: false,
-                defaultValue: 0m);
+                defaultValue: 0.0);
 
-            migrationBuilder.AddColumn<decimal>(
+            migrationBuilder.AddColumn<double>(
                 name: "ViDo",
                 table: "CuaHang",
-                type: "decimal(18,10)",
+                type: "float",
                 nullable: false,
-                defaultValue: 0m);
+                defaultValue: 0.0);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
