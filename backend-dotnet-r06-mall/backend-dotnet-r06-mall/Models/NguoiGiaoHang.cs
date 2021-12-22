@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace backend_dotnet_r06_mall.Models
 {
@@ -35,6 +36,7 @@ namespace backend_dotnet_r06_mall.Models
 
         public ICollection<ThongTinDiDuong> ThongTinDiDuong { get; set; }
         public ICollection<KetQuaKiemTra> KetQuaKiemTra { get; set; }
+        [JsonIgnore]
         public ICollection<DonHang> DonHang { get; set; }
     }
 }

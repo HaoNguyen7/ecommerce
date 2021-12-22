@@ -1,10 +1,10 @@
 using backend_dotnet_r06_mall.Models;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json.Bson;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace backend_dotnet_r06_mall.Data
 {
-    public class BanHangContext : DbContext
+    public class BanHangContext : IdentityDbContext
     {
         public BanHangContext(DbContextOptions<BanHangContext> options) : base(options)
         {
@@ -44,6 +44,7 @@ namespace backend_dotnet_r06_mall.Data
                 }
 
             );
+            base.OnModelCreating(modelBuilder);
         }
 
     }
