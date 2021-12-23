@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace backend_dotnet_r06_mall.Models
 {
@@ -28,6 +29,7 @@ namespace backend_dotnet_r06_mall.Models
 
         public TinhTrangDonHang TinhTrangDonHang { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<SanPham> SanPham { get; set; }
         public List<DonHangSanPham> DonHangSanPham { get; set; }
     }
