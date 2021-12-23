@@ -9,6 +9,7 @@ using Authentication.Configuration;
 using Authentication.Models.DTO.Incoming;
 using Authentication.Models.DTO.Outgoing;
 using backend_dotnet_r06_mall.Contants;
+using backend_dotnet_r06_mall.Data;
 using backend_dotnet_r06_mall.Models;
 using backend_dotnet_r06_mall.Services;
 using Microsoft.AspNetCore.Identity;
@@ -26,14 +27,22 @@ namespace backend_dotnet_r06_mall.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly JwtConfig _jwtConfig;
-        private readonly BanHangServices _service;
 
-        public AccountsController(UserManager<IdentityUser> userManager, IOptionsMonitor<JwtConfig> optionsMonitor, BanHangServices service,RoleManager<IdentityRole> roleManager)
+        private readonly BanHangContext _context;
+
+        public AccountsController
+        (
+            UserManager<IdentityUser> userManager,
+            IOptionsMonitor<JwtConfig> optionsMonitor,
+            RoleManager<IdentityRole> roleManager,
+            BanHangContext context
+
+        )
         {
             _userManager = userManager;
             _jwtConfig = optionsMonitor.CurrentValue;
-            _service = service;
             _roleManager = roleManager;
+            _context = context;
         }
 
         // Register Action
@@ -86,10 +95,11 @@ namespace backend_dotnet_r06_mall.Controllers
                 _khachHang.TenKhachHang = registrationDto.TenKhachHang;
                 _khachHang.Email = registrationDto.Email;
 
-                _service.CreateKhachHang(_khachHang);
+                await _context.KhachHang.AddAsync(_khachHang);
+                await _context.SaveChangesAsync();
 
                 //Create Roles
-                if(!await _roleManager.RoleExistsAsync(RoleConstants.Admin))
+                if (!await _roleManager.RoleExistsAsync(RoleConstants.Admin))
                 {
                     await _roleManager.CreateAsync(new IdentityRole(RoleConstants.Admin));
                 }
@@ -102,9 +112,9 @@ namespace backend_dotnet_r06_mall.Controllers
                     await _roleManager.CreateAsync(new IdentityRole(RoleConstants.TaiXe));
                 }
 
-                if (await _roleManager.RoleExistsAsync(RoleConstants.Admin))
+                if (await _roleManager.RoleExistsAsync(RoleConstants.Khach))
                 {
-                    await _userManager.AddToRoleAsync(newUser, RoleConstants.Admin);
+                    await _userManager.AddToRoleAsync(newUser, RoleConstants.Khach);
                 }
                 // Create a jwt token
                 var userRoles = await _userManager.GetRolesAsync(newUser);
@@ -198,7 +208,7 @@ namespace backend_dotnet_r06_mall.Controllers
             var jwtHandler = new JwtSecurityTokenHandler();
 
             // get the secret key
-            var key = Encoding.ASCII.GetBytes(_jwtConfig.Secret);        
+            var key = Encoding.ASCII.GetBytes(_jwtConfig.Secret);
 
             var subject = new ClaimsIdentity(
                     new[] {
@@ -208,7 +218,7 @@ namespace backend_dotnet_r06_mall.Controllers
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     });
 
-            foreach(var userRole in roles)
+            foreach (var userRole in roles)
             {
                 subject.AddClaim(new Claim(ClaimTypes.Role, userRole));
             }

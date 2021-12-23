@@ -6,6 +6,7 @@ namespace Authentication.Models.DTO.Incoming
     {
         [Required]
         public string TenKhachHang { get; set; }
+        [EmailAddress]
         [Required]
         public string Email { get; set; }
         [Required]

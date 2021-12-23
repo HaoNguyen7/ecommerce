@@ -26,7 +26,7 @@ namespace backend_dotnet_r06_mall.Services
                 DanhGia = x.DanhGia,
                 STK = x.STK,
                 TenCuaHang = x.TenCuaHang,
-                SoDienThoai = x.SoDienThoai,               
+                SoDienThoai = x.SoDienThoai,
             }).ToList().OrderByDescending(x => Calculate(x.ViDo, x.KinhDo, ViDo, KinhDo)).Last();
 
             return shortestStore;
