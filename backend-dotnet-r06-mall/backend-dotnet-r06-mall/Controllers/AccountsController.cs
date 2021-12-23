@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Authentication.Configuration;
 using Authentication.Models.DTO.Incoming;
 using Authentication.Models.DTO.Outgoing;
+using backend_dotnet_r06_mall.Contants;
 using backend_dotnet_r06_mall.Models;
 using backend_dotnet_r06_mall.Services;
 using Microsoft.AspNetCore.Identity;
@@ -23,14 +24,16 @@ namespace backend_dotnet_r06_mall.Controllers
     public class AccountsController : ControllerBase
     {
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly JwtConfig _jwtConfig;
         private readonly BanHangServices _service;
 
-        public AccountsController(UserManager<IdentityUser> userManager, IOptionsMonitor<JwtConfig> optionsMonitor, BanHangServices service)
+        public AccountsController(UserManager<IdentityUser> userManager, IOptionsMonitor<JwtConfig> optionsMonitor, BanHangServices service,RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _jwtConfig = optionsMonitor.CurrentValue;
             _service = service;
+            _roleManager = roleManager;
         }
 
         // Register Action
@@ -85,8 +88,27 @@ namespace backend_dotnet_r06_mall.Controllers
 
                 _service.CreateKhachHang(_khachHang);
 
+                //Create Roles
+                if(!await _roleManager.RoleExistsAsync(RoleConstants.Admin))
+                {
+                    await _roleManager.CreateAsync(new IdentityRole(RoleConstants.Admin));
+                }
+                if (!await _roleManager.RoleExistsAsync(RoleConstants.Khach))
+                {
+                    await _roleManager.CreateAsync(new IdentityRole(RoleConstants.Khach));
+                }
+                if (!await _roleManager.RoleExistsAsync(RoleConstants.TaiXe))
+                {
+                    await _roleManager.CreateAsync(new IdentityRole(RoleConstants.TaiXe));
+                }
+
+                if (await _roleManager.RoleExistsAsync(RoleConstants.Admin))
+                {
+                    await _userManager.AddToRoleAsync(newUser, RoleConstants.Admin);
+                }
                 // Create a jwt token
-                var token = GenerateJwtToken(newUser);
+                var userRoles = await _userManager.GetRolesAsync(newUser);
+                var token = GenerateJwtToken(newUser, userRoles);
 
                 // return the new user
                 return Ok(new UserRegistrationResponseDto()
@@ -136,7 +158,8 @@ namespace backend_dotnet_r06_mall.Controllers
                 var isCorrect = await _userManager.CheckPasswordAsync(existingUser, loginDto.Password);
                 if (isCorrect)
                 {
-                    var jwtToken = GenerateJwtToken(existingUser);
+                    var userRoles = await _userManager.GetRolesAsync(existingUser);
+                    var jwtToken = GenerateJwtToken(existingUser, userRoles);
 
                     return Ok(new UserLoginResponseDto()
                     {
@@ -170,23 +193,28 @@ namespace backend_dotnet_r06_mall.Controllers
             }
         }
 
-        private string GenerateJwtToken(IdentityUser user)
+        private string GenerateJwtToken(IdentityUser user, IList<string> roles)
         {
             var jwtHandler = new JwtSecurityTokenHandler();
 
             // get the secret key
-            var key = Encoding.ASCII.GetBytes(_jwtConfig.Secret);
+            var key = Encoding.ASCII.GetBytes(_jwtConfig.Secret);        
 
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(
+            var subject = new ClaimsIdentity(
                     new[] {
                         new Claim("Id", user.Id),
                         new Claim(JwtRegisteredClaimNames.Sub, user.Email),
                         new Claim(JwtRegisteredClaimNames.Email, user.Email),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    }
-                    ),
+                    });
+
+            foreach(var userRole in roles)
+            {
+                subject.AddClaim(new Claim(ClaimTypes.Role, userRole));
+            }
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = subject,
                 Expires = DateTime.UtcNow.AddHours(3),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(key),

@@ -56,7 +56,7 @@ namespace backend_dotnet_r06_mall
             });
             services.AddDbContext<BanHangContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Database")));
             services.AddScoped<BanHangServices>();
-
+            services.AddScoped<DriverServices>();
             services.AddAuthentication(option =>
             {
                 option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -79,7 +79,7 @@ namespace backend_dotnet_r06_mall
                     ValidateLifetime = true
                 };
             });
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<BanHangContext>();
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>().AddEntityFrameworkStores<BanHangContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -97,6 +97,7 @@ namespace backend_dotnet_r06_mall
             app.UseRouting();
 
             app.UseCors(MyAllowSpecificOrigins);
+
             app.UseAuthentication();
 
             app.UseAuthorization();

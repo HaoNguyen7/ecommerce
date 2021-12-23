@@ -1,4 +1,5 @@
-﻿using System;
+﻿using backend_dotnet_r06_mall.Models;
+using System;
 
 namespace backend_dotnet_r06_mall.Response
 {
@@ -12,6 +13,16 @@ namespace backend_dotnet_r06_mall.Response
         public string STK { get; set; }
         public double KinhDo { get; set; }
         public double ViDo { get; set; }
-        public double KhoangCach { get; set; }
+
+        public CuaHangResponse(CuaHang cuaHang)
+        {
+            TenCuaHang = cuaHang.TenCuaHang;
+            MoTa = cuaHang.MoTa;
+            DanhGia = cuaHang.DanhGia;
+            SoDienThoai = cuaHang.SoDienThoai;
+            STK = cuaHang. STK;
+            KinhDo = cuaHang.KinhDo;
+            ViDo = cuaHang.ViDo;
+        }
     }
 }
