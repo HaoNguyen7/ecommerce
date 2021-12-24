@@ -11,11 +11,13 @@ namespace backend_dotnet_r06_mall.Response
         public int PageIndex { get; private set; }
         public int TotalPages { get; private set; }
 
+        public int PageSize { get; set; }
+
         public PagedList(List<T> items, int count, int pageIndex, int pageSize)
         {
             PageIndex = pageIndex;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
-
+            PageSize = pageSize;
             this.AddRange(items);
         }
 
