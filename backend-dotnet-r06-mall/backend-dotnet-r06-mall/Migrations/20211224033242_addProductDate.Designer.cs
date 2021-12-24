@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend_dotnet_r06_mall.Data;
 
 namespace backend_dotnet_r06_mall.Migrations
 {
     [DbContext(typeof(BanHangContext))]
-    partial class BanHangContextModelSnapshot : ModelSnapshot
+    [Migration("20211224033242_addProductDate")]
+    partial class addProductDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -283,6 +285,9 @@ namespace backend_dotnet_r06_mall.Migrations
                     b.Property<DateTime>("ThoiGian")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid?>("TinhTrangDonHangTTDHId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<bool>("TinhTrangThanhToan")
                         .HasColumnType("bit");
 
@@ -293,6 +298,8 @@ namespace backend_dotnet_r06_mall.Migrations
                     b.HasIndex("KhachHangId");
 
                     b.HasIndex("NguoiGiaoHangNguoiGiaoId");
+
+                    b.HasIndex("TinhTrangDonHangTTDHId");
 
                     b.ToTable("DonHang");
                 });
@@ -518,22 +525,11 @@ namespace backend_dotnet_r06_mall.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("DonHangId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("GhiChu")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("NgayThucHien")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("TenTinhTrang")
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
                     b.HasKey("TTDHId");
-
-                    b.HasIndex("DonHangId");
 
                     b.ToTable("TinhTrangDonHang");
                 });
@@ -603,11 +599,17 @@ namespace backend_dotnet_r06_mall.Migrations
                         .WithMany("DonHang")
                         .HasForeignKey("NguoiGiaoHangNguoiGiaoId");
 
+                    b.HasOne("backend_dotnet_r06_mall.Models.TinhTrangDonHang", "TinhTrangDonHang")
+                        .WithMany()
+                        .HasForeignKey("TinhTrangDonHangTTDHId");
+
                     b.Navigation("HinhThucThanhToan");
 
                     b.Navigation("KhachHang");
 
                     b.Navigation("NguoiGiaoHang");
+
+                    b.Navigation("TinhTrangDonHang");
                 });
 
             modelBuilder.Entity("backend_dotnet_r06_mall.Models.DonHangSanPham", b =>
@@ -658,18 +660,9 @@ namespace backend_dotnet_r06_mall.Migrations
                         .HasForeignKey("NguoiGiaoHangNguoiGiaoId");
                 });
 
-            modelBuilder.Entity("backend_dotnet_r06_mall.Models.TinhTrangDonHang", b =>
-                {
-                    b.HasOne("backend_dotnet_r06_mall.Models.DonHang", null)
-                        .WithMany("TinhTrangDonHang")
-                        .HasForeignKey("DonHangId");
-                });
-
             modelBuilder.Entity("backend_dotnet_r06_mall.Models.DonHang", b =>
                 {
                     b.Navigation("DonHangSanPham");
-
-                    b.Navigation("TinhTrangDonHang");
                 });
 
             modelBuilder.Entity("backend_dotnet_r06_mall.Models.NguoiGiaoHang", b =>

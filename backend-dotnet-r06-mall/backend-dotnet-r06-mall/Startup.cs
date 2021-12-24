@@ -55,7 +55,7 @@ namespace backend_dotnet_r06_mall
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "backend_dotnet_r06_mall", Version = "v1" });
             });
             services.AddDbContext<BanHangContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Database")));
-            // services.AddScoped<BanHangServices>();
+            services.AddScoped<ProductServices>();
             services.AddScoped<DriverServices>();
             services.AddAuthentication(option =>
             {
