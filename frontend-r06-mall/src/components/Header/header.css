@@ -1,0 +1,24 @@
+.ant-menu-submenu,
+.ant-menu-submenu-selected,
+.ant-menu-item-selected,
+.ant-menu-item {
+  color: black !important;
+}
+.ant-menu-item:hover {
+    color: #40a9ff !important;
+    background-color: rgb(230, 230, 230) !important;
+}
+
+.login-space {
+    margin-left: auto;
+}
+
+.login-space:hover {
+    background: white !important;
+    border-color: transparent !important;
+}
+
+.login-button {
+    color: white !important;
+}
+
