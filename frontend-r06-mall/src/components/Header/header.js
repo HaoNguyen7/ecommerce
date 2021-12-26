@@ -15,6 +15,10 @@ function AppHeader() {
   function onClickLogin() {
     navigate('/login');
   };
+
+  function onClickSignUp() {
+    navigate('/signup');
+  };
   return (
     <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
       <Menu.Item key="homepage" icon={<HomeOutlined />}>
@@ -27,8 +31,11 @@ function AppHeader() {
         <Menu.Item key="type:4"><a href='/op4'>Option 4</a></Menu.Item>
       </SubMenu>
       <Menu.Item className="login-space">
-        <Button class = "login-button" type="primary" size="middle" onClick={onClickLogin}>
+        <Button className = "login-button" type="primary" size="middle" onClick={onClickLogin}>
           Đăng nhập
+        </Button>
+        <Button className = "signup-button" type="primary" size="middle" onClick={onClickSignUp}>
+          Tạo tài khoản
         </Button>
       </Menu.Item>
     </Menu>
