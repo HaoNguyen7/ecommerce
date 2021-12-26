@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Input, Button } from "antd"
 import "./signUp.css"
+import axios from 'axios';
 function SignUp() {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
@@ -17,8 +18,19 @@ function SignUp() {
   }
 
   const onClickSubmit = () => {
-    console.log(email)
-    console.log(password)
+    axios({
+      method:"POST",
+      url: "https://localhost:5001/Accounts/Register",
+      data: {
+        tenKhachHang: userName,
+        email: email,
+        password: password 
+      }
+    }).then(res=> {
+      console.log(res.data)
+    }).catch(err=> {
+      console.log(err)
+    })
   }
   return (
     <Card title="Tạo tài khoản" className='signup-card'>
