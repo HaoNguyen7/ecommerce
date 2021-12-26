@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Card, Input, Button } from "antd"
-import "./logIn.css"
+import { Card, Input, Button } from "antd";
+import "./logIn.css";
+import axios from "axios"
 function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("")
@@ -12,8 +13,18 @@ function LogIn() {
   }
   
   const onClickSubmit = () => {
-    console.log(email)
-    console.log(password)
+    axios({
+      method:"POST",
+      url: "https://localhost:5001/Accounts/Login",
+      data: {
+        email: email,
+        password: password 
+      }
+    }).then(res=> {
+      console.log(res.data)
+    }).catch(err=> {
+      console.log(err)
+    })
   }
   
   return (
