@@ -25,4 +25,9 @@
 
 .ant-card-body > .ant-btn {
     margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.ant-card-body > p {
+    font-size: 1.1rem;
 }
