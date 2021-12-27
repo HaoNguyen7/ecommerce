@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { Card, Input, Button } from "antd";
 import "./logIn.css";
 import axios from "axios"
+import {useNavigate } from "react-router-dom"
 function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("")
+  const navigate = useNavigate();
   const getPassword = (event) => {
     setPassword(event.target.value)
   }
@@ -22,6 +24,9 @@ function LogIn() {
       }
     }).then(res=> {
       localStorage.setItem("token", res.data.token)
+      alert("Đăng nhập thành công")
+      navigate("/")
+
     }).catch(err=> {
       console.log(err)
     })

@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { Card, Input, Button } from "antd"
 import "./signUp.css"
 import axios from 'axios';
+import {useNavigate } from "react-router-dom"
 function SignUp() {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("")
-
+  const navigate = useNavigate();
   const getUserName = (event) => {
     setUserName(event.target.value)
   }
@@ -27,7 +28,8 @@ function SignUp() {
         password: password 
       }
     }).then(res=> {
-      console.log(res.data)
+      alert("Đăng ký thành công")
+      navigate("/login")
     }).catch(err=> {
       console.log(err)
     })
