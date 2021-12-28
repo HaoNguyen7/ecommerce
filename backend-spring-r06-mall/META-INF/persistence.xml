@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+  <persistence-unit name="default">
+
+  </persistence-unit>
+    <persistence-unit name="persistenceUnit">
+      <class>r06.mall.Models.CuaHang</class>
+      <class>r06.mall.Models.DonHang</class>
+      <class>r06.mall.Models.DonHangSanPham</class>
+      <class>r06.mall.Models.HinhThucThanhToan</class>
+      <class>r06.mall.Models.KetQuaKiemTra</class>
+      <class>r06.mall.Models.KhachHang</class>
+      <class>r06.mall.Models.LoaiSanPham</class>
+      <class>r06.mall.Models.NguoiGiaoHang</class>
+      <class>r06.mall.Models.SanPham</class>
+      <class>r06.mall.Models.ThongTinDiDuong</class>
+      <class>r06.mall.Models.TinhTrangDonHang</class>
+      <properties>
+        <property name="hibernate.connection.url" value="jdbc:sqlserver://localhost\SQLEXPRESS;database=Mall"/>
+        <property name="hibernate.connection.driver_class" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+      </properties>
+    </persistence-unit>
+</persistence>
