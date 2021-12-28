@@ -6,7 +6,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AppHeader from './components/Header/header';
 import HomePage from "./views/Homepage/homepage";
 import SignUp from "./views/SignUp/signUp"
-import LogIn from "./views/Login/logIn";
+import LogIn from "./views/Login/login";
+import Upload from "./views/Upload/Upload.jsx"
 const { Header, Content, Footer } = Layout;
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/" element={<HomePage/>} />
             <Route path="/login" element={<LogIn/>} />
             <Route path="/signup" element={<SignUp/>}/>
+            <Route path="/upload" element={<Upload/>}/>
           </Routes>
         </Content>
       </Router>
