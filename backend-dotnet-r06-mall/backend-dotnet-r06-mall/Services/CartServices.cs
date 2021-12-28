@@ -31,7 +31,8 @@ namespace backend_dotnet_r06_mall.Services
             .Include(p=>p.DonVi)
             .Include(p=>p.CuaHang)
             .AsNoTracking()
-            .SingleOrDefault(p=>p.SanPhamId = id);
+            .SingleOrDefault(p=>p.SanPhamId = id);//loi cho nay?
+            
         }
     }
 }
