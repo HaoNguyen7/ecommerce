@@ -37,7 +37,7 @@ public class OrderController {
             JwtParser jwt = new JwtParser(token);
 
             if (!jwt.isKhach() ||
-                    !order.getKhachHangId().equals(jwt.Id.toUpperCase())) {
+                    !jwt.isAuthorized(order.getKhachHangId())) {
                 return new ResponseEntity<>(HttpStatus.FORBIDDEN);
             }
 

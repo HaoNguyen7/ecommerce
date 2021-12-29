@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import r06.mall.JwtParser.JwtParser;
-import r06.mall.Repositories.Commision;
+import r06.mall.Repositories.Commission;
 import r06.mall.Responses.HoaHongResponse;
 import r06.mall.Services.CommissionService;
 
@@ -33,7 +33,7 @@ public class StoreController {
                 return new ResponseEntity<HoaHongResponse>(new HoaHongResponse(
                         false), HttpStatus.FORBIDDEN);
             }
-            List<Commision> list = hoaHongService.findHoaHongByNamAndThang(year, month);
+            List<Commission> list = hoaHongService.findHoaHongByNamAndThang(year, month);
             return new ResponseEntity<HoaHongResponse>(new HoaHongResponse(
                     true, "", list), HttpStatus.OK);
         } catch (IllegalAccessError err) {

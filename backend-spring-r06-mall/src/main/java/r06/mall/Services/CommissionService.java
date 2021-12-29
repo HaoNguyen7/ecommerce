@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import r06.mall.Repositories.StoreRepository;
-import r06.mall.Repositories.Commision;
+import r06.mall.Repositories.Commission;
 
 @Service
 public class CommissionService {
@@ -15,11 +15,11 @@ public class CommissionService {
         this.cuaHangRepository = cuaHangRepository;
     }
 
-    public List<Commision> findAllHoaHong() {
+    public List<Commission> findAllHoaHong() {
         return cuaHangRepository.findAllHoaHong();
     }
 
-    public List<Commision> findHoaHongByNamAndThang(int nam, int thang) {
+    public List<Commission> findHoaHongByNamAndThang(int nam, int thang) {
         return cuaHangRepository.findHoaHongByNamAndThang(nam, thang);
     }
 }

@@ -1,5 +1,6 @@
 package r06.mall.JwtParser;
 
+import java.util.List;
 import java.util.Map;
 
 import com.auth0.jwt.JWT;
@@ -12,31 +13,41 @@ import r06.mall.Constants.RoleConstants;
 public class JwtParser {
     public String Id;
     public String email;
-    public String role;
+    public List<String> role;
 
     public boolean isAdmin() {
-        return role.equals(RoleConstants.Admin);
+        return role.contains(RoleConstants.Admin);
     }
 
     public boolean isKhach() {
-        return role.equals(RoleConstants.Khach);
+        return role.contains(RoleConstants.Khach);
     }
 
     public boolean isTaiXe() {
-        return role.equals(RoleConstants.TaiXe);
+        return role.contains(RoleConstants.TaiXe);
+    }
+
+    public boolean isAuthorized(String Id) {
+        return this.Id.toLowerCase().equals(Id.toLowerCase());
     }
 
     public JwtParser(String token) {
         try {
             token = token.substring(7);
-            System.out.println(token);
+
             DecodedJWT jwt = JWT.decode(token);
+
             Map<String, Claim> claims = jwt.getClaims(); // Key is the Claim name
+
             Claim claim = claims.get("role");
-            role = claim.toString().replace("\"", "");
+
+            role = claim.asList(String.class);
+
             claim = claims.get("Id");
-            Id = claim.toString().replace("\"", "");
-            email = jwt.getSubject().replace("\"", "");
+            Id = claim.asString();
+
+            email = jwt.getSubject();
+
         } catch (JWTDecodeException exception) {
             // Invalid token
         }
@@ -58,11 +69,11 @@ public class JwtParser {
         this.email = email;
     }
 
-    public String getRole() {
+    public List<String> getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(List<String> role) {
         this.role = role;
     }
 
