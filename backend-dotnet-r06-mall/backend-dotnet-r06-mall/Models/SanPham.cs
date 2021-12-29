@@ -9,10 +9,11 @@ namespace backend_dotnet_r06_mall.Models
     {
         [Key]
         public Guid SanPhamId { get; set; }
-        [MaxLength(50)]
+        [MaxLength(2147483645)]
         [Required]
         public string TenSanPham { get; set; }
 
+        [MaxLength(2147483645)]
         public string MoTa { get; set; }
         [Required]
         public int TonKho { get; set; }
