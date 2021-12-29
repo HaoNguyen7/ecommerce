@@ -5,7 +5,8 @@ import { Layout } from "antd";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AppHeader from './components/Header/header';
 import HomePage from "./views/Homepage/homepage";
-import Login from "./views/Login/login"
+import SignUp from "./views/SignUp/signUp"
+import LogIn from "./views/Login/logIn";
 const { Header, Content, Footer } = Layout;
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
         <Content>
           <Routes>
             <Route path="/" element={<HomePage/>} />
-            <Route path="/login" element={<Login/>} />
+            <Route path="/login" element={<LogIn/>} />
+            <Route path="/signup" element={<SignUp/>}/>
           </Routes>
         </Content>
       </Router>
