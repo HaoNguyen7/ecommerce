@@ -5,5 +5,6 @@ import org.springframework.stereotype.Repository;
 import r06.mall.Models.DonHang;
 
 @Repository
-public interface DonHangRepository extends JpaRepository<DonHang, String> {
+public interface OrderRepository extends JpaRepository<DonHang, String> {
+
 }

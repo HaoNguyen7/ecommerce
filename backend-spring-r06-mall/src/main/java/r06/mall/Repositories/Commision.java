@@ -1,6 +1,6 @@
 package r06.mall.Repositories;
 
-public interface HoaHong {
+public interface Commision {
     String getCuaHangId();
 
     String getTenCuaHang();

@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using backend_dotnet_r06_mall.Contants;
 using backend_dotnet_r06_mall.Data;
 using backend_dotnet_r06_mall.Models;
 using backend_dotnet_r06_mall.Requests;
@@ -29,6 +30,35 @@ namespace backend_dotnet_r06_mall.Services
         public async Task<DonHang> GetOrderById(Guid orderId)
         {
             return await _context.DonHang.Include(o => o.KhachHang).Include(o => o.DonHangSanPham).Include(o => o.SanPham).FirstOrDefaultAsync(p => p.DonHangId == orderId);
+        }
+
+        public async Task<TinhTrangDonHang> GetOrderLastestState(Guid orderId)
+        {
+            return await _context.TinhTrangDonHang.AsNoTracking().OrderByDescending(k => k.NgayThucHien).FirstOrDefaultAsync(o => o.DonHang.DonHangId == orderId);
+        }
+
+
+
+        public async Task<Boolean> UserCancelOrder(DonHang order)
+        {
+            var latestState = await GetOrderLastestState(order.DonHangId);
+
+            if (latestState.TenTinhTrang == OrderStateConstants.ChoXacNhan || latestState.TenTinhTrang == OrderStateConstants.DangXuLy)
+            {
+                TinhTrangDonHang tinhTrangDonHang = new TinhTrangDonHang()
+                {
+                    TTDHId = new Guid(),
+                    TenTinhTrang = OrderStateConstants.KhachHuyDon,
+                    NgayThucHien = new DateTime(),
+                    DonHang = order
+                };
+
+                var AddResult = _context.TinhTrangDonHang.AddAsync(tinhTrangDonHang);
+                await _context.SaveChangesAsync();
+
+                return AddResult.IsCompletedSuccessfully;
+            }
+            return false;
         }
 
     }

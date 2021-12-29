@@ -37,7 +37,7 @@ namespace backend_dotnet_r06_mall.Controllers
             return Ok(new PagedListResponse<DonHang>(orders));
         }
 
-        [HttpGet("{orderId}")]
+        [HttpGet("view/{orderId}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Khach)]
         public async Task<IActionResult> GetUserOrderById(Guid orderId)
         {
@@ -54,6 +54,60 @@ namespace backend_dotnet_r06_mall.Controllers
             }
 
             return Ok(order);
+        }
+
+        [HttpPost("tracking/{orderId}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Khach)]
+        public async Task<IActionResult> CancelUserOrder(Guid orderId)
+        {
+            Guid userId = new Guid(User.FindFirst("Id")?.Value);
+            var order = await _service.GetOrderById(orderId);
+            if (order is null)
+            {
+                return NotFound();
+            }
+
+            if (order.KhachHang is null || !order.KhachHang.KhachHangId.Equals(userId))
+            {
+                return Forbid();
+            }
+
+            Boolean addResult = await _service.UserCancelOrder(order);
+            if (addResult)
+            {
+                return NoContent();
+            }
+            else
+            {
+                return Forbid();
+            }
+        }
+
+        [HttpGet("tracking/{orderId}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Khach)]
+        public async Task<IActionResult> TrackUserOrder(Guid orderId)
+        {
+            Guid userId = new Guid(User.FindFirst("Id")?.Value);
+            var order = await _service.GetOrderById(orderId);
+            if (order is null)
+            {
+                return NotFound();
+            }
+
+            if (order.KhachHang is null || !order.KhachHang.KhachHangId.Equals(userId))
+            {
+                return Forbid();
+            }
+
+            Boolean addResult = await _service.UserCancelOrder(order);
+            if (addResult)
+            {
+                return NoContent();
+            }
+            else
+            {
+                return Forbid();
+            }
         }
     }
 }
