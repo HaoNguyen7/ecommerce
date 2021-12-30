@@ -7,6 +7,7 @@ import AppHeader from './components/Header/header';
 import HomePage from "./views/Homepage/homepage";
 import SignUp from "./views/SignUp/signUp"
 import LogIn from "./views/Login/login";
+import SellRegister from "./views/SellRegister/sellRegister"
 const { Header, Content, Footer } = Layout;
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/" element={<HomePage/>} />
             <Route path="/login" element={<LogIn/>} />
             <Route path="/signup" element={<SignUp/>}/>
+            <Route path="/sellregister" element={<SellRegister/>}/>
           </Routes>
         </Content>
       </Router>
