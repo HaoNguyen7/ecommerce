@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging;
 
 namespace backend_dotnet_r06_mall.Controllers
 {
-    [Authorize(Roles = RoleConstants.TaiXe)]
     [ApiController]
     [Route("[controller]")]
     public class DriverController : ControllerBase
@@ -24,13 +23,15 @@ namespace backend_dotnet_r06_mall.Controllers
             _logger = logger;
             _driverServices = driverServices;
         }
-   
+
+        [Authorize(Roles = RoleConstants.TaiXe)]
         [HttpGet("shortest_shop")]
         public ActionResult<CuaHangResponse> Get([FromQuery] SearchShortestStoreQuery query)
         {         
             return Ok(new CuaHangResponse(_driverServices.FindNearestShop(query.ViDo, query.KinhDo)));
         }
 
+        [Authorize(Roles = RoleConstants.TaiXe)]
         [HttpGet("shortest_shipper")]
         public ActionResult<NguoiGiaoHangResponse> GetShortestShipper([FromQuery] SearchShortestStoreQuery query)
         {
