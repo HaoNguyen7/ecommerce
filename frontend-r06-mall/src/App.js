@@ -10,6 +10,7 @@ import LogIn from "./views/Login/login";
 import Upload from "./views/Upload/Upload.jsx"
 import Driver from "./views/Driver/Driver.jsx"
 import Shipper from "./views/Driver/Shipper/Shipper.jsx";
+import SellRegister from "./views/SellRegister/sellRegister"
 const { Header, Content, Footer } = Layout;
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/upload" element={<Upload/>}/>
             <Route path="/nearest_store" element={<Driver />} />
             <Route path="/nearest_shipper" element={<Shipper />} />
+            <Route path="/sellregister" element={<SellRegister/>}/>
           </Routes>
         </Content>
       </Router>

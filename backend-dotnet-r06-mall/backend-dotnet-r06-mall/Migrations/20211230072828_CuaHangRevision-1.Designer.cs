@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend_dotnet_r06_mall.Data;
 
 namespace backend_dotnet_r06_mall.Migrations
 {
     [DbContext(typeof(BanHangContext))]
-    partial class BanHangContextModelSnapshot : ModelSnapshot
+    [Migration("20211230072828_CuaHangRevision-1")]
+    partial class CuaHangRevision1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -260,9 +262,6 @@ namespace backend_dotnet_r06_mall.Migrations
 
                     b.Property<bool>("TinhTrang")
                         .HasColumnType("bit");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("ViDo")
                         .HasColumnType("float");

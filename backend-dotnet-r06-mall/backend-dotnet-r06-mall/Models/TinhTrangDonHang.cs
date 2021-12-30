@@ -12,5 +12,7 @@ namespace backend_dotnet_r06_mall.Models
         public string GhiChu { get; set; }
         [Required]
         public DateTime NgayThucHien { get; set; }
+
+        public DonHang DonHang { get; set; }
     }
 }

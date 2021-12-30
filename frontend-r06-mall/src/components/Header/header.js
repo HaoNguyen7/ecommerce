@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-
 import { Menu, Button, Badge } from 'antd';
-import { HomeOutlined, ShoppingCartOutlined } from '@ant-design/icons';
+import { HomeOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
 import { useNavigate } from "react-router-dom"
 import "./header.css"
 const { SubMenu } = Menu;
 function AppHeader() {
   const [current, setCurrent] = useState("main");
-  const [isLogin,setIsLogin] = useState(false);
   const navigate = useNavigate();
   const handleClick = e => {
     setCurrent(e.key);
@@ -27,9 +25,10 @@ function AppHeader() {
   const onClickUpload = () => {
     navigate('/upload');
   }
-  useEffect(() => {
-    
-  })
+
+  function onClickLogOut() {
+    localStorage.removeItem("token");
+  };
   return (
     <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
       <Menu.Item key="homepage" icon={<HomeOutlined />}>
@@ -46,26 +45,25 @@ function AppHeader() {
         <Menu.Item key="5"><a href='/nearest_shipper'>Tìm shipper gần nhất</a></Menu.Item>
         <Menu.Item key="6"><a href='/register_driver'>Đăng ký shipper</a></Menu.Item>
       </SubMenu>
-      <Menu.Item className="login-space">
-        <Button className="login-button" type="primary" size="middle" onClick={onClickLogin}>
-          Đăng nhập
-        </Button>
-      </Menu.Item>
-      <Menu.Item>
-        <Button className="signup-button" type="primary" size="middle" onClick={onClickSignUp}>
-          Tạo tài khoản
-        </Button>
-      </Menu.Item>
-      <Menu.Item>
-        <Badge count={0} size="small">
-          <ShoppingCartOutlined style={{ fontSize: "30px", color: "#08c" }} onClick={onClickCart} />
-        </Badge>
-      </Menu.Item>
-      <Menu.Item>
-        <Button className="button" type="primary" size="middle" onClick={onClickUpload}>
-          Upload
-        </Button>
-      </Menu.Item>
+      {!localStorage.getItem("token") ?
+        <Menu.Item className="login-space">
+          <Button className="login-button" type="primary" size="middle" onClick={onClickLogin}>
+            Đăng nhập
+          </Button>
+          <Button className="signup-button" type="primary" size="middle" onClick={onClickSignUp}>
+            Tạo tài khoản
+          </Button>
+        </Menu.Item>
+        :
+        <Menu.Item className="login-space">
+        <SubMenu key="SubMenu" title={<UserOutlined  style={{ fontSize: '150%'}}/>}>
+        <Menu.Item key="type:1"><a href='/profile'>Trang cá nhân</a></Menu.Item>
+        <Menu.Item key="type:2"><a href='/regist-seller'>Bắt đầu kinh doanh</a></Menu.Item>
+        <Menu.Item key="type:3"><a href='/' onClick={onClickLogOut}>Đăng xuất</a></Menu.Item>
+      </SubMenu>
+        
+        </Menu.Item>
+      }
     </Menu>
   );
 }

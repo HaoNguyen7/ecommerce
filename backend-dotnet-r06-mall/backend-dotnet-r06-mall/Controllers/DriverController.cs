@@ -1,4 +1,6 @@
-﻿using backend_dotnet_r06_mall.Contants;
+﻿using System;
+using System.Threading.Tasks;
+using backend_dotnet_r06_mall.Contants;
 using backend_dotnet_r06_mall.Models;
 using backend_dotnet_r06_mall.Query;
 using backend_dotnet_r06_mall.Requests;
@@ -27,7 +29,7 @@ namespace backend_dotnet_r06_mall.Controllers
         [Authorize(Roles = RoleConstants.TaiXe)]
         [HttpGet("shortest_shop")]
         public ActionResult<CuaHangResponse> Get([FromQuery] SearchShortestStoreQuery query)
-        {         
+        {
             return Ok(new CuaHangResponse(_driverServices.FindNearestShop(query.ViDo, query.KinhDo)));
         }
 
@@ -42,6 +44,17 @@ namespace backend_dotnet_r06_mall.Controllers
         public ActionResult<NguoiGiaoHangResponse> RegisterDriver([FromBody] RegisterDriverRequest request)
         {
             return Ok(new NguoiGiaoHangResponse(_driverServices.RegisterDriver(request)));
+        }
+        [HttpGet]
+        [Route("{shipperId}")]
+        public async Task<IActionResult> GetNguoiGiaoHangById(Guid shipperId)
+        {
+            var shipper = await _driverServices.GetNguoiGiaoHangById(shipperId);
+            if (shipper is null)
+            {
+                return NotFound();
+            }
+            return Ok(shipper);
         }
     }
 }

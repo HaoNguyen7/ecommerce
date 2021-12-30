@@ -57,6 +57,8 @@ namespace backend_dotnet_r06_mall
             services.AddDbContext<BanHangContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Database")));
             services.AddScoped<ProductServices>();
             services.AddScoped<DriverServices>();
+            services.AddScoped<OrderServices>();
+            services.AddScoped<StoreService>();
             services.AddAuthentication(option =>
             {
                 option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

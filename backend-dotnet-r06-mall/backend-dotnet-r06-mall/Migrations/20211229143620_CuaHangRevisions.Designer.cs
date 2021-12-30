@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend_dotnet_r06_mall.Data;
 
 namespace backend_dotnet_r06_mall.Migrations
 {
     [DbContext(typeof(BanHangContext))]
-    partial class BanHangContextModelSnapshot : ModelSnapshot
+    [Migration("20211229143620_CuaHangRevisions")]
+    partial class CuaHangRevisions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -229,16 +231,8 @@ namespace backend_dotnet_r06_mall.Migrations
                         .HasMaxLength(2147483645)
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DiaChi")
-                        .HasMaxLength(2147483645)
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<double>("KinhDo")
                         .HasColumnType("float");
-
-                    b.Property<string>("MaSoThue")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("MoTa")
                         .HasMaxLength(2147483645)
@@ -260,9 +254,6 @@ namespace backend_dotnet_r06_mall.Migrations
 
                     b.Property<bool>("TinhTrang")
                         .HasColumnType("bit");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("ViDo")
                         .HasColumnType("float");
@@ -675,11 +666,9 @@ namespace backend_dotnet_r06_mall.Migrations
 
             modelBuilder.Entity("backend_dotnet_r06_mall.Models.TinhTrangDonHang", b =>
                 {
-                    b.HasOne("backend_dotnet_r06_mall.Models.DonHang", "DonHang")
+                    b.HasOne("backend_dotnet_r06_mall.Models.DonHang", null)
                         .WithMany("TinhTrangDonHang")
                         .HasForeignKey("DonHangId");
-
-                    b.Navigation("DonHang");
                 });
 
             modelBuilder.Entity("backend_dotnet_r06_mall.Models.DonHang", b =>
