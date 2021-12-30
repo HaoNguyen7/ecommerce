@@ -36,9 +36,9 @@ function SignUp() {
   }
   return (
     <Card title="Tạo tài khoản" className='signup-card'>
-      <Input size="large" placeholder="large size" addonBefore="Tên đăng nhập" type="text" onChange={getUserName}/>
-      <Input size="large" placeholder="large size" addonBefore="Email" type="email" onChange={getEmail}/>
-      <Input size="large" placeholder="large size" addonBefore="Mật khẩu" type="password" onChange={getPassword}/>
+      <Input size="large" placeholder="Enter username" addonBefore="Tên đăng nhập" type="text" onChange={getUserName}/>
+      <Input size="large" placeholder="Enter email" addonBefore="Email" type="email" onChange={getEmail}/>
+      <Input size="large" placeholder="Enter password" addonBefore="Mật khẩu" type="password" onChange={getPassword}/>
       <Button className = "login-button" type="primary" size="large" onClick={onClickSubmit}>
           Tạo tài khoản
         </Button>
