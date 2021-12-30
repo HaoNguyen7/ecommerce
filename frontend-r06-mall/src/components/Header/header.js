@@ -47,7 +47,7 @@ function AppHeader() {
         <Menu.Item className="login-space">
         <SubMenu key="SubMenu" title={<UserOutlined  style={{ fontSize: '150%'}}/>}>
         <Menu.Item key="type:1"><a href='/profile'>Trang cá nhân</a></Menu.Item>
-        <Menu.Item key="type:2"><a href='/regist-seller'>Bắt đầu kinh doanh</a></Menu.Item>
+        <Menu.Item key="type:2"><a href='/sellregister'>Bắt đầu kinh doanh</a></Menu.Item>
         <Menu.Item key="type:3"><a href='/' onClick={onClickLogOut}>Đăng xuất</a></Menu.Item>
       </SubMenu>
         
