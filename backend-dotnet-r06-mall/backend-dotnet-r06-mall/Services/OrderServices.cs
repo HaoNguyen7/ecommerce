@@ -49,7 +49,7 @@ namespace backend_dotnet_r06_mall.Services
                 {
                     TTDHId = new Guid(),
                     TenTinhTrang = OrderStateConstants.KhachHuyDon,
-                    NgayThucHien = new DateTime(),
+                    NgayThucHien = DateTime.UtcNow,
                     DonHang = order
                 };
 

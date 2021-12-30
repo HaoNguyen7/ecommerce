@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,13 +26,26 @@ namespace backend_dotnet_r06_mall.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProduct([FromQuery] ProductListRequest query)
+        public async Task<IActionResult> GetProductList([FromQuery] ProductListRequest query)
         {
             PagedList<SanPham> listProducts = await _service.GetProducts(query);
             return Ok(new PagedListResponse<SanPham>(listProducts));
         }
 
-
+        [HttpGet]
+        [Route("{productId}")]
+        public async Task<IActionResult> GetPoducDetail(Guid productId)
+        {
+            var product = await _service.GetProductDetail(productId);
+            if (product is null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(product);
+            }
+        }
 
     }
 }

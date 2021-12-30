@@ -5,5 +5,6 @@
         public const string Admin = "Admin";
         public const string Khach = "Khach";
         public const string TaiXe = "TaiXe";
+        public const string CuaHang = "CuaHang";
     }
 }

@@ -22,6 +22,12 @@ namespace backend_dotnet_r06_mall.Models
         [MaxLength(30)]
         public string STK { get; set; }
         public Boolean TinhTrang { get; set; }
+
+        [MaxLength(100)]
+        public string MaSoThue { get; set; }
+
+        [MaxLength(2147483645)]
+        public string DiaChi { get; set; }
         public double KinhDo { get; set; }
         public double ViDo { get; set; }
     }

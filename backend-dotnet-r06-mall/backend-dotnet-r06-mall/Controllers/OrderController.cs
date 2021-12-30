@@ -79,7 +79,7 @@ namespace backend_dotnet_r06_mall.Controllers
             }
             else
             {
-                return Forbid();
+                return BadRequest();
             }
         }
 

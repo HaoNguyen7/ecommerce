@@ -112,9 +112,9 @@ namespace backend_dotnet_r06_mall.Controllers
                     await _roleManager.CreateAsync(new IdentityRole(RoleConstants.TaiXe));
                 }
 
-                if (await _roleManager.RoleExistsAsync(RoleConstants.Khach))
+                if (await _roleManager.RoleExistsAsync(RoleConstants.CuaHang))
                 {
-                    await _userManager.AddToRoleAsync(newUser, RoleConstants.Khach);
+                    await _userManager.AddToRoleAsync(newUser, RoleConstants.CuaHang);
                 }
                 // Create a jwt token
                 var userRoles = await _userManager.GetRolesAsync(newUser);
