@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AppHeader from './components/Header/header';
 import HomePage from "./views/Homepage/homepage";
 import SignUp from "./views/SignUp/signUp"
-import LogIn from "./views/Login/logIn";
+import LogIn from "./views/Login/login";
 const { Header, Content, Footer } = Layout;
 function App() {
   return (
