@@ -41,6 +41,11 @@ function AppHeader() {
         <Menu.Item key="type:3"><a href='/op3'>Option 3</a></Menu.Item>
         <Menu.Item key="type:4"><a href='/op4'>Option 4</a></Menu.Item>
       </SubMenu>
+      <SubMenu key="Driver" title="Tài xế" style={{marginLeft:10}}>
+        <Menu.Item key="4"><a href='/nearest_store'>Tìm cửa hàng gần nhất</a></Menu.Item>
+        <Menu.Item key="5"><a href='/nearest_shipper'>Tìm shipper gần nhất</a></Menu.Item>
+        <Menu.Item key="6"><a href='/register_driver'>Đăng ký shipper</a></Menu.Item>
+      </SubMenu>
       <Menu.Item className="login-space">
         <Button className="login-button" type="primary" size="middle" onClick={onClickLogin}>
           Đăng nhập
