@@ -30,5 +30,7 @@ namespace backend_dotnet_r06_mall.Models
         public string DiaChi { get; set; }
         public double KinhDo { get; set; }
         public double ViDo { get; set; }
+
+        public Guid UserId { get; set; }
     }
 }

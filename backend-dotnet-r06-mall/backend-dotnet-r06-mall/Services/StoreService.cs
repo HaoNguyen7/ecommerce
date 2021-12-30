@@ -19,14 +19,15 @@ namespace backend_dotnet_r06_mall.Services
         {
             CuaHang store = new CuaHang
             {
-                CuaHangId = userId,
+                CuaHangId = new Guid(),
                 TenCuaHang = request.Name,
                 MoTa = request.Description,
                 SoDienThoai = request.PhoneNumber,
                 STK = request.CardId,
                 DiaChi = request.Address,
                 MaSoThue = request.TaxId,
-                TinhTrang = false
+                TinhTrang = false,
+                UserId = userId
             };
 
             var createResult = await _context.CuaHang.AddAsync(store);
