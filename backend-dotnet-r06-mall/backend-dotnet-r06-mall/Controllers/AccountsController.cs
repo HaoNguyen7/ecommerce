@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -11,11 +12,15 @@ using Authentication.Models.DTO.Outgoing;
 using backend_dotnet_r06_mall.Contants;
 using backend_dotnet_r06_mall.Data;
 using backend_dotnet_r06_mall.Models;
+using backend_dotnet_r06_mall.Response;
 using backend_dotnet_r06_mall.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Net.Http.Headers;
 
 namespace backend_dotnet_r06_mall.Controllers
 {
@@ -111,10 +116,14 @@ namespace backend_dotnet_r06_mall.Controllers
                 {
                     await _roleManager.CreateAsync(new IdentityRole(RoleConstants.TaiXe));
                 }
-
-                if (await _roleManager.RoleExistsAsync(RoleConstants.CuaHang))
+                if (!await _roleManager.RoleExistsAsync(RoleConstants.CuaHang))
                 {
-                    await _userManager.AddToRoleAsync(newUser, RoleConstants.CuaHang);
+                    await _roleManager.CreateAsync(new IdentityRole(RoleConstants.CuaHang));
+                }
+
+                if (await _roleManager.RoleExistsAsync(RoleConstants.Khach))
+                {
+                    await _userManager.AddToRoleAsync(newUser, RoleConstants.Khach);
                 }
                 // Create a jwt token
                 var userRoles = await _userManager.GetRolesAsync(newUser);
@@ -202,6 +211,72 @@ namespace backend_dotnet_r06_mall.Controllers
                 );
             }
         }
+
+        [HttpPut]
+        [Route("change-password")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> ChangePassword([FromBody] UserPasswordChangRequest request)
+        {
+            Guid userId = new Guid(User.FindFirst("Id")?.Value);
+            var existingUser = await _userManager.FindByIdAsync(userId.ToString());
+            var result = await _userManager.ChangePasswordAsync(existingUser, request.oldPassword, request.newPassword);
+            if (result.Succeeded)
+            {
+                var userRoles = await _userManager.GetRolesAsync(existingUser);
+                var jwtToken = GenerateJwtToken(existingUser, userRoles);
+                return Ok(new UserLoginResponseDto()
+                {
+                    Success = true,
+                    Token = jwtToken
+                });
+            }
+            else
+            {
+                return BadRequest(new UserLoginResponseDto()
+                {
+                    Success = false,
+                    Errors = new List<string>() {
+                        "Password change failed"
+                    }
+
+                });
+            }
+        }
+
+        [HttpPut]
+        [Route("change-email")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> ChangeEmail([FromBody] String email)
+        {
+            Guid userId = new Guid(User.FindFirst("Id")?.Value);
+            var existingUser = await _userManager.FindByIdAsync(userId.ToString());
+            var token = Request.Headers[HeaderNames.Authorization].ToString();
+            token = token.Replace("Bearer ", "");
+            System.Diagnostics.Debug.WriteLine(token);
+            var result = await _userManager.ChangeEmailAsync(existingUser, email, token);
+            if (result.Succeeded)
+            {
+                var userRoles = await _userManager.GetRolesAsync(existingUser);
+                var jwtToken = GenerateJwtToken(existingUser, userRoles);
+                return Ok(new UserLoginResponseDto()
+                {
+                    Success = true,
+                    Token = jwtToken
+                });
+            }
+            else
+            {
+                return BadRequest(new UserLoginResponseDto()
+                {
+                    Success = false,
+                    Errors = new List<string>() {
+                        "Email change failed"
+                    }
+
+                });
+            }
+        }
+
 
         private string GenerateJwtToken(IdentityUser user, IList<string> roles)
         {

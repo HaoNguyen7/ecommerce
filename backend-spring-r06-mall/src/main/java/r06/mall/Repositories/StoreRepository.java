@@ -16,7 +16,7 @@ public interface StoreRepository extends JpaRepository<CuaHang, String> {
                         + "where SanPham.SanPhamId = DonHangSanPham.SanPhamId and DonHang.DonHangId = DonHangSanPham.DonHangId and "
                         + "DonHang.TinhTrangThanhToan = 1 and SanPham.CuaHangId = CuaHang.CuaHangId "
                         + "group by SanPham.CuaHangId, CuaHang.TenCuaHang, DonHang.ThoiGian", nativeQuery = true)
-        List<Commision> findAllHoaHong();
+        List<Commission> findAllHoaHong();
 
         @Query(value = "select SanPham.CuaHangId, CuaHang.TenCuaHang, SUM(SanPham.DonGia * DonHangSanPham.SoLuong) as DoanhThu, "
                         + "SUM(DonHangSanPham.SoLuong) as SoLuong, Year(DonHang.ThoiGian) as Nam, Month(DonHang.ThoiGian) as Thang "
@@ -24,5 +24,5 @@ public interface StoreRepository extends JpaRepository<CuaHang, String> {
                         + "where SanPham.SanPhamId = DonHangSanPham.SanPhamId and DonHang.DonHangId = DonHangSanPham.DonHangId and "
                         + "DonHang.TinhTrangThanhToan = 1 and SanPham.CuaHangId = CuaHang.CuaHangId and Year(DonHang.ThoiGian) = ?1 and Month(DonHang.ThoiGian) = ?2 "
                         + "group by SanPham.CuaHangId, CuaHang.TenCuaHang, DonHang.ThoiGian", nativeQuery = true)
-        List<Commision> findHoaHongByNamAndThang(int nam, int thang);
+        List<Commission> findHoaHongByNamAndThang(int nam, int thang);
 }

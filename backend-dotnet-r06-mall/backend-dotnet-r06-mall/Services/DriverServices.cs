@@ -43,7 +43,7 @@ namespace backend_dotnet_r06_mall.Services
 
         public async Task<NguoiGiaoHang> GetNguoiGiaoHangById(Guid shipperId)
         {
-            return await _context.NguoiGiaoHang.AsNoTracking().FirstOrDefaultAsync(o => o.NguoiGiaoId.Equals(shipperId));
+            return await _context.NguoiGiaoHang.AsNoTracking().Include(o => o.DonHang).FirstOrDefaultAsync(o => o.NguoiGiaoId.Equals(shipperId));
         }
     }
 }
