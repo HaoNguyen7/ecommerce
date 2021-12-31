@@ -9,6 +9,7 @@ using backend_dotnet_r06_mall.Requests;
 using backend_dotnet_r06_mall.Response;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace backend_dotnet_r06_mall.Services
 {
@@ -59,5 +60,26 @@ namespace backend_dotnet_r06_mall.Services
         {
             return await _context.SanPham.Include(o => o.CuaHang).Include(o => o.LoaiSanPham).AsNoTracking().FirstOrDefaultAsync(o => o.SanPhamId.Equals(productId));
         }
+
+        public async Task<EntityEntry<SanPham>> CreateProduct(RegisterProductRequest request)
+        {
+            SanPham sanpham = new SanPham
+            {
+                SanPhamId = new Guid(),
+                TenSanPham = request.TenSanPham,
+                MoTa = request.MoTa,
+                DonVi = request.DonVi,
+                DonGia = request.DonGia,
+                LoaiSanPham = _context.LoaiSanPham.FirstOrDefault(o => o.LoaiId == request.LoaiSanPham),
+                TonKho = request.TonKho,
+                CuaHang = _context.CuaHang.FirstOrDefault(o => o.CuaHangId == request.CuaHang),
+                NgayDang = DateTime.Now,
+            };
+
+            var createResult = await _context.SanPham.AddAsync(sanpham);
+            await _context.SaveChangesAsync();
+            return createResult;
+        }
+
     }
 }

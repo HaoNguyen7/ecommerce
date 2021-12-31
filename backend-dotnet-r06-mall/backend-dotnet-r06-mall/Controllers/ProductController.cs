@@ -9,6 +9,9 @@ using backend_dotnet_r06_mall.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using backend_dotnet_r06_mall.Contants;
 
 namespace backend_dotnet_r06_mall.Controllers
 {
@@ -46,6 +49,17 @@ namespace backend_dotnet_r06_mall.Controllers
                 return Ok(product);
             }
         }
+        [HttpPost]
+        [Route("register")]
+        public async Task<IActionResult> ProductRegister([FromBody] RegisterProductRequest request)
+        {
 
+            var createStore = await _service.CreateProduct(request);
+            if (createStore is null)
+            {
+                return BadRequest();
+            }
+            return Ok();
+        }
     }
 }
