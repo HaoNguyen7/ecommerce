@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using backend_dotnet_r06_mall.Contants;
 using backend_dotnet_r06_mall.Models;
 using backend_dotnet_r06_mall.Query;
+using backend_dotnet_r06_mall.Requests;
 using backend_dotnet_r06_mall.Response;
 using backend_dotnet_r06_mall.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -13,7 +14,6 @@ using Microsoft.Extensions.Logging;
 
 namespace backend_dotnet_r06_mall.Controllers
 {
-    [Authorize(Roles = RoleConstants.TaiXe)]
     [ApiController]
     [Route("[controller]")]
     public class DriverController : ControllerBase
@@ -26,10 +26,24 @@ namespace backend_dotnet_r06_mall.Controllers
             _driverServices = driverServices;
         }
 
-        [HttpGet]
+        [Authorize(Roles = RoleConstants.TaiXe)]
+        [HttpGet("shortest_shop")]
         public ActionResult<CuaHangResponse> Get([FromQuery] SearchShortestStoreQuery query)
         {
             return Ok(new CuaHangResponse(_driverServices.FindNearestShop(query.ViDo, query.KinhDo)));
+        }
+
+        [Authorize(Roles = RoleConstants.TaiXe)]
+        [HttpGet("shortest_shipper")]
+        public ActionResult<NguoiGiaoHangResponse> GetShortestShipper([FromQuery] SearchShortestStoreQuery query)
+        {
+            return Ok(new NguoiGiaoHangResponse(_driverServices.FindNearestShipper(query.ViDo,query.KinhDo)));
+        }
+
+        [HttpPost("register_driver")]
+        public async Task<ActionResult<NguoiGiaoHangResponse>> RegisterDriver([FromBody] RegisterDriverRequest request)
+        {
+            return Ok(new NguoiGiaoHangResponse(await _driverServices.RegisterDriverAsync(request)));
         }
 
         [HttpGet]

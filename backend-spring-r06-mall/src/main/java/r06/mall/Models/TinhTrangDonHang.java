@@ -1,6 +1,9 @@
 package r06.mall.Models;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Date;
 import java.util.Objects;
 
@@ -78,6 +81,7 @@ public class TinhTrangDonHang {
     }
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "DonHangId", referencedColumnName = "DonHangId", insertable = false, updatable = false)
     public DonHang getDonHangByDonHangId() {
         return donHangByDonHangId;

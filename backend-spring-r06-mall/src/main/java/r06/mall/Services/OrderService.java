@@ -34,4 +34,8 @@ public class OrderService {
     public Collection<TinhTrangDonHang> GetOrderTracking(DonHang order) {
         return order.getTinhTrangDonHangsByDonHangId();
     }
+
+    public DonHang getDonHangByDriverId(String id, Integer tinhtrang) {
+        return _donHangRepository.findDonHangByDriver(id, tinhtrang);
+    }
 }
