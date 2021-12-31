@@ -17,7 +17,7 @@ public class ProductController {
         this.sanPhamService = sanPhamService;
     }
 
-    @GetMapping
+    @GetMapping("/sanpham")
     public List<SanPham> getSanPham() {
 
         return sanPhamService.getSanPham();

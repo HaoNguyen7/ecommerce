@@ -1,7 +1,9 @@
-﻿using backend_dotnet_r06_mall.Data;
+﻿using backend_dotnet_r06_mall.Contants;
+using backend_dotnet_r06_mall.Data;
 using backend_dotnet_r06_mall.Models;
 using backend_dotnet_r06_mall.Requests;
 using backend_dotnet_r06_mall.Response;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -12,9 +14,15 @@ namespace backend_dotnet_r06_mall.Services
     public class DriverServices
     {
         private readonly BanHangContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public DriverServices(BanHangContext context)
+        public DriverServices(BanHangContext context, 
+            UserManager<IdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager)
         {
+            _userManager = userManager;
+            _roleManager = roleManager;
             _context = context;
         }
 
@@ -39,7 +47,8 @@ namespace backend_dotnet_r06_mall.Services
 
         public NguoiGiaoHang FindNearestShipper(double ViDo, double KinhDo)
         {
-            var arrayProducts = new ViTriNguoiGiaoHang[]                  // Mảng 2 phần tử
+            //Fake shipper location
+            var arrayProducts = new ViTriNguoiGiaoHang[]                
             {
                 new ViTriNguoiGiaoHang(new Guid("9D2B0228-4D0D-4C23-8B49-01A698857709"),"Nguyen Van A",10.7,107.3),
                 new ViTriNguoiGiaoHang(new Guid("9D2B0228-4D0D-4C23-8B49-01A698857708"),"Nguyen Van B",10.9,107.55),
@@ -52,8 +61,16 @@ namespace backend_dotnet_r06_mall.Services
             return driverInfo;
         }
 
-        public NguoiGiaoHang RegisterDriver(RegisterDriverRequest request)
+        public async Task<NguoiGiaoHang> RegisterDriverAsync(RegisterDriverRequest request)
         {
+            var existEmail = _context.NguoiGiaoHang.Any(x => x.Email == request.Email);
+            if (existEmail)
+            {
+                throw new Exception("Your email already exist");
+            }
+
+            var existingUser = await _userManager.FindByEmailAsync(request.Email);
+            await _userManager.AddToRoleAsync(existingUser, RoleConstants.TaiXe);
             var driver = new NguoiGiaoHang
             {
                 NguoiGiaoId = new Guid(),

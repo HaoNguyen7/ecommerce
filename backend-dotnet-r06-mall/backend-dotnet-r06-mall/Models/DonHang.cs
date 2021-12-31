@@ -27,6 +27,8 @@ namespace backend_dotnet_r06_mall.Models
 
         public NguoiGiaoHang NguoiGiaoHang { get; set; }
 
+        public int TinhTrangGiao { get; set; }
+
         public List<TinhTrangDonHang> TinhTrangDonHang { get; set; }
 
         [JsonIgnore]

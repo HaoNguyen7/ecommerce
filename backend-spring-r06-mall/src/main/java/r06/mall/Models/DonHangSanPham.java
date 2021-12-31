@@ -1,5 +1,6 @@
 package r06.mall.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -58,7 +59,7 @@ public class DonHangSanPham {
         return Objects.hash(donHangId, sanPhamId, soLuong);
     }
 
-    @JsonManagedReference
+    @JsonIgnore
     @ManyToOne(optional=false)
     @JoinColumn(name = "DonHangId", referencedColumnName = "DonHangId", nullable = false, insertable = false, updatable = false)
     public DonHang getDonHangByDonHangId() {
@@ -69,7 +70,7 @@ public class DonHangSanPham {
         this.donHangByDonHangId = donHangByDonHangId;
     }
 
-    @JsonManagedReference
+    
     @ManyToOne(optional=false)
     @JoinColumn(name = "SanPhamId", referencedColumnName = "SanPhamId", nullable = false, insertable = false, updatable = false)
     public SanPham getSanPhamBySanPhamId() {

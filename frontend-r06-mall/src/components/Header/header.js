@@ -43,7 +43,7 @@ function AppHeader() {
       <SubMenu key="Driver" title="Tài xế" style={{marginLeft:10}}>
         <Menu.Item key="4"><a href='/nearest_store'>Tìm cửa hàng gần nhất</a></Menu.Item>
         <Menu.Item key="5"><a href='/nearest_shipper'>Tìm shipper gần nhất</a></Menu.Item>
-        <Menu.Item key="6"><a href='/register_driver'>Đăng ký shipper</a></Menu.Item>
+        <Menu.Item key="6"><a href='/get_order'>Tiếp nhận đơn hàng</a></Menu.Item>
       </SubMenu>
       {!localStorage.getItem("token") ?
         <Menu.Item className="login-space">
@@ -57,9 +57,10 @@ function AppHeader() {
         :
         <Menu.Item className="login-space">
         <SubMenu key="SubMenu" title={<UserOutlined  style={{ fontSize: '150%'}}/>}>
-        <Menu.Item key="type:1"><a href='/profile'>Trang cá nhân</a></Menu.Item>
-        <Menu.Item key="type:2"><a href='/regist-seller'>Bắt đầu kinh doanh</a></Menu.Item>
-        <Menu.Item key="type:3"><a href='/' onClick={onClickLogOut}>Đăng xuất</a></Menu.Item>
+        <Menu.Item key="7"><a href='/profile'>Trang cá nhân</a></Menu.Item>
+        <Menu.Item key="8"><a href='/regist-seller'>Bắt đầu kinh doanh</a></Menu.Item>
+        <Menu.Item key="9"><a href='/register_driver'>Đăng ký shipper</a></Menu.Item>
+        <Menu.Item key="10"><a href='/' onClick={onClickLogOut}>Đăng xuất</a></Menu.Item>
       </SubMenu>
         
         </Menu.Item>

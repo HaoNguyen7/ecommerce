@@ -1,6 +1,9 @@
 package r06.mall.Models;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Date;
 import java.util.Collection;
 import java.util.Objects;
@@ -16,6 +19,7 @@ public class DonHang {
     private String hinhThucThanhToanHinhThucId;
     private String khachHangId;
     private String nguoiGiaoHangNguoiGiaoId;
+    private Integer tinhTrangGiao;
     private HinhThucThanhToan hinhThucThanhToanByHinhThucThanhToanHinhThucId;
     private KhachHang khachHangByKhachHangId;
     private NguoiGiaoHang nguoiGiaoHangByNguoiGiaoHangNguoiGiaoId;
@@ -73,6 +77,16 @@ public class DonHang {
     }
 
     @Basic
+    @Column(name = "TinhTrangGiao", nullable = false)
+    public Integer getTinhTrangGiao() {
+        return tinhTrangGiao;
+    }
+
+    public void setTinhTrangGiao(Integer tinhTrangGiao) {
+        this.tinhTrangGiao = tinhTrangGiao;
+    }
+
+    @Basic
     @Column(name = "HinhThucThanhToanHinhThucId", nullable = true)
     public String getHinhThucThanhToanHinhThucId() {
         return hinhThucThanhToanHinhThucId;
@@ -116,6 +130,7 @@ public class DonHang {
     }
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "HinhThucThanhToanHinhThucId", referencedColumnName = "HinhThucId", insertable = false, updatable = false)
     public HinhThucThanhToan getHinhThucThanhToanByHinhThucThanhToanHinhThucId() {
         return hinhThucThanhToanByHinhThucThanhToanHinhThucId;
@@ -126,6 +141,7 @@ public class DonHang {
     }
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "KhachHangId", referencedColumnName = "KhachHangId", insertable = false, updatable = false)
     public KhachHang getKhachHangByKhachHangId() {
         return khachHangByKhachHangId;
@@ -136,6 +152,7 @@ public class DonHang {
     }
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "NguoiGiaoHangNguoiGiaoId", referencedColumnName = "NguoiGiaoId", insertable = false, updatable = false)
     public NguoiGiaoHang getNguoiGiaoHangByNguoiGiaoHangNguoiGiaoId() {
         return nguoiGiaoHangByNguoiGiaoHangNguoiGiaoId;

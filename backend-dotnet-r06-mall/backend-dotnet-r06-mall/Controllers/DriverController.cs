@@ -41,10 +41,11 @@ namespace backend_dotnet_r06_mall.Controllers
         }
 
         [HttpPost("register_driver")]
-        public ActionResult<NguoiGiaoHangResponse> RegisterDriver([FromBody] RegisterDriverRequest request)
+        public async Task<ActionResult<NguoiGiaoHangResponse>> RegisterDriver([FromBody] RegisterDriverRequest request)
         {
-            return Ok(new NguoiGiaoHangResponse(_driverServices.RegisterDriver(request)));
+            return Ok(new NguoiGiaoHangResponse(await _driverServices.RegisterDriverAsync(request)));
         }
+
         [HttpGet]
         [Route("{shipperId}")]
         public async Task<IActionResult> GetNguoiGiaoHangById(Guid shipperId)
