@@ -21,7 +21,7 @@ namespace backend_dotnet_r06_mall.Services
         {
             _context = context;
         }
-    
+
         public async Task<bool> TaoDonHang(CartRequest gh, Guid userId)
         {
             DonHang dh = new DonHang
@@ -29,7 +29,8 @@ namespace backend_dotnet_r06_mall.Services
                 DonHangId = new Guid(),
                 ThoiGian = DateTime.UtcNow,
                 TinhTrangThanhToan = false,
-                KhachHang = await _context.KhachHang.FirstOrDefaultAsync(o => o.KhachHangId == userId)
+                KhachHang = await _context.KhachHang.FirstOrDefaultAsync(o => o.KhachHangId == userId),
+                SoLuong = 1
             };
 
             dh.DonHangSanPham = new List<DonHangSanPham>();
@@ -39,18 +40,21 @@ namespace backend_dotnet_r06_mall.Services
                 DonHangSanPham dhsp = new DonHangSanPham
                 {
                     DonHang = dh,
-                    SanPham = await _context.SanPham.FirstOrDefaultAsync(o => o.SanPhamId == item.idsp)
+                    SanPham = await _context.SanPham.FirstOrDefaultAsync(o => o.SanPhamId == item.idsp),
+                    SoLuong = item.sl
+
                 };
                 dh.DonHangSanPham.Add(dhsp);
             }
 
             var createResult = await _context.DonHang.AddAsync(dh);
-            return createResult is null ? false :  true;
+            await _context.SaveChangesAsync();
+            return createResult is not null;
         }
         public async Task<IList<DonHangSanPham>> loadDonHang(Guid donHangId)
         {
             //tra ve gio hang theo ma don hang trong bang DonHangSanPham
-            var s =  await _context.DonHang.Include(q=> q.DonHangSanPham).FirstOrDefaultAsync(q=> q.DonHangId == donHangId);
+            var s = await _context.DonHang.Include(q => q.DonHangSanPham).FirstOrDefaultAsync(q => q.DonHangId == donHangId);
             return s.DonHangSanPham;
         }
     }
