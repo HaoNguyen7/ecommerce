@@ -1,5 +1,6 @@
 package r06.mall.JwtParser;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -40,15 +41,27 @@ public class JwtParser {
             Map<String, Claim> claims = jwt.getClaims(); // Key is the Claim name
 
             Claim claim = claims.get("role");
+            System.out.println(claim.asString());
 
-            role = claim.asList(String.class);
+            if (claim.asString() == null) {
+                role = new ArrayList<String>(claim.asList(String.class));
+            } else {
+                role = new ArrayList<String>();
+                role.add(claim.asString());
+            }
+
+            // role = claim.asList(String.class);
+
+            System.out.println(role);
 
             claim = claims.get("Id");
             Id = claim.asString();
 
             email = jwt.getSubject();
 
-        } catch (JWTDecodeException exception) {
+        } catch (
+
+        JWTDecodeException exception) {
             // Invalid token
         }
     }
