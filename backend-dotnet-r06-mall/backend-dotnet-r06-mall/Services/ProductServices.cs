@@ -28,6 +28,13 @@ namespace backend_dotnet_r06_mall.Services
             var products = from s in _context.SanPham
                            select s;
 
+            if (query.shopIds != Guid.Empty) {
+                products = products.Where(s=> s.CuaHang.CuaHangId.Equals(query.shopIds));
+            }
+
+            if(query.cateoryIds != Guid.Empty) {
+                products = products.Where(s=> s.LoaiSanPham.LoaiId.Equals(query.cateoryIds));
+            }
             if (!String.IsNullOrEmpty(query.searchString))
             {
                 products = products.Where(s => s.TenSanPham.Contains(query.searchString)
