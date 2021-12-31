@@ -1,24 +1,31 @@
-import logo from './logo.svg';
+import React from "react";
 import './App.css';
-
+import "antd/dist/antd.css"
+import { Layout } from "antd";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import AppHeader from './components/Header/header';
+import HomePage from "./views/Homepage/homepage";
+import SignUp from "./views/SignUp/signUp"
+import LogIn from "./views/Login/login";
+import SellRegister from "./views/SellRegister/sellRegister"
+const { Header, Content, Footer } = Layout;
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout className="mainLayout">
+      <Router>
+        <Header>
+          <AppHeader />
+        </Header>
+        <Content>
+          <Routes>
+            <Route path="/" element={<HomePage/>} />
+            <Route path="/login" element={<LogIn/>} />
+            <Route path="/signup" element={<SignUp/>}/>
+            <Route path="/sellregister" element={<SellRegister/>}/>
+          </Routes>
+        </Content>
+      </Router>
+    </Layout>
   );
 }
 

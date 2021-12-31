@@ -1,8 +1,10 @@
 ﻿using backend_dotnet_r06_mall.Data;
 using backend_dotnet_r06_mall.Models;
 using backend_dotnet_r06_mall.Response;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace backend_dotnet_r06_mall.Services
 {
@@ -37,6 +39,11 @@ namespace backend_dotnet_r06_mall.Services
             double rad(double angle) => angle * 0.017453292519943295769236907684886127d;
             double havf(double diff) => Math.Pow(Math.Sin(rad(diff) / 2d), 2);
             return 12745.6 * Math.Asin(Math.Sqrt(havf(lat2 - lat1) + Math.Cos(rad(lat1)) * Math.Cos(rad(lat2)) * havf(lon2 - lon1))); // earth radius 6.372,8‬km x 2 = 12745.6
+        }
+
+        public async Task<NguoiGiaoHang> GetNguoiGiaoHangById(Guid shipperId)
+        {
+            return await _context.NguoiGiaoHang.AsNoTracking().Include(o => o.DonHang).FirstOrDefaultAsync(o => o.NguoiGiaoId.Equals(shipperId));
         }
     }
 }

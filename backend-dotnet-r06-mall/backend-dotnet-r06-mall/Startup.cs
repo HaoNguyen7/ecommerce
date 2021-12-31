@@ -58,6 +58,8 @@ namespace backend_dotnet_r06_mall
             services.AddScoped<ProductServices>();
             services.AddScoped<DriverServices>();
             services.AddScoped<CartServices>();
+            services.AddScoped<OrderServices>();
+            services.AddScoped<StoreService>();
             services.AddAuthentication(option =>
             {
                 option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

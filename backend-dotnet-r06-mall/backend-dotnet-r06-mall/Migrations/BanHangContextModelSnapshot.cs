@@ -226,15 +226,23 @@ namespace backend_dotnet_r06_mall.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("DanhGia")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(2147483645)
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DiaChi")
+                        .HasMaxLength(2147483645)
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("KinhDo")
                         .HasColumnType("float");
 
+                    b.Property<string>("MaSoThue")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("MoTa")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasMaxLength(2147483645)
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("STK")
                         .HasMaxLength(30)
@@ -242,13 +250,19 @@ namespace backend_dotnet_r06_mall.Migrations
 
                     b.Property<string>("SoDienThoai")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("TenCuaHang")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(2147483645)
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TinhTrang")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("ViDo")
                         .HasColumnType("float");
@@ -468,6 +482,7 @@ namespace backend_dotnet_r06_mall.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("MoTa")
+                        .HasMaxLength(2147483645)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("NgayDang")
@@ -475,8 +490,8 @@ namespace backend_dotnet_r06_mall.Migrations
 
                     b.Property<string>("TenSanPham")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(2147483645)
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TonKho")
                         .HasColumnType("int");
@@ -660,9 +675,11 @@ namespace backend_dotnet_r06_mall.Migrations
 
             modelBuilder.Entity("backend_dotnet_r06_mall.Models.TinhTrangDonHang", b =>
                 {
-                    b.HasOne("backend_dotnet_r06_mall.Models.DonHang", null)
+                    b.HasOne("backend_dotnet_r06_mall.Models.DonHang", "DonHang")
                         .WithMany("TinhTrangDonHang")
                         .HasForeignKey("DonHangId");
+
+                    b.Navigation("DonHang");
                 });
 
             modelBuilder.Entity("backend_dotnet_r06_mall.Models.DonHang", b =>

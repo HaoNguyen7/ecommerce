@@ -53,6 +53,11 @@ namespace backend_dotnet_r06_mall.Services
             }
 
             return await PagedList<SanPham>.CreateAsync(products.AsNoTracking(), query.pageIndex, query.pageSize);
+
+        }
+        public async Task<SanPham> GetProductDetail(Guid productId)
+        {
+            return await _context.SanPham.Include(o => o.CuaHang).Include(o => o.LoaiSanPham).AsNoTracking().FirstOrDefaultAsync(o => o.SanPhamId.Equals(productId));
         }
     }
 }

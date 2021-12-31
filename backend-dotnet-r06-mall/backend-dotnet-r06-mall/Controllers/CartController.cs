@@ -38,9 +38,9 @@ namespace backend_dotnet_r06_mall.Controllers
         }
 
         [HttpGet("Cart/{userId}")]
-        public async Task<IActionResult> LoadGioHang(int userid, int donHangId)
+        public async Task<IActionResult> LoadGioHang(int donHangId)
         {
-            IList<DonHangSanPham> ds = await _service.
+            IList<DonHangSanPham> ds = await 
         }
     }
 }

@@ -31,7 +31,8 @@ namespace backend_dotnet_r06_mall.Services
         public async Task<IList<DonHangSanPham>> loadDonHang(Guid donHangId)
         {
             //tra ve gio hang theo ma don hang trong bang DonHangSanPham
-            var ds = await _context.DonHang.Include(q=> q.DonHangSanPham).FirstOrDefaultAsync(q=> q.DonHangId == donHangId);
+            var s =  await _context.DonHang.Include(q=> q.DonHangSanPham).FirstOrDefaultAsync(q=> q.DonHangId == donHangId);
+            return s.DonHangSanPham;
         }
     }
 }
