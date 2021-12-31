@@ -37,10 +37,10 @@ namespace backend_dotnet_r06_mall.Controllers
 
         [HttpPost("Create")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Khach)]
-        public async Task<IActionResult> TaoDonHang(CartRequest gh)
+        public async Task<IActionResult> TaoDonHang([FromBody] CartRequest gh)
         {
             Guid userId = new Guid(User.FindFirst("Id")?.Value);
-            var dh = await _service.TaoDonHang(gh,userId);
+            var dh = await _service.TaoDonHang(gh, userId);
             return dh ? Ok() : BadRequest();
         }
     }
