@@ -1,10 +1,14 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using backend_dotnet_r06_mall.Contants;
 using backend_dotnet_r06_mall.Models;
 using backend_dotnet_r06_mall.Requests;
 using backend_dotnet_r06_mall.Response;
 using backend_dotnet_r06_mall.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -31,16 +35,13 @@ namespace backend_dotnet_r06_mall.Controllers
         //     return Ok(new PagedListResponse<SanPham>(listProducts));
         // }
 
-        [HttpPost]
-        public async Task<IActionResult> ThemHangVaoGio(int donHangId)
+        [HttpPost("Create")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Khach)]
+        public async Task<IActionResult> TaoDonHang(CartRequest gh)
         {
-            return Ok(new )
-        }
-
-        [HttpGet("Cart/{userId}")]
-        public async Task<IActionResult> LoadGioHang(int donHangId)
-        {
-            IList<DonHangSanPham> ds = await 
+            Guid userId = new Guid(User.FindFirst("Id")?.Value);
+            var dh = await _service.TaoDonHang(gh,userId);
+            return dh ? Ok() : BadRequest();
         }
     }
 }
