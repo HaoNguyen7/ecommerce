@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Input, Button } from "antd";
+import { Link } from "react-router-dom";
 import "./logIn.css";
 import axios from "axios"
 import {useNavigate } from "react-router-dom"
@@ -34,12 +35,12 @@ function LogIn() {
   
   return (
     <Card title="Đăng nhập" className='login-card'>
-      <Input size="large" placeholder="large size" addonBefore="Email" type="email" onChange={getEmail} />
-      <Input size="large" placeholder="large size" addonBefore="Mật khẩu" type="password" onChange={getPassword} />
+      <Input size="large" placeholder="Enter email" addonBefore="Email" type="email" onChange={getEmail} />
+      <Input size="large" placeholder="Enter password" addonBefore="Mật khẩu" type="password" onChange={getPassword} />
       <Button type="primary" size="large" onClick={onClickSubmit}>
           Đăng nhập
       </Button>
-      <p><a href="/signup">Tạo tài khoản</a> nếu bạn chưa có tài khoản</p>
+      <p><Link to="/signup">Tạo tài khoản</Link> nếu bạn chưa có tài khoản</p>
     </Card>
   );
 }
