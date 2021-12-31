@@ -24,14 +24,23 @@ namespace backend_dotnet_r06_mall.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetProduct([FromQuery] ProductListRequest query)
+        // [HttpGet]
+        // public async Task<IActionResult> GetProduct([FromQuery] ProductListRequest query)
+        // {
+        //     PagedList<SanPham> listProducts = await _service.GetProducts(query);
+        //     return Ok(new PagedListResponse<SanPham>(listProducts));
+        // }
+
+        [HttpPost]
+        public async Task<IActionResult> ThemHangVaoGio(int donHangId)
         {
-            PagedList<SanPham> listProducts = await _service.GetProducts(query);
-            return Ok(new PagedListResponse<SanPham>(listProducts));
+            return Ok(new )
         }
 
-
-
+        [HttpGet("Cart/{userId}")]
+        public async Task<IActionResult> LoadGioHang(int userid, int donHangId)
+        {
+            IList<DonHangSanPham> ds = await _service.
+        }
     }
 }

@@ -21,18 +21,17 @@ namespace backend_dotnet_r06_mall.Services
         {
             _context = context;
         }
-
-        public SanPham? GetById(int id)
+        
+        public async Task<DonHangSanPham> addProductToCart(DonHangSanPham dhsp)
         {
-            return _context.SanPham!
-            .Include(p => p.TenSanPham)
-            .Include(p=> p.SanPhamId)
-            .Include(p=>p.DonGia)
-            .Include(p=>p.DonVi)
-            .Include(p=>p.CuaHang)
-            .AsNoTracking()
-            .SingleOrDefault(p=>p.SanPhamId = id);//loi cho nay?
-            
+            IEnumerable<DonHangSanPham> products = await _context.DonHangSanPham.AsQueryable.Select();
+            return 0;
+        }
+
+        public async Task<IList<DonHangSanPham>> loadDonHang(Guid donHangId)
+        {
+            //tra ve gio hang theo ma don hang trong bang DonHangSanPham
+            var ds = await _context.DonHang.Include(q=> q.DonHangSanPham).FirstOrDefaultAsync(q=> q.DonHangId == donHangId);
         }
     }
 }

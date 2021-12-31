@@ -22,6 +22,8 @@ namespace backend_dotnet_r06_mall.Data
         public DbSet<ThongTinDiDuong>? ThongTinDiDuong { get; set; }
         public DbSet<TinhTrangDonHang>? TinhTrangDonHang { get; set; }
 
+        public DbSet<DonHangSanPham>? DonHangSanPham { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DonHang>()
