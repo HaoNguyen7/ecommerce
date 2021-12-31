@@ -75,5 +75,18 @@ namespace backend_dotnet_r06_mall.Controllers
             }
             return Ok(product);
         }
+
+        [HttpDelete]
+        [Route("delete-product")]
+        public async Task<IActionResult> DeleteProduct([FromBody] RemoveProductRequest request)
+        {
+            bool result = await _service.RemoveProduct(request);
+
+            if (!result)
+            {
+                return BadRequest("Wrong id");
+            }
+            return Ok(result);
+        }
     }
 }

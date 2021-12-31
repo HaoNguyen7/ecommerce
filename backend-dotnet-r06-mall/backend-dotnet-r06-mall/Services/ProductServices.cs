@@ -117,5 +117,17 @@ namespace backend_dotnet_r06_mall.Services
             return product;
         }
 
+        public async Task<bool> RemoveProduct(RemoveProductRequest request)
+        {
+            SanPham product =  _context.SanPham.Find(request.id);
+            if(product == null)
+            {
+                return false;
+            }
+
+            _context.SanPham.Remove(product);
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }
