@@ -35,6 +35,7 @@ namespace backend_dotnet_r06_mall.Controllers
             return Ok(new PagedListResponse<SanPham>(listProducts));
         }
 
+
         [HttpGet]
         [Route("{productId}")]
         public async Task<IActionResult> GetPoducDetail(Guid productId)
@@ -60,6 +61,19 @@ namespace backend_dotnet_r06_mall.Controllers
                 return BadRequest();
             }
             return Ok();
+        }
+
+        [HttpPut]
+        [Route("update-product")]
+        public async Task<IActionResult> UpdateProduct([FromBody] UpdateProductRequest request)
+        {
+            SanPham product = await _service.UpdateProduct(request);
+
+            if (product == null)
+            {
+                return BadRequest("Wrong id");
+            }
+            return Ok(product);
         }
     }
 }

@@ -88,5 +88,34 @@ namespace backend_dotnet_r06_mall.Services
             return createResult;
         }
 
+        public async Task<SanPham> UpdateProduct(UpdateProductRequest request)
+        {
+            SanPham product =  _context.SanPham.Find(request.id);
+            if(product == null)
+            {
+                return null;
+            }
+            if(!String.IsNullOrEmpty(request.TenSanPham)) {
+                product.TenSanPham = request.TenSanPham;
+            }
+            if(!String.IsNullOrEmpty(request.MoTa)) {
+                product.MoTa = request.MoTa;
+            }
+            if(request.TonKho != null) {
+                product.TonKho = request.TonKho;
+            }
+            if(request.DonVi != null) {
+                product.DonVi = request.DonVi;
+            }
+            if(request.TonKho != null) {
+                product.DonGia = request.DonGia;
+            }
+            if(request.LoaiSanPham != Guid.Empty) {
+                product.LoaiSanPham = _context.LoaiSanPham.FirstOrDefault(o => o.LoaiId == request.LoaiSanPham);
+            }
+            await _context.SaveChangesAsync();
+            return product;
+        }
+
     }
 }
