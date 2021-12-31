@@ -28,6 +28,17 @@ namespace backend_dotnet_r06_mall.Controllers
             return Ok(result);
         }
 
+        [HttpPost]
+        [Route("register")]
+        public async Task<IActionResult> TypeProductRegister([FromBody] TypeProductRequest request)
+        {
+            var createStore = await _service.CreateLoaiSanPham(request);
+            if (createStore is null)
+            {
+                return BadRequest();
+            }
+            return Ok("Good");
+        }
 
     }
 }

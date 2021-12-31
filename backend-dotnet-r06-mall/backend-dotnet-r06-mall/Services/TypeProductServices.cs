@@ -28,6 +28,18 @@ namespace backend_dotnet_r06_mall.Services
             return await _context.LoaiSanPham.ToListAsync();
         }
 
+        public async Task<EntityEntry<LoaiSanPham>> CreateLoaiSanPham(TypeProductRequest request)
+        {
+            LoaiSanPham loai = new LoaiSanPham
+            {
+                LoaiId = new Guid(),
+                Ten = request.LoaiSanPham,
+            };
+
+            var createResult = await _context.LoaiSanPham.AddAsync(loai);
+            await _context.SaveChangesAsync();
+            return createResult;
+        }
 
     }
 }
