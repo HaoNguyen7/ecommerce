@@ -1,19 +1,20 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router';
-import { addToCart, removeFromCart } from '../actions/cartActions';
+import { addToCart, removeFromCart } from '../../actions/cartActions';
 import { Link } from 'react-router-dom';
-
+import data from '../../data';
 const CartScreen = (props) => {
 	const { id } = useParams();
 	const productId = id;
 	const location = useLocation();
 	const qty = location.search ? Number(location.search.split('=')[1]) : 1;
-
+	console.log('cartScreen day ne');
 	const navigate = useNavigate();
 
 	const cart = useSelector((state) => state.cart);
-	const { cartItems } = cart;
+	//const { cartItems } = cart;
+	const { cartItems } = data;
 	const dispatch = useDispatch();
 	//Ngay khi vua o product screen, nhan "them vao gio hang" thi se chuyen den CartScreen
 	//Sau khi render cartScreen thi se chay UseEffect =>> dispatch addtocart
