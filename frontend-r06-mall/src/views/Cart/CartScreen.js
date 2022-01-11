@@ -9,7 +9,6 @@ const CartScreen = (props) => {
 	const productId = id;
 	const location = useLocation();
 	const qty = location.search ? Number(location.search.split('=')[1]) : 1;
-	console.log('cartScreen day ne');
 	const navigate = useNavigate();
 
 	const cart = useSelector((state) => state.cart);
