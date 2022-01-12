@@ -8,14 +8,15 @@ import './CartScreen.css';
 
 const CartScreen = (props) => {
 	const { id } = useParams();
-	const productId = id;
+	//const productId = id;
+	const productId = '3aa85f64-5717-4562-b3fc-2c963f66afa6';
 	const location = useLocation();
 	const qty = location.search ? Number(location.search.split('=')[1]) : 1;
 	const navigate = useNavigate();
 
 	const cart = useSelector((state) => state.cart);
-	//const { cartItems } = cart;
-	const { cartItems } = data;
+	const { cartItems } = cart;
+	//const { cartItems } = data;
 	const dispatch = useDispatch();
 	//Ngay khi vua o product screen, nhan "them vao gio hang" thi se chuyen den CartScreen
 	//Sau khi render cartScreen thi se chay UseEffect =>> dispatch addtocart
