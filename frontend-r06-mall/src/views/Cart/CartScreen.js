@@ -4,6 +4,8 @@ import { useLocation, useNavigate, useParams } from 'react-router';
 import { addToCart, removeFromCart } from '../../actions/cartActions';
 import { Link } from 'react-router-dom';
 import data from '../../data';
+import './CartScreen.css';
+
 const CartScreen = (props) => {
 	const { id } = useParams();
 	const productId = id;
