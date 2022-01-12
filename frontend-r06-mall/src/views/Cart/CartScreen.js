@@ -50,7 +50,17 @@ const CartScreen = (props) => {
 							<li key={item.product}>
 								<div className="row">
 									<div>
-										<img src={item.img} alt={item.name} className="small" />
+										<img
+											src={
+												item.img ? (
+													item.img
+												) : (
+													'https://elearning-bucket2.s3.us-east-2.amazonaws.com/2022-01-05T05-40-25.924Z-react-logo.png'
+												)
+											}
+											alt={item.name}
+											className="small"
+										/>
 									</div>
 									<div className="min-30">
 										<Link to={`/product/${item.product}`}>{item.name}</Link>

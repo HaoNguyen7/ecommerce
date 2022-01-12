@@ -29,7 +29,7 @@ img {
 	border-radius: 0.5rem;
 }
 
-image.small {
+img.small {
 	max-width: 5rem;
 	width: 100%;
 }
@@ -84,4 +84,9 @@ button.block {
 }
 .price {
 	font-size: 2rem;
+}
+
+/* select box */
+select {
+	width: 50px;
 }
