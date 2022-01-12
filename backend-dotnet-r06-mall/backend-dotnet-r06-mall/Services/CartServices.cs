@@ -58,18 +58,18 @@ namespace backend_dotnet_r06_mall.Services
             return s.DonHangSanPham;
         }
         //update tinh trang don hang = da thanh toan
-        public async Task<bool> thanhToan(Guid donHangId, Guid userId)
-        {
-            var donHang = await _context.DonHang.Include(o => o.DonHangSanPham).Include(o => o.SanPham).FirstOrDefaultAsync(p => p.DonHangId == donHangId);
-            var s = await _context.DonHang.FirstOrDefaultAsync(q => q.DonHangId == donHangId);
-            var createResult = await _context.DonHang.FirstOrDefault(o => o.DonHangId == donHangId)
-            return createResult is not null;
-        }
-        //update dia chi, shipper tong tien cua don hang
-        public async Task<bool> shipping(CartRequest gh, Guid userId)
-        {
-            var createResult = await _context.DonHang.FirstOrDefault(o => o.DonHangId == donHangId)
-            return createResult is not null;
-        }
+        // public async Task<bool> thanhToan(Guid donHangId, Guid userId)
+        // {
+        //     var donHang = await _context.DonHang.Include(o => o.DonHangSanPham).Include(o => o.SanPham).FirstOrDefaultAsync(p => p.DonHangId == donHangId);
+        //     var s = await _context.DonHang.FirstOrDefaultAsync(q => q.DonHangId == donHangId);
+        //     var createResult = await _context.DonHang.FirstOrDefault(o => o.DonHangId == donHangId);
+        //     return createResult is not null;
+        // }
+        // //update dia chi, shipper tong tien cua don hang
+        // public async Task<bool> shipping(CartRequest gh, Guid userId)
+        // {
+        //     var createResult = await _context.DonHang.FirstOrDefault(o => o.DonHangId == donHangId);
+        //     return createResult is not null;
+        // }
     }
 }
