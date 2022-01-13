@@ -14,6 +14,7 @@ import SellRegister from './views/SellRegister/sellRegister';
 import RegisterShipper from './views/Driver/RegisterShipper/RegisterShipper.jsx';
 import GetOrder from './views/Driver/GetOrder/GetOrder';
 import CartScreen from './views/Cart/CartScreen';
+import ShippingAddressScreen from './views/Shipping/ShippingAddressScreen';
 const { Header, Content, Footer } = Layout;
 function App() {
 	return (
@@ -34,6 +35,7 @@ function App() {
 						<Route path="/register_driver" element={<RegisterShipper />} />
 						<Route path="/get_order" element={<GetOrder />} />
 						<Route path="/cart" element={<CartScreen />} />
+						<Route path="/shipping" element={<ShippingAddressScreen />} />
 					</Routes>
 				</Content>
 			</Router>
