@@ -37,8 +37,6 @@ namespace backend_dotnet_r06_mall.Services
             return await _context.TinhTrangDonHang.AsNoTracking().OrderByDescending(k => k.NgayThucHien).FirstOrDefaultAsync(o => o.DonHang.DonHangId == orderId);
         }
 
-
-
         public async Task<Boolean> UserCancelOrder(DonHang order)
         {
             var latestState = await GetOrderLastestState(order.DonHangId);

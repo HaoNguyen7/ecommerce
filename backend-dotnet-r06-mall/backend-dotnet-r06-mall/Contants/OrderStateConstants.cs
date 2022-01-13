@@ -9,5 +9,7 @@ namespace backend_dotnet_r06_mall.Contants
         public const string GiaoHangThanhCong = "Giao hang thanh cong";
         public const string KhachHuyDon = "Khach huy don";
         public const string ShopHuyDon = "Shop huy don";
+
+        public const string GioHang = "Trong gio hang";
     }
 }
