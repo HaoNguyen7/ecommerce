@@ -15,6 +15,7 @@ import RegisterShipper from './views/Driver/RegisterShipper/RegisterShipper.jsx'
 import GetOrder from './views/Driver/GetOrder/GetOrder';
 import CartScreen from './views/Cart/CartScreen';
 import ShippingAddressScreen from './views/Shipping/ShippingAddressScreen';
+import PaymentScreen from './views/Payment/PaymentScreen';
 const { Header, Content, Footer } = Layout;
 function App() {
 	return (
@@ -36,6 +37,7 @@ function App() {
 						<Route path="/get_order" element={<GetOrder />} />
 						<Route path="/cart" element={<CartScreen />} />
 						<Route path="/shipping" element={<ShippingAddressScreen />} />
+						<Route path="/payment" element={<PaymentScreen />} />
 					</Routes>
 				</Content>
 			</Router>
