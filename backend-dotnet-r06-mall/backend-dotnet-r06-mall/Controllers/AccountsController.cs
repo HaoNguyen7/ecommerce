@@ -172,7 +172,7 @@ namespace backend_dotnet_r06_mall.Controllers
                         }
                     });
                 }
-
+               
                 // Check password
                 var isCorrect = await _userManager.CheckPasswordAsync(existingUser, loginDto.Password);
                 if (isCorrect)
@@ -183,7 +183,9 @@ namespace backend_dotnet_r06_mall.Controllers
                     return Ok(new UserLoginResponseDto()
                     {
                         Success = true,
-                        Token = jwtToken
+                        Token = jwtToken, 
+                        Email = loginDto.Email,
+                        id = existingUser.Id.ToString()
                     });
                 }
                 else
