@@ -20,7 +20,7 @@ namespace backend_dotnet_r06_mall.Models
         [Required]
         public int DonGia { get; set; }
         [Required]
-        public int DonVi { get; set; }
+        public string DonVi { get; set; }
 
         [Required]
         public DateTime NgayDang { get; set; }
