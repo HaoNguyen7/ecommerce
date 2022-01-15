@@ -12,6 +12,7 @@ using Authentication.Models.DTO.Outgoing;
 using backend_dotnet_r06_mall.Contants;
 using backend_dotnet_r06_mall.Data;
 using backend_dotnet_r06_mall.Models;
+using backend_dotnet_r06_mall.Requests;
 using backend_dotnet_r06_mall.Response;
 using backend_dotnet_r06_mall.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -242,7 +243,19 @@ namespace backend_dotnet_r06_mall.Controllers
                 });
             }
         }
+        [HttpPut]
+        [Route("grant-role-cuahang")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Admin)]
+        public async Task<IActionResult> addRoleCHtoUser(GrantRoleCHRequest query)
+        {
+            var existingUser = await _userManager.FindByIdAsync(query.id.ToString());
 
+            if (await _roleManager.RoleExistsAsync(RoleConstants.CuaHang))
+            {
+                await _userManager.AddToRoleAsync(existingUser, RoleConstants.CuaHang);
+            }
+            return Ok("Success");
+        }
         [HttpPut]
         [Route("change-email")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
