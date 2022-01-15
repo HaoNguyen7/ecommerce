@@ -39,6 +39,14 @@ namespace backend_dotnet_r06_mall.Controllers
             return Ok();
         }
 
+        [HttpPut]
+        [Route("active-store")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Admin)]
+        public async Task<IActionResult> ActiveShop([FromQuery] ActiveStoreRequest query)
+        {
+            CuaHang cuaHang = await _service.ActiveStore(query);
+            return Ok(cuaHang);
+        }
         // [HttpPost]
         // [Route("register")]
         // // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Khach)]
