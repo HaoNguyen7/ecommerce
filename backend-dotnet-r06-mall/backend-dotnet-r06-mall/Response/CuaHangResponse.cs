@@ -13,6 +13,9 @@ namespace backend_dotnet_r06_mall.Response
         public string STK { get; set; }
         public double KinhDo { get; set; }
         public double ViDo { get; set; }
+        public string DiaChi { get; set; }
+        public bool TinhTrang { get; set; }
+
 
         public CuaHangResponse(CuaHang cuaHang)
         {
@@ -21,6 +24,8 @@ namespace backend_dotnet_r06_mall.Response
             DanhGia = cuaHang.DanhGia;
             SoDienThoai = cuaHang.SoDienThoai;
             STK = cuaHang. STK;
+            DiaChi = cuaHang.DiaChi;
+            TinhTrang = cuaHang.TinhTrang;
             KinhDo = cuaHang.KinhDo;
             ViDo = cuaHang.ViDo;
         }

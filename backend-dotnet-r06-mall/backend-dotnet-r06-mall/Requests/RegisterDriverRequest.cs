@@ -12,6 +12,7 @@ namespace backend_dotnet_r06_mall.Requests
         public string STK { get; set; }
         public string VungHoatDong { get; set; }
         public string Email { get; set; }
+        public string Image { get; set; }
         public DateTime NgayDangKy { get; set; }
     }
 }

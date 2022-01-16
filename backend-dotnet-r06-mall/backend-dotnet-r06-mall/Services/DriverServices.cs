@@ -40,6 +40,8 @@ namespace backend_dotnet_r06_mall.Services
                 STK = x.STK,
                 TenCuaHang = x.TenCuaHang,
                 SoDienThoai = x.SoDienThoai,
+                TinhTrang = x.TinhTrang,
+                DiaChi = x.DiaChi,
             }).ToList().OrderByDescending(x => Calculate(x.ViDo, x.KinhDo, ViDo, KinhDo)).Last();
 
             return shortestStore;
@@ -71,9 +73,18 @@ namespace backend_dotnet_r06_mall.Services
 
             var existingUser = await _userManager.FindByEmailAsync(request.Email);
             await _userManager.AddToRoleAsync(existingUser, RoleConstants.TaiXe);
+            var driverInfo = new ThongTinDiDuong
+            {
+                TTTDId = new Guid(),
+                NgayCap = DateTime.Now,
+                NgayHetHan = DateTime.Now.AddDays(7),
+                HinhXacMinh = request.Image,
+                NguoiGiaoHangNguoiGiaoId = new Guid(existingUser.Id)
+            };
+
             var driver = new NguoiGiaoHang
             {
-                NguoiGiaoId = new Guid(),
+                NguoiGiaoId = new Guid(existingUser.Id),
                 TenNguoiGiaoHang = request.TenNguoiGiaoHang,
                 SoDienThoai = request.SoDienThoai,
                 DiaChi = request.DiaChi,
@@ -83,6 +94,8 @@ namespace backend_dotnet_r06_mall.Services
                 Email = request.Email,
                 NgayDangKy = DateTime.Now
             };
+            
+            _context.ThongTinDiDuong.Add(driverInfo);
             _context.NguoiGiaoHang.Add(driver);
             _context.SaveChanges();
 
