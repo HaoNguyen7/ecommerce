@@ -51,7 +51,7 @@ namespace backend_dotnet_r06_mall.Controllers
 
         [HttpPut]
         [Route("active-store")]
-        public async Task<IActionResult> ActiveShop([FromQuery] ActiveStoreRequest query)
+        public async Task<IActionResult> ActiveShop([FromBody] ActiveStoreRequest query)
         {
             CuaHang cuaHang = await _service.ActiveStore(query);
             return Ok(cuaHang);
