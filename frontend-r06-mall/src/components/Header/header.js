@@ -8,12 +8,12 @@ import { Constants } from '../../Constaints';
 
 const { SubMenu } = Menu;
 function AppHeader() {
-	const [ current, setCurrent ] = useState('main');
+	const [current, setCurrent] = useState('main');
 	const navigate = useNavigate();
 	let userRole = [];
-	if(localStorage.getItem('token')) {
+	if (localStorage.getItem('token')) {
 		let roles = jwt_decode(localStorage.getItem('token')).role
-		if(Array.isArray(roles)) {
+		if (Array.isArray(roles)) {
 			userRole = [...roles]
 		}
 		else {
@@ -44,7 +44,7 @@ function AppHeader() {
 		localStorage.removeItem('token');
 	}
 	return (
-		<Menu onClick={handleClick} selectedKeys={[ current ]} mode="horizontal">
+		<Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
 			<Menu.Item key="homepage" icon={<HomeOutlined />}>
 				<a href="/">Homepage</a>
 			</Menu.Item>
@@ -73,23 +73,27 @@ function AppHeader() {
 					<a href="/get_order">Tiếp nhận đơn hàng</a>
 				</Menu.Item>
 			</SubMenu>
-			{userRole.includes(Constants.ROLE_ADMIN)? 
+			{userRole.includes(Constants.ROLE_ADMIN) ?
 				(<SubMenu key="Quanly" title="Quản lý">
-						<Menu.Item key="7">
-							<a href="/manage-register-shop">Quản lý đăng ký bán hàng</a>
-						</Menu.Item>
-						<Menu.Item key="8">
-							<a href="/manage-register-driver">Quản lý đăng ký giao hàng</a>
-						</Menu.Item>
-						<Menu.Item key="9">
-							<a href="/manage-product">Quản lý thông tin sản phẩm</a>
-						</Menu.Item>
-						<Menu.Item key="10">
-							<a href="/" onClick={onClickLogOut}>
-								Đăng xuất
-							</a>
-						</Menu.Item>
-					</SubMenu>):(false)}
+					<Menu.Item key="7">
+						<a href="/manage-register-shop">Quản lý đăng ký bán hàng</a>
+					</Menu.Item>
+					<Menu.Item key="8">
+						<a href="/manage-register-driver">Quản lý đăng ký giao hàng</a>
+					</Menu.Item>
+					<Menu.Item key="9">
+						<a href="/manage-product">Quản lý thông tin sản phẩm</a>
+					</Menu.Item>
+				</SubMenu>) : (false)}
+			{userRole.includes(Constants.ROLE_CUAHANG) ?
+				(<SubMenu key="cuahang" title="Quản lý cửa hàng">
+					<Menu.Item key="7">
+						<a href="/add-product">Đăng sản phẩm mới</a>
+					</Menu.Item>
+					<Menu.Item key="8">
+						<a href="/list-products">Quản lý sản phẩm</a>
+					</Menu.Item>
+				</SubMenu>) : (false)}
 			{!localStorage.getItem('token') ? (
 				<Menu.Item className="login-space">
 					<Link to="/cart">Cart</Link>

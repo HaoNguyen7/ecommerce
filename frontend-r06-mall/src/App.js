@@ -15,6 +15,7 @@ import RegisterShipper from './views/Driver/RegisterShipper/RegisterShipper.jsx'
 import GetOrder from './views/Driver/GetOrder/GetOrder';
 import CartScreen from './views/Cart/CartScreen';
 import ManageRegisterStore from './views/ManageRegisterStore/manageRegisterStore';
+import AddProduct from './views/AddProduct/addProduct';
 const { Header, Content, Footer } = Layout;
 function App() {
 	return (
@@ -36,6 +37,7 @@ function App() {
 						<Route path="/get_order" element={<GetOrder />} />
 						<Route path="/cart" element={<CartScreen />} />
 						<Route path="/manage-register-shop" element={<ManageRegisterStore />}/>
+						<Route path="/add-product" element={<AddProduct />}/>
 					</Routes>
 				</Content>
 			</Router>
