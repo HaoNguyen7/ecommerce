@@ -31,7 +31,7 @@ function App() {
 						<Route path="/upload" element={<Upload />} />
 						<Route path="/nearest_store" element={<Driver />} />
 						<Route path="/nearest_shipper" element={<Shipper />} />
-						<Route path="/sellregister" element={<SellRegister />} />
+						<Route path="/regist-seller" element={<SellRegister />} />
 						<Route path="/register_driver" element={<RegisterShipper />} />
 						<Route path="/get_order" element={<GetOrder />} />
 						<Route path="/cart" element={<CartScreen />} />
