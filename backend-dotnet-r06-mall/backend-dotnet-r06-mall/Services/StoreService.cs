@@ -50,7 +50,9 @@ namespace backend_dotnet_r06_mall.Services
         {
             var stores = from s in _context.CuaHang
                          select s;
-            stores = stores.Where(s => s.UserId.Equals(query.id));
+            if(query.id != null && query.id != Guid.Empty) {
+                stores = stores.Where(s => s.UserId.Equals(query.id));
+            }
             return await PagedList<CuaHang>.CreateAsync(stores.AsNoTracking(), query.pageIndex, query.pageSize);
         }
         public async Task<CuaHang> ActiveStore(ActiveStoreRequest query)

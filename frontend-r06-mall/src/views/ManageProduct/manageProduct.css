@@ -1,0 +1,18 @@
+.filter-bar {
+    display: flex;
+    background-color: white !important;
+}
+
+.filter-bar .ant-select {
+    margin: 10px !important;
+}
+.filter-bar  .ant-select-selector {
+    border-color: rgb(68, 68, 255) !important;
+}
+.filter-bar .ant-btn {
+    margin: 10px !important;
+}
+.list-produc-view {
+    display: flex;
+    flex-wrap: wrap;
+}
