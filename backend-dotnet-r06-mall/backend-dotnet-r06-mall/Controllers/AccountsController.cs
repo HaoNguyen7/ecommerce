@@ -243,9 +243,8 @@ namespace backend_dotnet_r06_mall.Controllers
                 });
             }
         }
-        [HttpPut]
+        [HttpPost]
         [Route("grant-role-cuahang")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Admin)]
         public async Task<IActionResult> addRoleCHtoUser(GrantRoleCHRequest query)
         {
             var existingUser = await _userManager.FindByIdAsync(query.id.ToString());
