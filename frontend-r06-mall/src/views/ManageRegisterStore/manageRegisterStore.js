@@ -14,10 +14,15 @@ function ManageRegisterStore() {
       setListStore(res.data.data)
       console.log(listStore)
     }).catch((err) => console.log(err))
-  }, [])
+  }, []);
+  
+  let removeItem = (id) => {
+    listStore = listStore.filter(value => value.cuaHangId !== id)
+    setListStore(listStore)
+  }
   return (
     <div className='manage-register-screen'>
-      {listStore.map((store, i) => <StoreInfoCard storeInfor={store} key={store.cuaHangId} />)}
+      {listStore.map((store, i) => <StoreInfoCard storeInfor={store} key={store.cuaHangId}  removeItem={removeItem}/>)}
     </div>
   );
 }

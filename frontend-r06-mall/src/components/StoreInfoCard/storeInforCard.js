@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Button } from 'antd';
 import './storeInforCard.css';
 import axios from "axios";
-function StoreInfoCard({storeInfor}) {  
+function StoreInfoCard({storeInfor, removeItem}) {  
 
   const onClickActive = async ()=>{
     
@@ -23,7 +23,8 @@ function StoreInfoCard({storeInfor}) {
         id: storeInfor.cuaHangId,
       },
     }).then( () => {
-      alert("Kích hoạt thành công cửa hàng ", storeInfor.tenCuaHang)
+      alert("Kích hoạt thành công cửa hàng ", storeInfor.tenCuaHang);
+      removeItem(storeInfor.cuaHangId)
     }).catch((err) => console.log(err))
   }
   return (
