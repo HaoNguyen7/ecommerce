@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./manageProduct.css"
+import jwt_decode from "jwt-decode"
 import {
   Form,
   Input,
@@ -9,6 +10,7 @@ import {
   Row,
   Col
 } from 'antd';
+import { Constants } from '../../Constaints';
 import ProductBox from '../../components/ProductBox/productBox';
 const { Option } = Select;
 function ManageProduct() {
@@ -17,7 +19,21 @@ function ManageProduct() {
   var [listStore, setListStore] = useState([]);
   const [category, setCategory] = useState("");
   const [store, setStore] = useState("");
+  let userRole = [];
+  if (localStorage.getItem('token')) {
+		let roles = jwt_decode(localStorage.getItem('token')).role
+		if (Array.isArray(roles)) {
+			userRole = [...roles]
+		}
+		else {
+			userRole.push(roles)
+		}
+	}
   useEffect(() => {
+    let params = {pageSize: 50};
+    if(userRole.includes(Constants.ROLE_CUAHANG)) {
+      params.id =  jwt_decode(localStorage.getItem('token')).Id;
+    }
     axios({
       method: "GET",
       url: "https://localhost:5001/api/TypeProduct",
@@ -32,9 +48,7 @@ function ManageProduct() {
       method: "GET",
       url: "https://localhost:5001/Store/get-store-by-user",
       headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
-      params: {
-        pageSize: 50
-      }
+      params: params,
     }).then((res) => {
       listStore.push({ cuaHangId: "All", tenCuaHang: "All" });
       listStore = res.data.data;
