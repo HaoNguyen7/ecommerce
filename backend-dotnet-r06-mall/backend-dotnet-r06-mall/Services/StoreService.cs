@@ -45,6 +45,14 @@ namespace backend_dotnet_r06_mall.Services
             stores = stores.Where(s => s.TinhTrang.Equals(false));
             return await PagedList<CuaHang>.CreateAsync(stores.AsNoTracking(), query.pageIndex, query.pageSize);
         }
+
+        public async Task<PagedList<CuaHang>> GetStoreOfUser(ListStoreOfUserRequest query)
+        {
+            var stores = from s in _context.CuaHang
+                         select s;
+            stores = stores.Where(s => s.UserId.Equals(query.id));
+            return await PagedList<CuaHang>.CreateAsync(stores.AsNoTracking(), query.pageIndex, query.pageSize);
+        }
         public async Task<CuaHang> ActiveStore(ActiveStoreRequest query)
         {
             var store = _context.CuaHang.Find(query.id);
