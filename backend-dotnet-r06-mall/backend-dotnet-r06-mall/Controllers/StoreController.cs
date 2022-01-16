@@ -49,6 +49,15 @@ namespace backend_dotnet_r06_mall.Controllers
             return Ok(new PagedListResponse<CuaHang>(listCuaHang));
         }
 
+        [HttpGet]
+        [Route("get-store-by-user")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.CuaHang)]
+        public async Task<IActionResult> GetStoresOfUser([FromQuery] ListStoreOfUserRequest query)
+        {
+            PagedList<CuaHang> listCuaHang = await _service.GetStoreOfUser(query);
+            return Ok(new PagedListResponse<CuaHang>(listCuaHang));
+        }
+
         [HttpPut]
         [Route("active-store")]
         public async Task<IActionResult> ActiveShop([FromBody] ActiveStoreRequest query)
