@@ -17,6 +17,7 @@ import CartScreen from './views/Cart/CartScreen';
 import ManageRegisterStore from './views/ManageRegisterStore/manageRegisterStore';
 import AddProduct from './views/AddProduct/addProduct';
 import ManageProduct from './views/ManageProduct/manageProduct';
+import UpdateProduct from './views/UpdateProduct/updateProduct';
 const { Header, Content, Footer } = Layout;
 function App() {
 	return (
@@ -40,6 +41,7 @@ function App() {
 						<Route path="/manage-register-shop" element={<ManageRegisterStore />}/>
 						<Route path="/add-product" element={<AddProduct />}/>
 						<Route path="/manage-product" element={<ManageProduct />}/>
+						<Route path="/product-update/:id" element={<UpdateProduct />}/>
 					</Routes>
 				</Content>
 			</Router>
