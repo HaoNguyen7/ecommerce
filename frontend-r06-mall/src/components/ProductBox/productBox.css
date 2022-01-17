@@ -23,6 +23,12 @@
     color: rgb(94, 94, 94);
 }
 
+.card-store .atn-btn {
+    border-color: rgb(104, 156, 252) !important;
+    color: rgb(104, 156, 252) !important;
+    background-color: rgb(104, 156, 252) !important;
+}
+
 @media only screen and (max-width: 600px) {
     .card-store {
         width: 100% !important;

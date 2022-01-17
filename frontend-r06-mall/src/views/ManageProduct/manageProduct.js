@@ -29,6 +29,11 @@ function ManageProduct() {
 			userRole.push(roles)
 		}
 	}
+
+  let removeItem = (id) => {
+    listProduct = listProduct.filter(value => value.sanPhamId !== id)
+    setListProduct(listProduct)
+  }
   useEffect(() => {
     let params = {pageSize: 50};
     if(userRole.includes(Constants.ROLE_CUAHANG)) {
@@ -112,7 +117,7 @@ function ManageProduct() {
       <Row>
         {listProduct.map((product, i) =>
           <Col xs={24} lg = {8}>
-            <ProductBox productInfor={product} key={product.sanPhamId} />
+            <ProductBox productInfor={product} key={product.sanPhamId} removeItem={removeItem} />
           </Col>
         )}
       </Row>
