@@ -101,16 +101,16 @@ namespace backend_dotnet_r06_mall.Services
             if(!String.IsNullOrEmpty(request.MoTa)) {
                 product.MoTa = request.MoTa;
             }
-            if(request.TonKho != null) {
+            if(request.TonKho > 0) {
                 product.TonKho = request.TonKho;
             }
-            if(request.DonVi != null) {
+            if(request.DonVi > 0) {
                 product.DonVi = request.DonVi;
             }
-            if(request.TonKho != null) {
+            if(request.TonKho > 0) {
                 product.DonGia = request.DonGia;
             }
-            if(request.LoaiSanPham != Guid.Empty) {
+            if(request.LoaiSanPham != Guid.Empty && _context.LoaiSanPham.FirstOrDefault(o => o.LoaiId == request.LoaiSanPham) != null) {
                 product.LoaiSanPham = _context.LoaiSanPham.FirstOrDefault(o => o.LoaiId == request.LoaiSanPham);
             }
             await _context.SaveChangesAsync();
