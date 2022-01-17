@@ -23,7 +23,7 @@ export const addToCart = (productId, qty) => async (dispatch, getState) => {
 			countInStock: data.tonKho,
 			product: data.sanPhamId,
 			qty,
-			shopId: cuaHang.cuaHangId, //shop= data.cuaHang la 1 object chua data cua cua hang gom cuaHangId, tenCuaHang, moTa,...
+			shopId: cuaHang.cuaHangId,
 			shopName: cuaHang.tenCuaHang
 		}
 	});
