@@ -8,7 +8,11 @@ const Delivered = () => {
     const [totalPage, setTotalPage] = useState(0)
 
     const getDeliveredItems = () => {
-        axios.get("https://localhost:5001/api/Delivered/history")
+        axios({
+            method: 'get',
+            url: `https://localhost:5001/api/Delivered/history`,
+            headers: { 'Authorization':`Bearer ${localStorage.getItem('token')}`}
+        })
         .then(res=>{
             const result = res.data
             setDeliveredItems(result.data)
@@ -22,7 +26,7 @@ const Delivered = () => {
 
     useEffect(()=>{
         getDeliveredItems()
-    }, [deliveredItems])
+    }, [])
 
     return(
         <div>
@@ -31,7 +35,9 @@ const Delivered = () => {
                     {deliveredItems.map((item)=>{
                         const {} = item
                         return(
-                            <h3>Delivered Item</h3>
+                            <div className='delivered-item'>
+                                <h3>Đơn hàng đã vận chuyển</h3>
+                            </div>
                         )
                     })}
                 </div>
