@@ -104,7 +104,7 @@ namespace backend_dotnet_r06_mall.Services
             if(request.TonKho > 0) {
                 product.TonKho = request.TonKho;
             }
-            if(request.DonVi > 0) {
+            if(request.DonVi != "") {
                 product.DonVi = request.DonVi;
             }
             if(request.TonKho > 0) {

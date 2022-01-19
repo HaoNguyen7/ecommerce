@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend_dotnet_r06_mall.Data;
 
 namespace backend_dotnet_r06_mall.Migrations
 {
     [DbContext(typeof(BanHangContext))]
-    partial class BanHangContextModelSnapshot : ModelSnapshot
+    [Migration("20220114023402_updateSanPham")]
+    partial class updateSanPham
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -514,9 +516,6 @@ namespace backend_dotnet_r06_mall.Migrations
                     b.Property<Guid>("TTTDId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("HinhXacMinh")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("NgayCap")
                         .HasColumnType("datetime2");

@@ -14,6 +14,7 @@ import SellRegister from './views/SellRegister/sellRegister';
 import RegisterShipper from './views/Driver/RegisterShipper/RegisterShipper.jsx';
 import GetOrder from './views/Driver/GetOrder/GetOrder';
 import CartScreen from './views/Cart/CartScreen';
+import ShippingAddressScreen from './views/Shipping/ShippingAddressScreen';
 import ManageRegisterStore from './views/ManageRegisterStore/manageRegisterStore';
 import AddProduct from './views/AddProduct/addProduct';
 import ManageProduct from './views/ManageProduct/manageProduct';
@@ -38,6 +39,7 @@ function App() {
 						<Route path="/register_driver" element={<RegisterShipper />} />
 						<Route path="/get_order" element={<GetOrder />} />
 						<Route path="/cart" element={<CartScreen />} />
+						<Route path="/shipping" element={<ShippingAddressScreen />} />
 						<Route path="/manage-register-shop" element={<ManageRegisterStore />}/>
 						<Route path="/add-product" element={<AddProduct />}/>
 						<Route path="/manage-product" element={<ManageProduct />}/>

@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import './logIn.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { signin } from '../../actions/userActions';
 function LogIn() {
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
@@ -14,7 +16,7 @@ function LogIn() {
 	const getEmail = (event) => {
 		setEmail(event.target.value);
 	};
-
+	const dispatch = useDispatch();
 	const onClickSubmit = () => {
 		axios({
 			method: 'POST',
@@ -26,6 +28,7 @@ function LogIn() {
 		})
 			.then((res) => {
 				localStorage.setItem('token', res.data.token);
+				dispatch(signin(res.data.email, res.data.id));
 				alert('Đăng nhập thành công');
 				navigate('/');
 			})

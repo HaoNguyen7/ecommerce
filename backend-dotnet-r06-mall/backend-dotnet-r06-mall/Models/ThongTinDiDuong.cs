@@ -9,5 +9,7 @@ namespace backend_dotnet_r06_mall.Models
         public Guid TTTDId { get; set; }
         public DateTime NgayCap { get; set; }
         public DateTime NgayHetHan { get; set; }
+        public string HinhXacMinh { get; set; }
+        public Guid NguoiGiaoHangNguoiGiaoId { get; set; }
     }
 }
