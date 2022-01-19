@@ -3,9 +3,10 @@ import { Card, Button } from 'antd';
 import './productBox.css';
 import { Link } from 'react-router-dom';
 import axios from "axios";
+const { Meta } = Card;
 function ProductBox({ productInfor, removeItem }) {
 
-  let onClick = ()=> {
+  let onClick = () => {
     axios({
       method: "DELETE",
       url: "https://localhost:5001/api/Product/delete-product",
@@ -22,13 +23,30 @@ function ProductBox({ productInfor, removeItem }) {
   }
   return (
     <div>
-      <Card title={productInfor.tenSanPham} className='card-store' extra={<div><Link to={{
-        pathname: `/product-update/${productInfor.sanPhamId}`,
-        query: { product: productInfor.sanPhamId }
-      }}>Cập nhật</Link><Button  onClick={onClick}>Xóa</Button></div>}>
-        <p><strong>Giá:</strong> {productInfor.donGia}/{productInfor.donVi}</p>
-        <p><strong>Mô tả:</strong> {productInfor.moTa}</p>
+      <Card
+        style={{ width: 300 }}
+        className='card-store'
+        cover={
+          <img
+            alt="Hình minh họa"
+            src={productInfor.hinhMinhHoa}
+          />
+        }
+        actions={[
+          <Link to={{
+            pathname: `/product-update/${productInfor.sanPhamId}`,
+            query: { product: productInfor.sanPhamId }
+          }}>Cập nhật</Link>,
+          <Button onClick={onClick}>Xóa</Button>,
+        ]}
+      >
+        <Meta
+          title={productInfor.tenSanPham}
+          description={<div><p><strong>Giá:</strong> {productInfor.donGia}/{productInfor.donVi}</p>
+            <p><strong>Mô tả:</strong> {productInfor.moTa}</p></div>}
+        />
       </Card>
+
     </div>
   );
 }

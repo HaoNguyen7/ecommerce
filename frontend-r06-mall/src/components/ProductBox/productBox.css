@@ -1,5 +1,5 @@
 .card-store {
-    width: 100% !important;
+    width: 250px !important;
     max-width: 400px !important;
     height: 100 !important;
     border-color: rgb(104, 156, 252) !important;
@@ -27,6 +27,10 @@
     border-color: rgb(104, 156, 252) !important;
     color: rgb(104, 156, 252) !important;
     background-color: rgb(104, 156, 252) !important;
+}
+
+.card-store .ant-card-cover {
+    height: 250px !important;
 }
 
 @media only screen and (max-width: 600px) {

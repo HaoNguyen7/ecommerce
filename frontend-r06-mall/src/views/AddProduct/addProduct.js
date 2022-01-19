@@ -3,24 +3,26 @@ import {
   Form,
   Input,
   Button,
-  Select
+  Select,
+  Image
 } from 'antd';
 import "./addProduct.css"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import jwt_decode from "jwt-decode"
-
+import Upload from '../Upload/Upload';
 const { Option } = Select;
 const { TextArea } = Input;
 function AddProduct() {
+  const [form] = Form.useForm();
   const [name, setName] = useState("");
   const [inventory, setInventory] = useState(0);
-  const [unit, setUnit] = useState(0)
+  const [unit, setUnit] = useState("")
   const [cost, setCost] = useState(0);
   const [category, setCategory] = useState("");
   const [store, setStore] = useState("");
   const [description, setDescription] = useState("");
-
+  const [image, setImage] = useState("")
   var [listCategory, setListCategory] = useState([]);
   var [listStore, setListStore] = useState([]);
 
@@ -44,7 +46,7 @@ function AddProduct() {
     })
       .catch((err) => console.log(err))
 
-      axios({
+    axios({
       method: "GET",
       url: "https://localhost:5001/Store/get-store-by-user",
       params: {
@@ -58,8 +60,24 @@ function AddProduct() {
     })
       .catch((err) => console.log(err))
   }, [])
+
+  const uploadImage = (value) => {
+    const formData = new FormData();
+    formData.append("file", value);
+    formData.append("upload_preset", "nrxqvf2q");
+
+    axios.post(`https://api.cloudinary.com/v1_1/ddeipl7ed/image/upload`, formData
+    ).then(res => {
+      console.log("upload thanh cong")
+      setImage(res.data.url)
+      form.setFieldsValue({ image: res.data.url });
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
   const onSubmit = () => {
-    if (name !== "" && !isNaN(inventory) && !isNaN(unit) && !isNaN(cost) && category !== "" && store !== "" && description !== "") {
+    if (name !== "" && !isNaN(inventory) && unit != "" && !isNaN(cost) && category !== "" && store !== "" && description !== "") {
 
       axios.post("https://localhost:5001/api/Product/register",
         {
@@ -70,6 +88,7 @@ function AddProduct() {
           donGia: cost,
           loaiSanPham: category,
           cuaHang: store,
+          hinhMinhHoa: image
         }, config
       ).then(() => {
         alert("Sản phẩm đã được thêm")
@@ -96,6 +115,11 @@ function AddProduct() {
 
       <Form.Item label="Tên sản phẩm" rules={[{ required: true }]}>
         <Input onChange={(event) => setName(event.target.value)} />
+      </Form.Item>
+      <Form.Item label="Hình minh họa" name="image">
+        <input type="file"
+          onChange={e => { uploadImage(e.target.files[0]) }} />
+        <Image width={200} src={image} alt="" />
       </Form.Item>
       <Form.Item label="Tồn kho" rules={[{ required: true }]}>
         <Input onChange={(event) => setInventory(event.target.value)} />

@@ -3,28 +3,44 @@ import {
   Form,
   Input,
   Button,
-  Select
+  Select,
+  Image
 } from 'antd';
 import "./updateProduct.css"
 import axios from "axios"
 import { useNavigate, useParams, useLocation } from "react-router-dom"
 import jwt_decode from "jwt-decode"
-
+import Upload from "../Upload/Upload"
 const { Option } = Select;
 const { TextArea } = Input;
 function UpdateProduct() {
   const id = useParams().id;
   const [name, setName] = useState("");
   const [inventory, setInventory] = useState(-1);
-  const [unit, setUnit] = useState(-1)
+  const [unit, setUnit] = useState("")
   const [cost, setCost] = useState(-1);
   const [category, setCategory] = useState(id);
   const [description, setDescription] = useState("");
-
+  const [image, setImage] = useState("");
+  const [form] = Form.useForm();
   var [listCategory, setListCategory] = useState([]);
 
   const navigate = useNavigate();
 
+  const uploadImage = (value) => {
+    const formData = new FormData();
+    formData.append("file", value);
+    formData.append("upload_preset", "nrxqvf2q")
+
+    axios.post(`https://api.cloudinary.com/v1_1/ddeipl7ed/image/upload`, formData
+    ).then(res => {
+      console.log("upload thanh cong")
+      setImage(res.data.url)
+      form.setFieldsValue({ image: res.data.url });
+    }).catch(err => {
+      console.log(err)
+    })
+  }
 
   useEffect(() => {
     axios({
@@ -38,9 +54,6 @@ function UpdateProduct() {
       .catch((err) => console.log(err))
   }, [])
   const onSubmit = () => {
-    // if(category == "") {
-    //   setCategory(id)
-    // }
     axios({
       method: "PUT",
       url: "https://localhost:5001/api/Product/update-product",
@@ -52,6 +65,7 @@ function UpdateProduct() {
         donVi: unit,
         donGia: cost,
         loaiSanPham: category,
+        hinhMinhHoa: image
       }
     }).then(() => {
       alert("Sản phẩm đã được cập nhật")
@@ -73,6 +87,11 @@ function UpdateProduct() {
 
       <Form.Item label="Tên sản phẩm" rules={[{ required: true }]}>
         <Input onChange={(event) => setName(event.target.value)} />
+      </Form.Item>
+      <Form.Item label="Hình minh họa" name="image">
+        <input type="file"
+          onChange={e => { uploadImage(e.target.files[0]) }} />
+        <Image width={200} src={image} alt="" />
       </Form.Item>
       <Form.Item label="Tồn kho" rules={[{ required: true }]}>
         <Input onChange={(event) => setInventory(Number(event.target.value))} />

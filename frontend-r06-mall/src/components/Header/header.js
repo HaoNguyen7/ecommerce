@@ -91,7 +91,7 @@ function AppHeader() {
 						<a href="/add-product">Đăng sản phẩm mới</a>
 					</Menu.Item>
 					<Menu.Item key="8">
-						<a href="/list-products">Quản lý sản phẩm</a>
+						<a href="/manage-product">Quản lý sản phẩm</a>
 					</Menu.Item>
 				</SubMenu>) : (false)}
 			{!localStorage.getItem('token') ? (
