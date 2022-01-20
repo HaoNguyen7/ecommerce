@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from "axios";
 import {Button,Card} from "antd"
+import "./Delivered.css"
 
 const Delivered = () => {
     const [deliveredItems, setDeliveredItems] = useState([])
@@ -24,6 +25,10 @@ const Delivered = () => {
         })
     }
 
+    const showMore = () =>{
+
+    }
+
     useEffect(()=>{
         getDeliveredItems()
     }, [])
@@ -41,6 +46,12 @@ const Delivered = () => {
                         )
                     })}
                 </div>
+                <a 
+                    className='show-more-btn'
+                    onClick={showMore()}
+                >
+                    Xem thêm...
+                </a>
             </Card>
         </div>
     )
