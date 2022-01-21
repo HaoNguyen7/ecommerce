@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,20 +21,25 @@ import r06.mall.JwtParser.JwtParser;
 import r06.mall.Models.CuaHang;
 import r06.mall.Models.SanPham;
 import r06.mall.Repositories.Commission;
+import r06.mall.Repositories.Report;
 import r06.mall.Responses.HoaHongResponse;
+import r06.mall.Responses.ReportResponse;
 import r06.mall.Responses.StoreDetailResponse;
 import r06.mall.Services.CommissionService;
+import r06.mall.Services.ReportService;
 import r06.mall.Services.StoreService;
 
 @RestController
 public class StoreController {
     private final CommissionService hoaHongService;
     private final StoreService storeService;
+    private final ReportService reportService;
 
     @Autowired
-    public StoreController(CommissionService hoaHongService, StoreService storeService) {
+    public StoreController(CommissionService hoaHongService, StoreService storeService, ReportService reportService) {
         this.hoaHongService = hoaHongService;
         this.storeService = storeService;
+        this.reportService = reportService;
     }
 
     @GetMapping("/store/commission")
@@ -51,6 +58,17 @@ public class StoreController {
             return new ResponseEntity<HoaHongResponse>(new HoaHongResponse(
                     false), HttpStatus.UNAUTHORIZED);
         }
+    }
+
+    @RequestMapping(value = "/store/report", method = RequestMethod.GET)
+    public ResponseEntity<ReportResponse> findReportByQuarter(
+            @RequestParam(value = "year", required = false, defaultValue = "2022") String year,
+            @RequestParam(value = "quarter", required = false, defaultValue = "2") String quarter,
+            @RequestParam(value = "idCuaHang", required = false, defaultValue = "0482BF2A-DEDC-4980-CF0C-08D9D8CF552A") String idCuaHang) {
+        List<Report> list = reportService.findReportInQuarter(Integer.parseInt(year), Integer.parseInt(quarter),
+                idCuaHang);
+        return new ResponseEntity<ReportResponse>(new ReportResponse(
+                true, "Success", list), HttpStatus.OK);
     }
 
     @GetMapping("/store/{storeId}")

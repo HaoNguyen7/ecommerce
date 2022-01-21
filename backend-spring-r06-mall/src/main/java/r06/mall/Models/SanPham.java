@@ -23,6 +23,7 @@ public class SanPham {
     private Collection<DonHangSanPham> donHangSanPhamsBySanPhamId;
     private LoaiSanPham loaiSanPhamByLoaiSanPhamLoaiId;
     private CuaHang cuaHangByCuaHangId;
+    private String hinhMinhHoa;
 
     @Id
     @Column(name = "SanPhamId", nullable = false)
@@ -88,6 +89,15 @@ public class SanPham {
     @Column(name = "LoaiSanPhamLoaiId", nullable = true)
     public String getLoaiSanPhamLoaiId() {
         return loaiSanPhamLoaiId;
+    }
+
+    @Basic
+    @Column(name = "HinhMinhHoa", nullable = true)
+    public String getHinhMinhHoa() {
+        return hinhMinhHoa;
+    }
+    public void setHinhMinhHoa(String hinhMinhHoa) {
+        this.hinhMinhHoa = hinhMinhHoa;
     }
 
     public void setLoaiSanPhamLoaiId(String loaiSanPhamLoaiId) {
