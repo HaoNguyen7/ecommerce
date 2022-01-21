@@ -5,8 +5,8 @@ import "./Delivered.css"
 
 const Delivered = () => {
     const [deliveredItems, setDeliveredItems] = useState([])
-    const [pageIndex, setPageIndex] = useState(0)
-    const [totalPage, setTotalPage] = useState(0)
+    const [pageIndex, setPageIndex] = useState(1)
+    const [pageSize, setPageSize] = useState(10)
 
     const getDeliveredItems = () => {
         axios({
@@ -18,7 +18,7 @@ const Delivered = () => {
             const result = res.data
             setDeliveredItems(result.data)
             setPageIndex(result.pageIndex)
-            setTotalPage(result.totalPage)
+            setPageSize(result.pageSize)
         })
         .catch((error)=>{
             console.log(error)
