@@ -1,10 +1,11 @@
 package r06.mall.Services;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import r06.mall.Repositories.ImportantItemsRepository;
+import r06.mall.Repositories.Item;
 
 @Service
 public class ImportantItemsService {
@@ -12,5 +13,9 @@ public class ImportantItemsService {
 
     public ImportantItemsService(ImportantItemsRepository importantItemsRepository) {
         this.importantItemsRepository = importantItemsRepository;
+    }
+
+    public List<Item> getImportantItems(){
+        return importantItemsRepository.getImportantItems();
     }
 }
