@@ -5,6 +5,7 @@ import r06.mall.Models.DonHang;
 import r06.mall.Models.TinhTrangDonHang;
 import r06.mall.Repositories.OrderRepository;
 import r06.mall.Repositories.OrderStatusRepository;
+import r06.mall.Repositories.TimeRange;
 
 import java.util.Collection;
 import java.util.List;
@@ -31,6 +32,9 @@ public class OrderService {
 
     }
 
+    public TimeRange findTimeRange() {
+        return _donHangRepository.findTimeRange();
+    }
     public Collection<TinhTrangDonHang> GetOrderTracking(DonHang order) {
         return order.getTinhTrangDonHangsByDonHangId();
     }

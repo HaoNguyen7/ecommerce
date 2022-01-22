@@ -19,6 +19,10 @@ public class ReportService {
     public List<Report> findReportInQuarter(int nam, int quarter, String id) {
         var startMonth = 3* (quarter - 1) + 1;
         var endMonth = 3* quarter;
+        if(quarter == 0) {
+            startMonth = 1;
+            endMonth = 12;
+        }
         return cuahangRepository.findReportByQuarter(startMonth, endMonth, nam, id);
     }
 }
