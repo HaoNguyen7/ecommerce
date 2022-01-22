@@ -6,8 +6,8 @@ import "./Delivered.css"
 // const data = [
 //     {
 //         DonHangId: 111111,
-//         TinhTrangThanhToan: 'Da thanh toan',
-//         TinhTrangGiao: 'Dang giao hang',
+//         TinhTrangThanhToan: 'Đã thanh toán',
+//         TinhTrangGiao: 'Đang giao hàng',
 //         KhachHang: {
 //             TenKhachHang: 'Nguyễn Văn A',
 //             DiaChi: 'số nhà 1'
@@ -15,8 +15,8 @@ import "./Delivered.css"
 //     },
 //     {
 //         DonHangId: 222222,
-//         TinhTrangThanhToan: 'Da thanh toan',
-//         TinhTrangGiao: 'Da giao hang',
+//         TinhTrangThanhToan: 'Đã thanh toán',
+//         TinhTrangGiao: 'Đã giao hàng',
 //         KhachHang: {
 //             TenKhachHang: 'Nguyễn Văn B',
 //             DiaChi: 'số nhà 2'
@@ -24,8 +24,8 @@ import "./Delivered.css"
 //     },
 //     {
 //         DonHangId: 333333,
-//         TinhTrangThanhToan: 'Chua thanh toan',
-//         TinhTrangGiao: 'Dang giao hang',
+//         TinhTrangThanhToan: 'Chưa thanh toán',
+//         TinhTrangGiao: 'Đang giao hàng',
 //         KhachHang: {
 //             TenKhachHang: 'Nguyễn Văn C',
 //             DiaChi: 'số nhà 3'
@@ -39,25 +39,24 @@ const Delivered = () => {
     const getDeliveredItems = () => {
         axios({
             method: 'get',
-            url: `https://localhost:5001/api/Delivered/history`,
+            url: `https://localhost:44391/api/Delivered/history`,
             headers: { 'Authorization':`Bearer ${localStorage.getItem('token')}`}
         })
         .then(res=>{
             const result = res.data
-            setDeliveredItems(result.data)
+            setDeliveredItems(result)
         })
         .catch((error)=>{
             console.log(error)
         })
     }
+    useEffect(()=>{
+        getDeliveredItems()
+    }, [])
 
     const showMore = () =>{
 
     }
-
-    useEffect(()=>{
-        getDeliveredItems()
-    }, [])
 
     return(
         <div>
