@@ -1,6 +1,7 @@
 import Axios from 'axios';
 import {
 	CART_ADD_ITEM,
+	CART_EMPTY,
 	CART_REMOVE_ITEM,
 	CART_SAVE_PAYMENT_METHOD,
 	CART_SAVE_SHIPPING_ADDRESS
@@ -42,4 +43,9 @@ export const saveShippingAddress = (data) => (dispatch) => {
 
 export const savePaymentMethod = (data) => (dispatch) => {
 	dispatch({ type: CART_SAVE_PAYMENT_METHOD, payload: data });
+};
+
+export const emptyCart = () => (dispatch) => {
+	dispatch({ type: CART_EMPTY });
+	localStorage.removeItem('cartItems');
 };

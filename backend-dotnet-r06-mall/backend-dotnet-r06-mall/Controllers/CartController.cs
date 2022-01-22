@@ -37,21 +37,27 @@ namespace backend_dotnet_r06_mall.Controllers
 
         [HttpPost("Create")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Khach)]
-        public async Task<IActionResult> TaoDonHang([FromBody] CartRequest gh)
+        public async Task<Guid> TaoDonHang([FromBody] CartRequest gh)
         {
             Guid userId = new Guid(User.FindFirst("Id")?.Value);
             var dh = await _service.TaoDonHang(gh, userId);
-            return dh ? Ok() : BadRequest();
+            // return dh ? Ok() : BadRequest();
+            return dh;
         }
-
-        // [HttpPatch("Pay")]
-        // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Khach)]
-        // public async Task<IActionResult> ThanhToan([FromBody] Guid cartId)
-        // {
-        //     Guid userId = new Guid(User.FindFirst("Id")?.Value);
-        //     var temp = await _service.thanhToan(cartId,userId);
-        //     return temp ? Ok(): BadRequest();
-        // }
+        [HttpPost("payPal")]
+        public string payPal()
+        {
+            string x = "AeO06MIYy3GnUJMFw-TkWnw4qebCTVEZB1bjeMzrG1j2UVIwzmETbKFYJ7g6TK_bowZCB3UiZk-t943d";
+            return x;
+        }
+        [HttpPut("{orderId}/pay")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Khach)]
+        public async Task<IActionResult> ThanhToan(Guid orderId)
+        {
+            Guid userId = new Guid(User.FindFirst("Id")?.Value);
+            var temp = await _service.thanhToan(orderId);
+            return temp ? Ok(): BadRequest();
+        }
 
         // [HttpPost("Ship")]
         // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Khach)]
