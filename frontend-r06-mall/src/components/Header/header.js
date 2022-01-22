@@ -93,6 +93,9 @@ function AppHeader() {
 					<Menu.Item key="8">
 						<a href="/manage-product">Quản lý sản phẩm</a>
 					</Menu.Item>
+					<Menu.Item key="9">
+						<a href="/report">Thống kê kinh doanh</a>
+					</Menu.Item>
 				</SubMenu>) : (false)}
 			{!localStorage.getItem('token') ? (
 				<Menu.Item className="login-space">

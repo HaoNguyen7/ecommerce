@@ -19,6 +19,7 @@ import ManageRegisterStore from './views/ManageRegisterStore/manageRegisterStore
 import AddProduct from './views/AddProduct/addProduct';
 import ManageProduct from './views/ManageProduct/manageProduct';
 import UpdateProduct from './views/UpdateProduct/updateProduct';
+import Report from './views/Report/report';
 const { Header, Content, Footer } = Layout;
 function App() {
 	return (
@@ -44,6 +45,7 @@ function App() {
 						<Route path="/add-product" element={<AddProduct />}/>
 						<Route path="/manage-product" element={<ManageProduct />}/>
 						<Route path="/product-update/:id" element={<UpdateProduct />}/>
+						<Route path="/report" element={<Report />}/>
 					</Routes>
 				</Content>
 			</Router>
