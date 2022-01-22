@@ -53,6 +53,12 @@ public class OrderController {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
+
+    @RequestMapping(value = "/time-range", method = RequestMethod.GET)
+    public ResponseEntity<TimeRangeResponse> findReportByQuarter() {
+        TimeRange tr = _orderService.findTimeRange();
+        return new ResponseEntity<TimeRangeResponse>(new TimeRangeResponse(tr), HttpStatus.OK);
+    }
     @GetMapping("/order_driver/{driverId}")
     public ResponseEntity<DonHang> getDonHangByDriver(String id, Integer tinhtrang,@RequestHeader(name = "Authorization") String token) {
         try {
