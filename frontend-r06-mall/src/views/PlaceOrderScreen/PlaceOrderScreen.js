@@ -28,7 +28,7 @@ export default function PlaceOrderScreen(props) {
 	const [ orderId, setOrderId ] = useState('');
 	const placeholderHandler = async () => {
 		const listsp = cart.cartItems;
-		const data = { listsp };
+		const data = cart;
 		Axios({
 			method: 'post',
 			url: 'https://localhost:5001/api/Cart/Create',

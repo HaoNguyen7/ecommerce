@@ -30,21 +30,25 @@ namespace backend_dotnet_r06_mall.Services
                 ThoiGian = DateTime.UtcNow,
                 TinhTrangThanhToan = false,
                 KhachHang = await _context.KhachHang.FirstOrDefaultAsync(o => o.KhachHangId == userId),
-                SoLuong = 1
+                SoLuong = 1,
+                DiaChi = gh.shippingAddress.address,
+                HinhThucThanhToan = await _context.HinhThucThanhToan.FirstOrDefaultAsync(o=> o.TenHTTT == gh.paymentMethod)
             };
 
             dh.DonHangSanPham = new List<DonHangSanPham>();
 
-            foreach (var item in gh.listsp)
+            foreach (var item in gh.cartItems)
             {
                 DonHangSanPham dhsp = new DonHangSanPham
                 {
                     DonHang = dh,
                     SanPham = await _context.SanPham.FirstOrDefaultAsync(o => o.SanPhamId == item.product),
                     SoLuong = item.qty
-
                 };
                 dh.DonHangSanPham.Add(dhsp);
+                var x = await _context.SanPham.FirstOrDefaultAsync(o => o.SanPhamId == item.product);
+                x.TonKho = x.TonKho - item.qty;
+                await _context.SaveChangesAsync();
             }
 
             var createResult = await _context.DonHang.AddAsync(dh);

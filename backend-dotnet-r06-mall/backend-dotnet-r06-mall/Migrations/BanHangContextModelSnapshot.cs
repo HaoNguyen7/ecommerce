@@ -281,6 +281,9 @@ namespace backend_dotnet_r06_mall.Migrations
                     b.Property<string>("DanhGia")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("DiaChi")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid?>("HinhThucThanhToanHinhThucId")
                         .HasColumnType("uniqueidentifier");
 
