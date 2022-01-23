@@ -23,11 +23,11 @@ export default function PlaceOrderScreen(props) {
 	const toPrice = (num) => Number(num.toFixed(2));
 	cart.itemsPrice = toPrice(cart.cartItems.reduce((a, c) => a + c.qty * c.price, 0));
 	cart.shippingPrice = 0; //tien shipping chua biet?
-	cart.totalPrice = cart.shippingPrice + cart.itemsPrice;
+	cart.totalPrice = parseInt(cart.shippingPrice) + parseInt(cart.itemsPrice);
 	cart.totalPrice = 300000;
+	cart.paymentMethod == 'PayPal' ? (cart.isPaid = true) : (cart.isPaid = false);
 	const [ orderId, setOrderId ] = useState('');
 	const placeholderHandler = async () => {
-		const listsp = cart.cartItems;
 		const data = cart;
 		Axios({
 			method: 'post',

@@ -1,4 +1,5 @@
 package r06.mall.Repositories;
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,4 +13,7 @@ import r06.mall.Models.DonHang;
 public interface OrderRepository extends JpaRepository<DonHang, String> {
     @Query(value = "SELECT * FROM DonHang dh WHERE dh.NguoiGiaoHangNguoiGiaoId = ?1 and dh.TinhTrangGiao = ?2", nativeQuery = true)
     DonHang findDonHangByDriver(String id,Integer tinhtrang);
+    @Query(value = "SELECT * FROM DonHang dh WHERE dh.nguoiGiaoHangNguoiGiaoId is null", nativeQuery = true)
+    Collection<DonHang> findAllUnpickedOrder();
 }
+

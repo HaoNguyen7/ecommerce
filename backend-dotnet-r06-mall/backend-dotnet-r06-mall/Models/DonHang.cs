@@ -30,6 +30,8 @@ namespace backend_dotnet_r06_mall.Models
         public int TinhTrangGiao { get; set; }
 
         public string DiaChi { get; set; }
+        public string ThanhPho { get; set; }
+        public int TongTien { get; set; }
         public List<TinhTrangDonHang> TinhTrangDonHang { get; set; }
 
         [JsonIgnore]

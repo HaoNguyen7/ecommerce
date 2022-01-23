@@ -297,6 +297,9 @@ namespace backend_dotnet_r06_mall.Migrations
                         .IsRequired()
                         .HasColumnType("int");
 
+                    b.Property<string>("ThanhPho")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("ThoiGian")
                         .HasColumnType("datetime2");
 
@@ -305,6 +308,9 @@ namespace backend_dotnet_r06_mall.Migrations
 
                     b.Property<bool>("TinhTrangThanhToan")
                         .HasColumnType("bit");
+
+                    b.Property<int>("TongTien")
+                        .HasColumnType("int");
 
                     b.HasKey("DonHangId");
 
