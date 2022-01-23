@@ -10,10 +10,10 @@ import r06.mall.Models.DonHangSanPham;
 
 @Repository
 public interface ImportantItemsRepository extends JpaRepository<DonHangSanPham, String> {
-    @Query(value = "select top 10 DonHangSanPham.sanPhamId, DonHangSanPham.sanPhamBySanPhamId, SUM(DonHangSanPham.SoLuong) as SoLuong"
-                    + "from DonHangSanPham"
-                    + "group by DonHangSanPham.sanPhamId"
-                    + "order by SoLuong desc", nativeQuery = true)
+    @Query(value = "select top 10 dhsp.sanPhamId, sp.TenSanPham, SUM(dhsp.SoLuong) as SoLuong"
+    + " from DonHangSanPham dhsp join SanPham sp on dhsp.sanPhamId = sp.sanPhamId"
+    + " group by dhsp.sanPhamId, sp.TenSanPham"
+    + " order by SoLuong desc", nativeQuery = true)
         List<Item> getImportantItems();
 }
 /*
