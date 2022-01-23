@@ -40,3 +40,25 @@
 .single-item .total-section .total-price{
     color: red;
 }
+
+.order-detail p{
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.order-detail .price,
+.order-detail .total{
+    color: red;
+}
+
+.order-detail span{
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+}
+
+.order-detail .address p{
+    margin-bottom: -5px;
+    margin-left: 10px;
+    font-weight: 400;
+}

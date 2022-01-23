@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Card, Row, Col, Avatar } from "antd"
+import { Link } from 'react-router-dom'
 import './OrderHistory.css'
 import axios from 'axios'
 
@@ -65,6 +66,7 @@ const OrderHistory = () =>{
                                         <span className='total-price'> đ{DonHangSanPham.SoLuong*DonHangSanPham.SanPham.DonGia}</span>
                                     </h3>
                                 </div>
+                                <Link to={`/order_history/${DonHangId}`}>Xem chi tiết...</Link>
                             </div>
                         )
                     })}
