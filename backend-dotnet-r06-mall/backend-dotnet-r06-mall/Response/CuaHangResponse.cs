@@ -16,7 +16,7 @@ namespace backend_dotnet_r06_mall.Response
         public string DiaChi { get; set; }
         public bool TinhTrang { get; set; }
 
-
+        public string GiayPhepKinhDoanh { get; set; }
         public CuaHangResponse(CuaHang cuaHang)
         {
             TenCuaHang = cuaHang.TenCuaHang;
@@ -28,6 +28,7 @@ namespace backend_dotnet_r06_mall.Response
             TinhTrang = cuaHang.TinhTrang;
             KinhDo = cuaHang.KinhDo;
             ViDo = cuaHang.ViDo;
+            GiayPhepKinhDoanh = cuaHang.GiayPhepKinhDoanh;
         }
     }
 }
