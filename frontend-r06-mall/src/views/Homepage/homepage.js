@@ -1,17 +1,35 @@
-import React, { useState } from 'react';
-import { Carousel, Space, Avatar } from 'antd';
-import { Menu, Button, Card, List, Row } from 'antd';
-import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
+import React, { useEffect, useState } from 'react';
+import { Carousel, Button, Card, List, Layout, Input } from 'antd';
+import axios from 'axios';
+import SearchProduct from '../../components/SearchProduct';
+const { Search } = Input;
+const { Content } = Layout;
 const { Meta } = Card;
-const { SubMenu } = Menu;
 
 function HomePage() {
-  const [current, setCurrent] = useState('main');
+  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const getCategories = async () => {
+      const res = await axios.get(
+        'https://localhost:5001/api/Product/categories'
+      );
+      const { data } = res;
+      setCategories(data);
+    };
 
-  const handleClick = (e) => {
-    console.log('click ', e);
-    setCurrent(e.key);
-  };
+    const getProducts = async () => {
+      const productRes = await axios.get('https://localhost:5001/api/Product');
+      const { data: productList } = productRes;
+      console.log(productList);
+      setProducts(productList);
+    };
+
+    getCategories();
+    getProducts();
+  }, []);
+
+  console.log(categories);
 
   const contentStyle = {
     height: '360px',
@@ -26,43 +44,10 @@ function HomePage() {
     console.log(a, b, c);
   }
 
-  const IconText = ({ icon, text }) => (
-    <Space>
-      {React.createElement(icon)}
-      {text}
-    </Space>
-  );
-
-  const listData = [];
-  for (let i = 0; i < 23; i++) {
-    listData.push({
-      sanPhamId: 'd1e184d9-5a69-4766-9fa8-7f2b2c7f2126',
-      tenSanPham: 'Kệ Sách Gỗ Để Sàn Cao Cấp SPEVI',
-      moTa: 'Tủ Ngăn Kéo INDEX KARLMAR (60 x 39.7 x 106.7 cm) được làm từ chất liệu bền chắc, hạn chế cong vênh và nứt gãy, cũng như mối mọt theo thời gian',
-      tonKho: 54,
-      donGia: 1273000,
-      donVi: '1',
-      ngayDang: '2021-12-25T00:00:00',
-      loaiSanPham: null,
-      cuaHang: {
-        cuaHangId: '25c80cd4-9eca-4455-9de9-aba8eb0364f1',
-        tenCuaHang: 'Hoàng An Furniture',
-        moTa: 'Bán nội thất',
-        danhGia: null,
-        soDienThoai: '0348724198',
-        stk: '18120273',
-        tinhTrang: false,
-        maSoThue: null,
-        diaChi: null,
-        kinhDo: 106.341118,
-        viDo: 9.93628,
-        userId: '00000000-0000-0000-0000-000000000000',
-      },
-    });
-  }
-
   return (
     <div>
+      {/* {console.log(categories)} */}
+      <SearchProduct />
       <Carousel afterChange={onChange}>
         <div>
           <h3 style={contentStyle}>1</h3>
@@ -77,37 +62,89 @@ function HomePage() {
           <h3 style={contentStyle}>4</h3>
         </div>
       </Carousel>
-      <List
-        grid={{ gutter: 16, column: 4 }}
-        pagination={{
-          onChange: (page) => {
-            console.log(page);
-          },
-          pageSize: 8,
+      <Content
+        className="site-layout"
+        style={{
+          padding: '0 50px',
+          marginTop: 64,
         }}
-        dataSource={listData}
-        footer={
-          <div>
-            <b>ant design</b> footer part
-          </div>
-        }
-        renderItem={(item) => (
-          <List.Item>
-            <Card
-              hoverable
-              style={{ width: 250 }}
-              cover={
-                <img
-                  alt="example"
-                  src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                />
-              }
-            >
-              <Meta title={item.tenSanPham} description={item.donGia} />
-            </Card>
-          </List.Item>
-        )}
-      />
+      >
+        <List
+          grid={{
+            gutter: 16,
+            xs: 1,
+            sm: 2,
+            md: 4,
+            lg: 4,
+            xl: 8,
+            xxl: 3,
+          }}
+          bordered={true}
+          header={<h1>Doanh mục sản phẩm</h1>}
+          dataSource={categories}
+          renderItem={(item) => (
+            <List.Item>
+              {/* <Card>Category</Card> */}
+              <Button
+                size="large"
+                style={{ width: 150 }}
+                href={`/search?category=${item.loaiId}`}
+              >
+                {item.ten}
+              </Button>
+            </List.Item>
+          )}
+        />
+      </Content>
+
+      <Content
+        className="site-layout"
+        style={{
+          padding: '0 50px',
+          marginTop: 64,
+          width: '100%',
+          justifyContent: 'center',
+        }}
+      >
+        <List
+          header={
+            <div>
+              <h1>Sản phẩm có thể bạn sẽ thích</h1>
+            </div>
+          }
+          bordered={true}
+          grid={{ gutter: 4, column: 5 }}
+          pagination={{
+            onChange: (page) => {
+              console.log(page);
+              console.log(categories);
+            },
+            pageSize: 20,
+          }}
+          dataSource={products}
+          footer={
+            <div>
+              <Button>View more</Button>
+            </div>
+          }
+          renderItem={(item) => (
+            <List.Item>
+              <Card
+                hoverable
+                style={{ width: 250 }}
+                cover={
+                  <img
+                    alt="example"
+                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                  />
+                }
+              >
+                <Meta title={item.tenSanPham} description={item.donGia} />
+              </Card>
+            </List.Item>
+          )}
+        />
+      </Content>
     </div>
   );
 }
