@@ -43,7 +43,8 @@ function App() {
 						<Route path="/sellregister" element={<SellRegister />} />
 						<Route path="/register_driver" element={<RegisterShipper />} />
 						<Route path="/get_order" element={<GetOrder />} />
-						<Route path="/cart" element={<CartScreen />} />
+						<Route path="/cart/" element={<CartScreen />} />
+						<Route path="/cart/:id" element={<CartScreen />} />
 						<Route path="/shipping" element={<ShippingAddressScreen />} />
 						<Route path="/payment" element={<PaymentScreen />} />
 						<Route path="/placeorder" element={<PlaceOrderScreen />} />

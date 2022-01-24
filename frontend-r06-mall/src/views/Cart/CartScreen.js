@@ -9,7 +9,7 @@ import './CartScreen.css';
 const CartScreen = (props) => {
 	const { id } = useParams();
 	//const productId = id;
-	const productId = '3aa85f64-5717-4562-b3fc-2c963f66afa6';
+	const productId = id;
 	const location = useLocation();
 	const qty = location.search ? Number(location.search.split('=')[1]) : 1;
 	const navigate = useNavigate();
@@ -78,7 +78,7 @@ const CartScreen = (props) => {
 											))}
 										</select>
 									</div>
-									<div>${item.price}</div>
+									<div>{item.price} VNĐ</div>
 									<div>
 										<button type="button" onClick={() => removeFromCartHandler(item.product)}>
 											Delete
@@ -95,7 +95,8 @@ const CartScreen = (props) => {
 					<ul>
 						<li>
 							<h2>
-								Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items): ${cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
+								Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items):{' '}
+								{cartItems.reduce((a, c) => a + c.price * c.qty, 0)} VNĐ
 							</h2>
 						</li>
 						<li>

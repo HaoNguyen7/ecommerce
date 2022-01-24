@@ -53,6 +53,18 @@ namespace backend_dotnet_r06_mall.Services
                 await _context.SaveChangesAsync();
             }
 
+            dh.TinhTrangDonHang = new List<TinhTrangDonHang>();
+            TinhTrangDonHang ttdh = new TinhTrangDonHang
+            {
+                TTDHId = new Guid(),
+                TenTinhTrang = "Chờ xác nhận",
+                DonHangId = dh.DonHangId,
+                NgayThucHien = DateTime.UtcNow,
+                DonHang = dh
+            };
+            dh.TinhTrangDonHang.Add(ttdh);
+            await _context.SaveChangesAsync();
+
             var createResult = await _context.DonHang.AddAsync(dh);
             await _context.SaveChangesAsync();
             // return createResult is not null;
