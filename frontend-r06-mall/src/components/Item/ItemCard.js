@@ -17,7 +17,13 @@ export default function ItemCard({ item }) {
             />
           }
         >
-          <Meta title={item.tenSanPham} description={item.donGia} />
+          <Meta
+            title={item.tenSanPham}
+            description={new Intl.NumberFormat('vi-VN', {
+              style: 'currency',
+              currency: 'VND',
+            }).format(item.donGia)}
+          />
         </Card>
       </Link>
     </>

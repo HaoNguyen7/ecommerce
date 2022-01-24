@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Image, InputNumber, Button, Descriptions, Layout } from 'antd';
+import { Image, InputNumber, Button, Descriptions, PageHeader } from 'antd';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './Product.css';
@@ -27,10 +27,28 @@ export default function Product() {
     console.log('changed', value);
   }
 
+  const routes = [
+    {
+      href: '/',
+      breadcrumbName: 'Trang chủ',
+    },
+    {
+      href: `/search?category=${loaiSanPham ? loaiSanPham.loaiId : ''}`,
+      breadcrumbName: `${loaiSanPham ? loaiSanPham.ten : ''}`,
+    },
+    {
+      href: '#',
+      breadcrumbName: product.tenSanPham,
+    },
+  ];
+
   return (
     <div>
       {console.log(loaiSanPham)}
       {console.log(cuaHang)}
+
+      <PageHeader className="site-page-header" breadcrumb={{ routes }} />
+
       <div className="row">
         <div className="column">
           <Image
@@ -40,13 +58,25 @@ export default function Product() {
         </div>
         <div className="column">
           <h1>{product.tenSanPham}</h1>
-          <h2>{product.donGia} đ</h2>
+          <h2>
+            {new Intl.NumberFormat('vi-VN', {
+              style: 'currency',
+              currency: 'VND',
+            }).format(product.donGia)}
+          </h2>
           <p>Còn {product.tonKho} sản phẩm</p>
-          <h3>Số lượng</h3>
-          <InputNumber min={1} defaultValue={1} onChange={onChange} />
 
-          <div>
-            <Button type="primary" danger>
+          <div className="product-num">
+            <InputNumber
+              min={1}
+              defaultValue={1}
+              addonBefore={<p>Số lượng: </p>}
+              keyboard={false}
+              onChange={onChange}
+            />
+          </div>
+          <div style={{ 'margin-top': 10 }}>
+            <Button size="large" type="primary" danger>
               Chọn Mua
             </Button>
           </div>

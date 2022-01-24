@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Carousel, Button, Card, List, Layout, Input } from 'antd';
 import axios from 'axios';
 import SearchProduct from '../../components/SearchProduct';
+import ItemCard from '../../components/Item/ItemCard';
 const { Search } = Input;
 const { Content } = Layout;
 const { Meta } = Card;
@@ -129,18 +130,7 @@ function HomePage() {
           }
           renderItem={(item) => (
             <List.Item>
-              <Card
-                hoverable
-                style={{ width: 250 }}
-                cover={
-                  <img
-                    alt="example"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                  />
-                }
-              >
-                <Meta title={item.tenSanPham} description={item.donGia} />
-              </Card>
+              <ItemCard item={item} />
             </List.Item>
           )}
         />
