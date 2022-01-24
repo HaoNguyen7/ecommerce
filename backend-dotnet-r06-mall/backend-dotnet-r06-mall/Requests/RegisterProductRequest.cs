@@ -11,5 +11,6 @@ namespace backend_dotnet_r06_mall.Requests
         public Guid LoaiSanPham { get; set; }
         public Guid CuaHang { get; set; }
         public string HinhMinhHoa  { get; set; }
+        public string NguonGoc { get; set; }
     }
 }

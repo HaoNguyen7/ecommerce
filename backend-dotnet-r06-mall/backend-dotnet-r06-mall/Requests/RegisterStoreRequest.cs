@@ -13,5 +13,6 @@ namespace backend_dotnet_r06_mall.Requests
         public string CardId { get; set; }
         public string TaxId { get; set; }
         public string Description { get; set; }
+        public string GiayPhepKinhDoanh { get; set; }
     }
 }

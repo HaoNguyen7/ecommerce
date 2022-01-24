@@ -24,6 +24,10 @@ public class JwtParser {
         return role.contains(RoleConstants.Khach);
     }
 
+    public boolean isCuaHang() {
+        return role.contains(RoleConstants.CuaHang);
+    }
+
     public boolean isTaiXe() {
         return role.contains(RoleConstants.TaiXe);
     }

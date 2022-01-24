@@ -25,6 +25,8 @@ namespace backend_dotnet_r06_mall.Models
 
         [MaxLength(100)]
         public string MaSoThue { get; set; }
+        [MaxLength(2147483645)]
+        public string GiayPhepKinhDoanh { get; set; }
 
         [MaxLength(2147483645)]
         public string DiaChi { get; set; }

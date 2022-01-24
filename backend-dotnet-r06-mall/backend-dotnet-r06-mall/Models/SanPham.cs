@@ -31,6 +31,8 @@ namespace backend_dotnet_r06_mall.Models
         [MaxLength(2147483645)]
         public string HinhMinhHoa { get; set; }
 
+        [MaxLength(2147483645)]
+        public string NguonGoc { get; set; }
         [JsonIgnore]
         public virtual ICollection<DonHang> DonHang { get; set; }
         [JsonIgnore]

@@ -23,6 +23,7 @@ function AddProduct() {
   const [store, setStore] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("")
+  const [source, setSource] = useState("")
   var [listCategory, setListCategory] = useState([]);
   var [listStore, setListStore] = useState([]);
 
@@ -88,7 +89,8 @@ function AddProduct() {
           donGia: cost,
           loaiSanPham: category,
           cuaHang: store,
-          hinhMinhHoa: image
+          hinhMinhHoa: image,
+          nguonGoc: source,
         }, config
       ).then(() => {
         alert("Sản phẩm đã được thêm")
@@ -129,6 +131,9 @@ function AddProduct() {
       </Form.Item>
       <Form.Item label="Đơn giá" rules={[{ required: true }]}>
         <Input onChange={(event) => setCost(event.target.value)} />
+      </Form.Item>
+      <Form.Item label="Nguồn gốc" rules={[{ required: true }]}>
+        <Input onChange={(event) => setSource(event.target.value)} />
       </Form.Item>
       <Form.Item label="Loại sản phẩm" rules={[{ required: true }]}>
         <Select

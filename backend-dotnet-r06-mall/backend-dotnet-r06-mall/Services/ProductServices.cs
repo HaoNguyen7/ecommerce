@@ -84,7 +84,8 @@ namespace backend_dotnet_r06_mall.Services
                 TonKho = request.TonKho,
                 CuaHang = _context.CuaHang.FirstOrDefault(o => o.CuaHangId == request.CuaHang),
                 NgayDang = DateTime.Now,
-                HinhMinhHoa = request.HinhMinhHoa
+                HinhMinhHoa = request.HinhMinhHoa,
+                NguonGoc = request.NguonGoc
             };
 
             var createResult = await _context.SanPham.AddAsync(sanpham);
@@ -126,6 +127,10 @@ namespace backend_dotnet_r06_mall.Services
             if (request.HinhMinhHoa != "")
             {
                 product.HinhMinhHoa = request.HinhMinhHoa;
+            }
+
+            if(request.NguonGoc != "") {
+                product.NguonGoc = request.NguonGoc;
             }
             await _context.SaveChangesAsync();
             return product;

@@ -19,8 +19,9 @@ import ManageRegisterStore from './views/ManageRegisterStore/manageRegisterStore
 import AddProduct from './views/AddProduct/addProduct';
 import ManageProduct from './views/ManageProduct/manageProduct';
 import UpdateProduct from './views/UpdateProduct/updateProduct';
-import ProductSearch from './views/ProductSearch/ProductSearch';
+import Report from './views/Report/report';
 import Product from './views/Product/Product';
+import ProductSearch from './views/ProductSearch/ProductSearch';
 import OrderTracking from './views/OrderTracking/OrderTracking';
 const { Header, Content, Footer } = Layout;
 function App() {
@@ -50,6 +51,7 @@ function App() {
             <Route path="/add-product" element={<AddProduct />} />
             <Route path="/manage-product" element={<ManageProduct />} />
             <Route path="/product-update/:id" element={<UpdateProduct />} />
+            <Route path="/report" element={<Report />} />
             <Route path="/search" element={<ProductSearch />} />
             <Route path="/product/:id" element={<Product />} />
             <Route path="/order/tracking/:id" element={<OrderTracking />} />

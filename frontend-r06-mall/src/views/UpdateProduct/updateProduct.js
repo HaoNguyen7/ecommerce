@@ -22,6 +22,7 @@ function UpdateProduct() {
   const [category, setCategory] = useState(id);
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
+  const [source, setSource] = useState("");
   const [form] = Form.useForm();
   var [listCategory, setListCategory] = useState([]);
 
@@ -54,6 +55,7 @@ function UpdateProduct() {
       .catch((err) => console.log(err))
   }, [])
   const onSubmit = () => {
+    console.log(source);
     axios({
       method: "PUT",
       url: "https://localhost:5001/api/Product/update-product",
@@ -65,7 +67,8 @@ function UpdateProduct() {
         donVi: unit,
         donGia: cost,
         loaiSanPham: category,
-        hinhMinhHoa: image
+        hinhMinhHoa: image,
+        nguonGoc: source,
       }
     }).then(() => {
       alert("Sản phẩm đã được cập nhật")
@@ -101,6 +104,9 @@ function UpdateProduct() {
       </Form.Item>
       <Form.Item label="Đơn giá" rules={[{ required: true }]}>
         <Input onChange={(event) => setCost(Number(event.target.value))} />
+      </Form.Item>
+      <Form.Item label="Nguồn gốc" rules={[{ required: true }]}>
+        <Input onChange={(event) => setSource(event.target.value)} />
       </Form.Item>
       <Form.Item label="Loại sản phẩm" rules={[{ required: true }]}>
         <Select

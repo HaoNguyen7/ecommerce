@@ -12,11 +12,15 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import r06.mall.JwtParser.JwtParser;
 import r06.mall.Models.DonHang;
 import r06.mall.Models.TinhTrangDonHang;
+import r06.mall.Repositories.TimeRange;
+import r06.mall.Responses.TimeRangeResponse;
 import r06.mall.Services.OrderService;
 
 @SpringBootApplication
@@ -53,6 +57,12 @@ public class OrderController {
         } catch (IllegalArgumentException exception) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
+    }
+
+    @RequestMapping(value = "/time-range", method = RequestMethod.GET)
+    public ResponseEntity<TimeRangeResponse> findReportByQuarter() {
+        TimeRange tr = _orderService.findTimeRange();
+        return new ResponseEntity<TimeRangeResponse>(new TimeRangeResponse(tr), HttpStatus.OK);
     }
 
     @GetMapping("/order_driver/{driverId}")

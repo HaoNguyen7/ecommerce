@@ -12,4 +12,7 @@ import r06.mall.Models.DonHang;
 public interface OrderRepository extends JpaRepository<DonHang, String> {
     @Query(value = "SELECT * FROM DonHang dh WHERE dh.NguoiGiaoHangNguoiGiaoId = ?1 and dh.TinhTrangGiao = ?2", nativeQuery = true)
     DonHang findDonHangByDriver(String id,Integer tinhtrang);
+    
+    @Query(value = "select max(YEAR(ThoiGian)) Max, MIN(YEAR(ThoiGian)) Min from DonHang", nativeQuery = true)
+    TimeRange findTimeRange();
 }

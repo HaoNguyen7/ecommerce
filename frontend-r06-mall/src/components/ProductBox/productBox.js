@@ -43,7 +43,10 @@ function ProductBox({ productInfor, removeItem }) {
         <Meta
           title={productInfor.tenSanPham}
           description={<div><p><strong>Giá:</strong> {productInfor.donGia}/{productInfor.donVi}</p>
-            <p><strong>Mô tả:</strong> {productInfor.moTa}</p></div>}
+            <p><strong>Mô tả:</strong> {productInfor.moTa}</p>
+            <p><strong>Nguồn gốc:</strong> {productInfor.nguonGoc}</p>
+            </div>}
+            
         />
       </Card>
 
