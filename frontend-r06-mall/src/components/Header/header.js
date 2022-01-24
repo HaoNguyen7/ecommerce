@@ -73,6 +73,11 @@ function AppHeader() {
 					<a href="/get_order">Tiếp nhận đơn hàng</a>
 				</Menu.Item>
 			</SubMenu>
+			<SubMenu key="Statistic" title="Thống kê" style={{ marginLeft: 10 }}>
+				<Menu.Item key="1">
+					<a href="/important_items">Thống kê mặt hàng thiết yếu</a>
+				</Menu.Item>
+			</SubMenu>
 			{userRole.includes(Constants.ROLE_ADMIN) ?
 				(<SubMenu key="Quanly" title="Quản lý">
 					<Menu.Item key="7">

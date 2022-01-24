@@ -9,6 +9,7 @@ import SignUp from './views/SignUp/signUp';
 import LogIn from './views/Login/login';
 import Upload from './views/Upload/Upload.jsx';
 import Driver from './views/Driver/Driver.jsx';
+import ImportantItems from './views/Statistics/ImportantItems.jsx';
 import Shipper from './views/Driver/Shipper/Shipper.jsx';
 import SellRegister from './views/SellRegister/sellRegister';
 import RegisterShipper from './views/Driver/RegisterShipper/RegisterShipper.jsx';
@@ -37,6 +38,7 @@ function App() {
 						<Route path="/nearest_shipper" element={<Shipper />} />
 						<Route path="/regist-seller" element={<SellRegister />} />
 						<Route path="/register_driver" element={<RegisterShipper />} />
+						<Route path="/important_items" element={<ImportantItems />} />
 						<Route path="/get_order" element={<GetOrder />} />
 						<Route path="/cart" element={<CartScreen />} />
 						<Route path="/shipping" element={<ShippingAddressScreen />} />
@@ -44,6 +46,7 @@ function App() {
 						<Route path="/add-product" element={<AddProduct />}/>
 						<Route path="/manage-product" element={<ManageProduct />}/>
 						<Route path="/product-update/:id" element={<UpdateProduct />}/>
+
 					</Routes>
 				</Content>
 			</Router>
