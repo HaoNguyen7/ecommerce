@@ -69,7 +69,7 @@ public class OrderController {
     }
 
     @GetMapping("/order/unpicked")
-    public ResponseEntity<Collection<DonHang>> getUnpickedOrder(String id, Integer tinhtrang,@RequestHeader(name = "Authorization") String token) {
+    public ResponseEntity<Collection<DonHang>> getUnpickedOrder(String id, Integer tinhtrang) {
         try {
             Collection<DonHang> listDh = _orderService.GetUnpickedOrder();
             return new ResponseEntity<>(listDh, HttpStatus.OK);

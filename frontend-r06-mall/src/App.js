@@ -17,6 +17,7 @@ import CartScreen from './views/Cart/CartScreen';
 import ShippingAddressScreen from './views/Shipping/ShippingAddressScreen';
 import PaymentScreen from './views/Payment/PaymentScreen';
 import PlaceOrderScreen from './views/PlaceOrderScreen/PlaceOrderScreen';
+import OrderShipper from './views/Orders/OrderShipper';
 const { Header, Content, Footer } = Layout;
 function App() {
 	return (
@@ -40,6 +41,7 @@ function App() {
 						<Route path="/shipping" element={<ShippingAddressScreen />} />
 						<Route path="/payment" element={<PaymentScreen />} />
 						<Route path="/placeorder" element={<PlaceOrderScreen />} />
+						<Route path="/order/unpicked" element={<OrderShipper />} />
 					</Routes>
 				</Content>
 			</Router>

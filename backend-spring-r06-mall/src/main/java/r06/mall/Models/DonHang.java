@@ -25,7 +25,9 @@ public class DonHang {
     private NguoiGiaoHang nguoiGiaoHangByNguoiGiaoHangNguoiGiaoId;
     private Collection<DonHangSanPham> donHangSanPhamsByDonHangId;
     private Collection<TinhTrangDonHang> tinhTrangDonHangsByDonHangId;
-
+    private Integer TongTien;
+    private String DiaChi;
+    private String ThanhPho;
     @Id
     @Column(name = "DonHangId", nullable = false)
     public String getDonHangId() {
@@ -179,4 +181,35 @@ public class DonHang {
     public void setTinhTrangDonHangsByDonHangId(Collection<TinhTrangDonHang> tinhTrangDonHangsByDonHangId) {
         this.tinhTrangDonHangsByDonHangId = tinhTrangDonHangsByDonHangId;
     }
+
+    @Basic
+    @Column(name = "DiaChi", nullable = false, length = 2147483647)
+    public String getDiaChi() {
+        return DiaChi;
+    }
+
+    public void setDiaChi(String DiaChi) {
+        this.DiaChi = DiaChi;
+    }
+
+    @Basic
+    @Column(name = "ThanhPho", nullable = false, length = 2147483647)
+    public String getThanhPho() {
+        return ThanhPho;
+    }
+
+    public void setThanhPho(String ThanhPho) {
+        this.ThanhPho = ThanhPho;
+    }
+
+    @Basic
+    @Column(name = "TongTien", nullable = false)
+    public Integer getTongTien() {
+        return TongTien;
+    }
+
+    public void setTongTien(Integer TongTien) {
+        this.TongTien = TongTien;
+    }
+
 }
