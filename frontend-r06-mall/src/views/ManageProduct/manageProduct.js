@@ -77,8 +77,8 @@ function ManageProduct() {
       params: params
     }).then((res) => {
       listProduct.push()
-      listProduct = res.data.data;
-      setListProduct([...res.data.data]);
+      listProduct = res.data;
+      setListProduct([...res.data]);
 
     })
       .catch((err) => console.log(err))
