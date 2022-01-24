@@ -30,7 +30,7 @@ export default function SingleOrder(){
     const getOrder = () => {
         axios({
             method: 'get',
-            url: `https://localhost:44391/api/Order/view/{${DonHangId}}`,
+            url: `https://localhost:44391/api/Order/view/${DonHangId}`,
             headers: { 'Authorization':`Bearer ${localStorage.getItem('token')}`}
         })
         .then(res=>{
