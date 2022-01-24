@@ -9,5 +9,6 @@ namespace backend_dotnet_r06_mall.Requests
         public DiaChiRequest shippingAddress { get; set; }
         public string paymentMethod { get; set; }
         public bool isPaid { get; set; }
+        public int totalPrice { get; set; }
     }
 }

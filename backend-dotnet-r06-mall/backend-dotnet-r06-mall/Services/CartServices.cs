@@ -33,7 +33,7 @@ namespace backend_dotnet_r06_mall.Services
                 SoLuong = 1,
                 DiaChi = gh.shippingAddress.address,
                 ThanhPho = gh.shippingAddress.city,
-                TongTien = dh.TongTien,
+                TongTien = gh.totalPrice,
                 HinhThucThanhToan = await _context.HinhThucThanhToan.FirstOrDefaultAsync(o=> o.TenHTTT == gh.paymentMethod)
             };
 
