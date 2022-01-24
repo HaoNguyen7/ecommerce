@@ -42,4 +42,8 @@ public class OrderService {
     public DonHang getDonHangByDriverId(String id, Integer tinhtrang) {
         return _donHangRepository.findDonHangByDriver(id, tinhtrang);
     }
+
+    public Collection<DonHang> GetUnpickedOrder(){
+        return _donHangRepository.findAllUnpickedOrder();
+    }
 }

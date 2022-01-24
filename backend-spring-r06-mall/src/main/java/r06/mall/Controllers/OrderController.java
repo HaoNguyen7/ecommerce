@@ -1,7 +1,6 @@
 package r06.mall.Controllers;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,4 +81,13 @@ public class OrderController {
         }
     }
 
+    @GetMapping("/order/unpicked")
+    public ResponseEntity<Collection<DonHang>> getUnpickedOrder(String id, Integer tinhtrang) {
+        try {
+            Collection<DonHang> listDh = _orderService.GetUnpickedOrder();
+            return new ResponseEntity<>(listDh, HttpStatus.OK);
+        }catch(IllegalArgumentException exception) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
 }

@@ -16,6 +16,9 @@ import GetOrder from './views/Driver/GetOrder/GetOrder';
 import Delivered from './views/Driver/Delivered/Delivered';
 import CartScreen from './views/Cart/CartScreen';
 import ShippingAddressScreen from './views/Shipping/ShippingAddressScreen';
+import PaymentScreen from './views/Payment/PaymentScreen';
+import PlaceOrderScreen from './views/PlaceOrderScreen/PlaceOrderScreen';
+import OrderShipper from './views/Orders/OrderShipper';
 import ManageRegisterStore from './views/ManageRegisterStore/manageRegisterStore';
 import AddProduct from './views/AddProduct/addProduct';
 import ManageProduct from './views/ManageProduct/manageProduct';
@@ -50,6 +53,9 @@ function App() {
 						<Route path="/order_history/:DonHangId" element={<SingleOrder />} />
 						<Route path="/cart" element={<CartScreen />} />
 						<Route path="/shipping" element={<ShippingAddressScreen />} />
+						<Route path="/payment" element={<PaymentScreen />} />
+						<Route path="/placeorder" element={<PlaceOrderScreen />} />
+						<Route path="/order/unpicked" element={<OrderShipper />} />
 						<Route path="/manage-register-shop" element={<ManageRegisterStore />} />
 						<Route path="/add-product" element={<AddProduct />} />
 						<Route path="/manage-product" element={<ManageProduct />} />

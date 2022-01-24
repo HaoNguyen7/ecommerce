@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CheckoutSteps from '../../components/CheckoutSteps';
 import './ShippingAddressScreen.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,20 +6,25 @@ import { saveShippingAddress } from '../../actions/cartActions';
 import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button } from 'antd';
 export default function ShippingAddressScreen(props) {
-	//const userSignin = useSelector((state) => state.userSignin);
-	//const { userInfo } = userSignin;
+	const userSignin = useSelector((state) => state.userSignin);
+	const { userInfo } = userSignin;
+	console.log(userInfo);
 	const cart = useSelector((state) => state.cart);
 	const { shippingAddress } = cart;
-	// if (!userInfo) {
-	// 	navigate('/login');
-	// }
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (!userInfo) {
+			navigate('/login');
+			console.log('working');
+		}
+	}, []);
 	const [ fullName, setFullName ] = useState(shippingAddress.fullName);
 	const [ address, setAddress ] = useState(shippingAddress.address);
 	const [ city, setCity ] = useState(shippingAddress.city);
 	const [ postalCode, setPostalCode ] = useState(shippingAddress.postalCode);
 	const [ country, setCountry ] = useState(shippingAddress.country);
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 
 	//submit se luu data vao trong store redux
 	const submitHandler = (e) => {

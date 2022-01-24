@@ -42,6 +42,9 @@ function AppHeader() {
 
 	function onClickLogOut() {
 		localStorage.removeItem('token');
+		localStorage.removeItem('userInfo');
+		localStorage.removeItem('cartItems');
+		localStorage.removeItem('shippingAddress');
 	}
 	return (
 		<Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
@@ -117,7 +120,7 @@ function AppHeader() {
 				</SubMenu>) : (false)}
 			{!localStorage.getItem('token') ? (
 				<Menu.Item className="login-space">
-					<Link to="/cart">Cart</Link>
+					<Link to="/shipping">Cart</Link>
 					<Button className="login-button" type="primary" size="middle" onClick={onClickLogin}>
 						Đăng nhập
 					</Button>
@@ -136,6 +139,9 @@ function AppHeader() {
 						</Menu.Item>
 						<Menu.Item key="9">
 							<a href="/register_driver">Đăng ký shipper</a>
+						</Menu.Item>
+						<Menu.Item key="11">
+							<a href="/shipping">Shipping</a>
 						</Menu.Item>
 						<Menu.Item key="10">
 							<a href="/" onClick={onClickLogOut}>
