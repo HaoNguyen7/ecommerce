@@ -18,4 +18,7 @@ public class ImportantItemsService {
     public List<Item> getImportantItems(){
         return importantItemsRepository.getImportantItems();
     }
+    public List<Item> getImportantItemsByYear(int year){
+        return importantItemsRepository.getImportantItemsByYear(year);
+    }
 }

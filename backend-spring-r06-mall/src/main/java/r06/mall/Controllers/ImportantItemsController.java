@@ -36,5 +36,11 @@ public class ImportantItemsController {
         List<Item> list = importantItemsService.getImportantItems();
         return new ResponseEntity<ImportantItemsResponse>(new ImportantItemsResponse(list), HttpStatus.OK);
     }
+
+    @GetMapping("/importantItemsByYear/{year}")
+    public ResponseEntity<ImportantItemsResponse> getImportantItemsByYear(@PathVariable int year){
+        List<Item> list = importantItemsService.getImportantItemsByYear(year);
+        return new ResponseEntity<ImportantItemsResponse>(new ImportantItemsResponse(list), HttpStatus.OK);
+    }
     
 }

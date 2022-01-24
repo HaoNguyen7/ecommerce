@@ -15,6 +15,14 @@ public interface ImportantItemsRepository extends JpaRepository<DonHangSanPham, 
     + " group by dhsp.sanPhamId, sp.TenSanPham"
     + " order by SoLuong desc", nativeQuery = true)
         List<Item> getImportantItems();
+
+    @Query(value = "select top 10 dhsp.sanPhamId, sp.TenSanPham, SUM(dhsp.SoLuong) as SoLuong"
+    + " from DonHangSanPham dhsp join SanPham sp on dhsp.sanPhamId = sp.sanPhamId join DonHang dh on dh.DonHangId=dhsp.DonHangId"
+    + " where YEAR(dh.ThoiGian)=?1"
+    + " group by dhsp.sanPhamId, sp.TenSanPham"
+    + " order by SoLuong desc", nativeQuery = true)
+        List<Item> getImportantItemsByYear(int year);
+
 }
 /*
 @Query(value = "select SanPham.CuaHangId, CuaHang.TenCuaHang, SUM(SanPham.DonGia * DonHangSanPham.SoLuong) as DoanhThu, "
