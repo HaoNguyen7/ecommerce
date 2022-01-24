@@ -1,9 +1,11 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace backend_dotnet_r06_mall.Requests
 {
-    public class ProductListRequest
+    public class CustomerListRequest
     {
         const int maxPageSize = 50;
         public int pageIndex { get; set; } = 1;
@@ -19,11 +21,5 @@ namespace backend_dotnet_r06_mall.Requests
                 _pageSize = (value > maxPageSize) ? maxPageSize : value;
             }
         }
-
-        public String categoryId { get; set; }
-        public String shopId { get; set; }
-        public string sortOrder { get; set; } = "date_desc";
-        public string searchString { get; set; }
     }
-
 }

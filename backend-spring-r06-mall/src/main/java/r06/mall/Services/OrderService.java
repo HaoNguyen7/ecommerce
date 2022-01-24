@@ -36,7 +36,7 @@ public class OrderService {
         return _donHangRepository.findTimeRange();
     }
     public Collection<TinhTrangDonHang> GetOrderTracking(DonHang order) {
-        return order.getTinhTrangDonHangsByDonHangId();
+        return _orderStatusRepository.findOrderTracking(order.getDonHangId());
     }
 
     public DonHang getDonHangByDriverId(String id, Integer tinhtrang) {

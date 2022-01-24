@@ -22,6 +22,9 @@ import UpdateProduct from './views/UpdateProduct/updateProduct';
 import Report from './views/Report/report';
 import OrderHistory from './views/OrderHistory/OrderHistory';
 import SingleOrder from './views/OrderHistory/SingleOrder';
+import Product from './views/Product/Product';
+import ProductSearch from './views/ProductSearch/ProductSearch';
+import OrderTracking from './views/OrderTracking/OrderTracking';
 const { Header, Content, Footer } = Layout;
 function App() {
 	return (
@@ -45,16 +48,18 @@ function App() {
 						<Route path="/order_history/:DonHangId" element={<SingleOrder />} />
 						<Route path="/cart" element={<CartScreen />} />
 						<Route path="/shipping" element={<ShippingAddressScreen />} />
-						<Route path="/manage-register-shop" element={<ManageRegisterStore />}/>
-						<Route path="/add-product" element={<AddProduct />}/>
-						<Route path="/manage-product" element={<ManageProduct />}/>
-						<Route path="/product-update/:id" element={<UpdateProduct />}/>
-						<Route path="/report" element={<Report />}/>
+						<Route path="/manage-register-shop" element={<ManageRegisterStore />} />
+						<Route path="/add-product" element={<AddProduct />} />
+						<Route path="/manage-product" element={<ManageProduct />} />
+						<Route path="/product-update/:id" element={<UpdateProduct />} />
+						<Route path="/report" element={<Report />} />
+						<Route path="/search" element={<ProductSearch />} />
+						<Route path="/product/:id" element={<Product />} />
+						<Route path="/order/tracking/:id" element={<OrderTracking />} />
 					</Routes>
 				</Content>
 			</Router>
 		</Layout>
 	);
 }
-
 export default App;
