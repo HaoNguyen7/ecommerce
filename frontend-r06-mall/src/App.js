@@ -21,6 +21,7 @@ import ManageProduct from './views/ManageProduct/manageProduct';
 import UpdateProduct from './views/UpdateProduct/updateProduct';
 import ProductSearch from './views/ProductSearch/ProductSearch';
 import Product from './views/Product/Product';
+import OrderTracking from './views/OrderTracking/OrderTracking';
 const { Header, Content, Footer } = Layout;
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
             <Route path="/product-update/:id" element={<UpdateProduct />} />
             <Route path="/search" element={<ProductSearch />} />
             <Route path="/product/:id" element={<Product />} />
+            <Route path="/order/tracking/:id" element={<OrderTracking />} />
           </Routes>
         </Content>
       </Router>

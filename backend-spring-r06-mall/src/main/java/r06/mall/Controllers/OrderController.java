@@ -47,20 +47,23 @@ public class OrderController {
             }
 
             Collection<TinhTrangDonHang> orderStatus = _orderService.GetOrderTracking(order);
+            System.out.println(orderStatus.toString());
             return new ResponseEntity<>(orderStatus, HttpStatus.OK);
 
         } catch (IllegalArgumentException exception) {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
+
     @GetMapping("/order_driver/{driverId}")
-    public ResponseEntity<DonHang> getDonHangByDriver(String id, Integer tinhtrang,@RequestHeader(name = "Authorization") String token) {
+    public ResponseEntity<DonHang> getDonHangByDriver(String id, Integer tinhtrang,
+            @RequestHeader(name = "Authorization") String token) {
         try {
-            DonHang order = _orderService.getDonHangByDriverId(id,tinhtrang);
+            DonHang order = _orderService.getDonHangByDriverId(id, tinhtrang);
             JwtParser jwt = new JwtParser(token);
 
             // if (!jwt.isTaiXe()) {
-            //     return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            // return new ResponseEntity<>(HttpStatus.FORBIDDEN);
             // }
             return new ResponseEntity<>(order, HttpStatus.OK);
 

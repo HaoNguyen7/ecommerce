@@ -32,7 +32,7 @@ public class OrderService {
     }
 
     public Collection<TinhTrangDonHang> GetOrderTracking(DonHang order) {
-        return order.getTinhTrangDonHangsByDonHangId();
+        return _orderStatusRepository.findOrderTracking(order.getDonHangId());
     }
 
     public DonHang getDonHangByDriverId(String id, Integer tinhtrang) {

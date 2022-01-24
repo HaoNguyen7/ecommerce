@@ -70,7 +70,7 @@ namespace backend_dotnet_r06_mall.Controllers
             return Ok(order);
         }
 
-        [HttpPost("tracking/{orderId}")]
+        [HttpDelete("tracking/{orderId}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Khach)]
         public async Task<IActionResult> CancelUserOrder(Guid orderId)
         {

@@ -10,6 +10,6 @@ import r06.mall.Models.TinhTrangDonHang;
 
 @Repository
 public interface OrderStatusRepository extends JpaRepository<TinhTrangDonHang, String> {
-    @Query(value = "Select * from TinhTrangDonHang where DonHangId = ?1 order by NgayThucHien Desc", nativeQuery = true)
+    @Query(value = "Select *  from TinhTrangDonHang where DonHangId = ?1 order by NgayThucHien Desc", nativeQuery = true)
     public List<TinhTrangDonHang> findOrderTracking(String orderId);
 }

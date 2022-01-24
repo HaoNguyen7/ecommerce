@@ -81,7 +81,7 @@ function HomePage() {
             xxl: 3,
           }}
           bordered={true}
-          header={<h1>Doanh mục sản phẩm</h1>}
+          header={<h1>Danh mục sản phẩm</h1>}
           dataSource={categories}
           renderItem={(item) => (
             <List.Item>
