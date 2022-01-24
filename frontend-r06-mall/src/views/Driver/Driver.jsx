@@ -8,7 +8,8 @@ const Driver = () => {
         navigator.geolocation.getCurrentPosition((position) => {
             console.log("Latitude is :", position.coords.latitude);
             console.log("Longitude is :", position.coords.longitude);
-            const params = { ViDo: position.coords.latitude, KinhDo: position.coords.longitude }
+            const cuaHangId = shop ? shop.cuaHangId : null;
+            const params = { ViDo: position.coords.latitude, KinhDo: position.coords.longitude,CuaHangId:cuaHangId }
 
             axios({
                 method: 'get',

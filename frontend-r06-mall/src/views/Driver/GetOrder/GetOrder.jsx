@@ -3,6 +3,7 @@ import axios from 'axios'
 import {Card, Button, Table, Row, Col,Typography, Input, Tag} from 'antd'
 import {useSelector} from 'react-redux'
 import moment from 'moment'
+import './GetOrder.css'
 const GetOrder = () => {
     const { Text } = Typography;
     const {TextArea} = Input;
@@ -10,7 +11,8 @@ const GetOrder = () => {
     const [order,setOrder] = useState()
     const [orderDetail,setOrderDetail] = useState([])
     const [note,setNote]=useState()
-
+    const [customer,setCustomer] = useState()
+    const [isAccept,setIsAccpet] = useState(false)
     const columns = [
         {
           title: 'Tên sản phẩm',
@@ -80,17 +82,24 @@ const GetOrder = () => {
         })
         .then(res => {
             setOrder(res.data)
-            
             axios({
                 method: 'get',
                 url: `https://localhost:44391/api/Order/view/driver/${res.data.donHangId}`,
                 headers: { 'Authorization':`Bearer ${localStorage.getItem('token')}`},
             }).then(response =>{
                 setOrderDetail(response.data);
-                console.log(response.data)
             }).catch((error)=> {
                 console.log(error)
             })
+            axios({
+              method: 'get',
+              url: `https://localhost:44391/customer/${res.data.khachHangId}`,
+              headers: { 'Authorization':`Bearer ${localStorage.getItem('token')}`},
+              }).then(response =>{
+                  setCustomer(response.data);
+              }).catch((error)=> {
+                  console.log(error)
+              })
         })
         .catch((error) => {
             console.error(error);
@@ -100,9 +109,13 @@ const GetOrder = () => {
       const onInputChange = (e) =>{
         setNote(e.target.value)
       }
+
+      const onAccpet = () => {
+        setIsAccpet(true)
+      }
     return (
         <div>
-            <Card title="Tiếp nhận đơn hàng" extra={<Button onClick={onClick}>Hoàn tất đơn hàng</Button>}>
+            <Card title="Tiếp nhận đơn hàng">
               <Row>
                 <Col span={12} offset={8}>
                   <Card
@@ -117,6 +130,10 @@ const GetOrder = () => {
                           <Col>Ngày: &ensp;</Col>
                           <Col> {order?.thoiGian}</Col>
                         </Row>
+                        <Row>
+                          <Col>Tên khách hàng: &ensp;</Col>
+                          <Col> {customer?.tenKhachHang}</Col>
+                        </Row>
                       </Col>
                       <Col span={12}>
                         <Row>
@@ -125,10 +142,18 @@ const GetOrder = () => {
                             <Tag color="#87d068">Đã thanh toán</Tag> : 
                             <Tag color="#f50">Chưa thanh toán</Tag>}</Col>
                         </Row>
+                        <Row>
+                          <Col>Số điện thoại: &ensp;</Col>
+                          <Col> {customer?.soDienThoai}</Col>
+                        </Row>
                       </Col>
+                      <Row>
+                          <Col>Địa chỉ: &ensp;</Col>
+                          <Col> {customer?.diaChi}</Col>
+                        </Row>
                     </Row>
                     <br />
-                  <Table columns={columns} dataSource={orderDetail} 
+                  {isAccept && <><Table columns={columns} dataSource={orderDetail} 
                       summary={pageData => {
                         let total = 0;
                 
@@ -146,7 +171,10 @@ const GetOrder = () => {
                         </Table.Summary.Cell>
                     </Table.Summary.Row></>)}}/> 
                     <p>Ghi chú</p>   
-                    <TextArea onChange={onInputChange} rows={4} />       
+                    <TextArea onChange={onInputChange} rows={4} />
+                    <Button onClick={onClick} block className='success-btn'>Hoàn tất đơn hàng</Button>
+                    </>}    
+                    {!isAccept && <Button block className='success-btn' onClick={onAccpet}>Chấp nhận</Button>}
                   </Card>
                 </Col>
               </Row>

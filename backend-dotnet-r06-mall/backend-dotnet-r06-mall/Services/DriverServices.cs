@@ -1,6 +1,7 @@
 ﻿using backend_dotnet_r06_mall.Contants;
 using backend_dotnet_r06_mall.Data;
 using backend_dotnet_r06_mall.Models;
+using backend_dotnet_r06_mall.Query;
 using backend_dotnet_r06_mall.Requests;
 using backend_dotnet_r06_mall.Response;
 using Microsoft.AspNetCore.Identity;
@@ -28,7 +29,7 @@ namespace backend_dotnet_r06_mall.Services
 
         
 
-        public CuaHang FindNearestShop(double ViDo, double KinhDo)
+        public CuaHang FindNearestShop(SearchShortestStoreQuery query)
         {
             var shortestStore = _context.CuaHang.AsQueryable().Select(x => new CuaHang
             {
@@ -42,9 +43,15 @@ namespace backend_dotnet_r06_mall.Services
                 SoDienThoai = x.SoDienThoai,
                 TinhTrang = x.TinhTrang,
                 DiaChi = x.DiaChi,
-            }).ToList().OrderByDescending(x => Calculate(x.ViDo, x.KinhDo, ViDo, KinhDo)).Last();
+            });
 
-            return shortestStore;
+            if (!query.CuaHangId.Equals(null))
+            {
+                var anotherStore = shortestStore.Where(x => x.CuaHangId != query.CuaHangId);
+                return anotherStore.ToList().OrderByDescending(x => Calculate(x.ViDo, x.KinhDo, query.ViDo, query.KinhDo)).Last();
+            }
+
+            return shortestStore.ToList().OrderByDescending(x => Calculate(x.ViDo, x.KinhDo, query.ViDo, query.KinhDo)).Last();
         }
 
         public NguoiGiaoHang FindNearestShipper(double ViDo, double KinhDo)
@@ -112,6 +119,11 @@ namespace backend_dotnet_r06_mall.Services
         public async Task<NguoiGiaoHang> GetNguoiGiaoHangById(Guid shipperId)
         {
             return await _context.NguoiGiaoHang.AsNoTracking().Include(o => o.DonHang).FirstOrDefaultAsync(o => o.NguoiGiaoId.Equals(shipperId));
+        }
+
+        public async Task<KhachHang> GetKhachHangById(Guid orderId)
+        {
+            return await _context.KhachHang.AsNoTracking().FirstOrDefaultAsync(o => o.KhachHangId.Equals(orderId));
         }
     }
 }

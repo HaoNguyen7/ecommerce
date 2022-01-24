@@ -30,7 +30,7 @@ namespace backend_dotnet_r06_mall.Controllers
         [HttpGet("shortest_shop")]
         public ActionResult<CuaHangResponse> Get([FromQuery] SearchShortestStoreQuery query)
         {
-            return Ok(new CuaHangResponse(_driverServices.FindNearestShop(query.ViDo, query.KinhDo)));
+            return Ok(new CuaHangResponse(_driverServices.FindNearestShop(query)));
         }
 
         [Authorize(Roles = RoleConstants.TaiXe)]
@@ -56,6 +56,18 @@ namespace backend_dotnet_r06_mall.Controllers
                 return NotFound();
             }
             return Ok(shipper);
+        }
+
+        [HttpGet]
+        [Route("/customer/{orderId}")]
+        public async Task<IActionResult> GetCustomerByOrderId(Guid orderId)
+        {
+            var customer = await _driverServices.GetKhachHangById(orderId);
+            if (customer is null)
+            {
+                return NotFound();
+            }
+            return Ok(customer);
         }
     }
 }
