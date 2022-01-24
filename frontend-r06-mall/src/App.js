@@ -13,6 +13,7 @@ import Shipper from './views/Driver/Shipper/Shipper.jsx';
 import SellRegister from './views/SellRegister/sellRegister';
 import RegisterShipper from './views/Driver/RegisterShipper/RegisterShipper.jsx';
 import GetOrder from './views/Driver/GetOrder/GetOrder';
+import Delivered from './views/Driver/Delivered/Delivered';
 import CartScreen from './views/Cart/CartScreen';
 import ShippingAddressScreen from './views/Shipping/ShippingAddressScreen';
 import ManageRegisterStore from './views/ManageRegisterStore/manageRegisterStore';
@@ -44,6 +45,7 @@ function App() {
 						<Route path="/regist-seller" element={<SellRegister />} />
 						<Route path="/register_driver" element={<RegisterShipper />} />
 						<Route path="/get_order" element={<GetOrder />} />
+						<Route path="/delivered_order" element={<Delivered />} />
 						<Route path="/order_history" element={<OrderHistory />} />
 						<Route path="/order_history/:DonHangId" element={<SingleOrder />} />
 						<Route path="/cart" element={<CartScreen />} />

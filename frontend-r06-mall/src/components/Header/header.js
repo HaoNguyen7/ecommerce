@@ -72,6 +72,9 @@ function AppHeader() {
 				<Menu.Item key="6">
 					<a href="/get_order">Tiếp nhận đơn hàng</a>
 				</Menu.Item>
+				<Menu.Item key="7">
+					<a href="/delivered_order">Đơn hàng đã giao</a>
+				</Menu.Item>
 			</SubMenu>
 			{/* <SubMenu 
 				key='lichsumuahang' 
