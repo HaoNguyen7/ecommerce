@@ -23,17 +23,19 @@ namespace backend_dotnet_r06_mall.Services
             _context = context;
         }
 
-        public async Task<PagedList<SanPham>> GetProducts(ProductListRequest query)
+        public async Task<List<SanPham>> GetProducts(ProductListRequest query)
         {
             var products = from s in _context.SanPham
                            select s;
 
-            if (query.shopIds != Guid.Empty) {
-                products = products.Where(s=> s.CuaHang.CuaHangId.Equals(query.shopIds));
+            if (query.shopId is not null && !query.shopId.Equals(""))
+            {
+                products = products.Where(s => s.CuaHang.CuaHangId.Equals(query.shopId));
             }
 
-            if(query.cateoryIds != Guid.Empty) {
-                products = products.Where(s=> s.LoaiSanPham.LoaiId.Equals(query.cateoryIds));
+            if (!String.IsNullOrEmpty(query.categoryId))
+            {
+                products = products.Where(s => s.LoaiSanPham.LoaiId.Equals(new Guid(query.categoryId)));
             }
             if (!String.IsNullOrEmpty(query.searchString))
             {
@@ -60,7 +62,8 @@ namespace backend_dotnet_r06_mall.Services
                     break;
             }
 
-            return await PagedList<SanPham>.CreateAsync(products.Include(o => o.CuaHang).AsNoTracking(), query.pageIndex, query.pageSize);
+            var res = await products.Include(o => o.CuaHang).AsNoTracking().ToListAsync();
+            return res;
 
         }
         public async Task<SanPham> GetProductDetail(Guid productId)
@@ -81,6 +84,7 @@ namespace backend_dotnet_r06_mall.Services
                 TonKho = request.TonKho,
                 CuaHang = _context.CuaHang.FirstOrDefault(o => o.CuaHangId == request.CuaHang),
                 NgayDang = DateTime.Now,
+                HinhMinhHoa = request.HinhMinhHoa
             };
 
             var createResult = await _context.SanPham.AddAsync(sanpham);
@@ -90,28 +94,38 @@ namespace backend_dotnet_r06_mall.Services
 
         public async Task<SanPham> UpdateProduct(UpdateProductRequest request)
         {
-            SanPham product =  _context.SanPham.Find(request.id);
-            if(product == null)
+            SanPham product = _context.SanPham.Find(request.id);
+            if (product == null)
             {
                 return null;
             }
-            if(!String.IsNullOrEmpty(request.TenSanPham)) {
+            if (!String.IsNullOrEmpty(request.TenSanPham))
+            {
                 product.TenSanPham = request.TenSanPham;
             }
-            if(!String.IsNullOrEmpty(request.MoTa)) {
+            if (!String.IsNullOrEmpty(request.MoTa))
+            {
                 product.MoTa = request.MoTa;
             }
-            if(request.TonKho != null) {
+            if (request.TonKho > 0)
+            {
                 product.TonKho = request.TonKho;
             }
-            if(request.DonVi != null) {
+            if (request.DonVi != "")
+            {
                 product.DonVi = request.DonVi;
             }
-            if(request.TonKho != null) {
+            if (request.TonKho > 0)
+            {
                 product.DonGia = request.DonGia;
             }
-            if(request.LoaiSanPham != Guid.Empty) {
+            if (request.LoaiSanPham != Guid.Empty && _context.LoaiSanPham.FirstOrDefault(o => o.LoaiId == request.LoaiSanPham) != null)
+            {
                 product.LoaiSanPham = _context.LoaiSanPham.FirstOrDefault(o => o.LoaiId == request.LoaiSanPham);
+            }
+            if (request.HinhMinhHoa != "")
+            {
+                product.HinhMinhHoa = request.HinhMinhHoa;
             }
             await _context.SaveChangesAsync();
             return product;
@@ -119,8 +133,8 @@ namespace backend_dotnet_r06_mall.Services
 
         public async Task<bool> RemoveProduct(RemoveProductRequest request)
         {
-            SanPham product =  _context.SanPham.Find(request.id);
-            if(product == null)
+            SanPham product = _context.SanPham.Find(request.id);
+            if (product == null)
             {
                 return false;
             }
@@ -128,6 +142,11 @@ namespace backend_dotnet_r06_mall.Services
             _context.SanPham.Remove(product);
             await _context.SaveChangesAsync();
             return true;
+        }
+
+        public async Task<List<LoaiSanPham>> getCategories()
+        {
+            return await _context.LoaiSanPham.AsNoTracking().ToListAsync();
         }
     }
 }

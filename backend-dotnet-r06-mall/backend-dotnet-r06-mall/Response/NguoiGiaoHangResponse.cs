@@ -22,6 +22,8 @@ namespace backend_dotnet_r06_mall.Response
             SoDienThoai = nguoiGiaoHang.SoDienThoai;
             DiaChi = nguoiGiaoHang.DiaChi;
             VungHoatDong = nguoiGiaoHang.VungHoatDong;
+            NgayDangKy = nguoiGiaoHang.NgayDangKy;
+            Cccd = nguoiGiaoHang.Cccd;
         }
     }
 }

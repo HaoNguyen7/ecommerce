@@ -1,0 +1,41 @@
+.card-store {
+    width: 250px !important;
+    max-width: 400px !important;
+    height: 100 !important;
+    border-color: rgb(104, 156, 252) !important;
+}
+.card-store .ant-card-head-title,.card-store .ant-card-extra{
+    padding-bottom: 0;
+    padding-top: 7px;
+}
+.card-store .ant-card-head-title {
+    font-weight: 700;
+    font-size: 20px !important;
+    top: -50px !important;
+    color: rgb(104, 156, 252) !important;
+}
+.card-store .ant-card-head {
+    height: 10px !important;
+}
+
+.card-store p {
+    margin-bottom: 0px !important;
+    color: rgb(94, 94, 94);
+}
+
+.card-store .atn-btn {
+    border-color: rgb(104, 156, 252) !important;
+    color: rgb(104, 156, 252) !important;
+    background-color: rgb(104, 156, 252) !important;
+}
+
+.card-store .ant-card-cover {
+    height: 250px !important;
+}
+
+@media only screen and (max-width: 600px) {
+    .card-store {
+        width: 100% !important;
+        height: 100 !important;
+    }
+  }

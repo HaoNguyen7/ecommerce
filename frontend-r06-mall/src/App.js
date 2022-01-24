@@ -18,6 +18,12 @@ import ShippingAddressScreen from './views/Shipping/ShippingAddressScreen';
 import PaymentScreen from './views/Payment/PaymentScreen';
 import PlaceOrderScreen from './views/PlaceOrderScreen/PlaceOrderScreen';
 import OrderShipper from './views/Orders/OrderShipper';
+import ManageRegisterStore from './views/ManageRegisterStore/manageRegisterStore';
+import AddProduct from './views/AddProduct/addProduct';
+import ManageProduct from './views/ManageProduct/manageProduct';
+import UpdateProduct from './views/UpdateProduct/updateProduct';
+import ProductSearch from './views/ProductSearch/ProductSearch';
+import Product from './views/Product/Product';
 const { Header, Content, Footer } = Layout;
 function App() {
 	return (
@@ -42,6 +48,12 @@ function App() {
 						<Route path="/payment" element={<PaymentScreen />} />
 						<Route path="/placeorder" element={<PlaceOrderScreen />} />
 						<Route path="/order/unpicked" element={<OrderShipper />} />
+						<Route path="/manage-register-shop" element={<ManageRegisterStore />} />
+						<Route path="/add-product" element={<AddProduct />} />
+						<Route path="/manage-product" element={<ManageProduct />} />
+						<Route path="/product-update/:id" element={<UpdateProduct />} />
+						<Route path="/search" element={<ProductSearch />} />
+						<Route path="/product/:id" element={<Product />} />
 					</Routes>
 				</Content>
 			</Router>

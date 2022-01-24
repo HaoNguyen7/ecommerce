@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using backend_dotnet_r06_mall.Contants;
@@ -57,6 +58,11 @@ namespace backend_dotnet_r06_mall.Services
                 return AddResult.IsCompletedSuccessfully;
             }
             return false;
+        }
+
+        public async Task<IList<DonHangSanPham>> GetOrderDriverByID(Guid orderId)
+        {
+            return await _context.DonHangSanPham.Include(o => o.SanPham).Where(p => p.DonHangId == orderId).ToListAsync();
         }
 
     }

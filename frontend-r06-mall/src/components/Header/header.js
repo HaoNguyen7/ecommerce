@@ -1,13 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, Button, Badge } from 'antd';
+import jwt_decode from "jwt-decode"
 import { HomeOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import './header.css';
+import { Constants } from '../../Constaints';
 
 const { SubMenu } = Menu;
 function AppHeader() {
-	const [ current, setCurrent ] = useState('main');
+	const [current, setCurrent] = useState('main');
 	const navigate = useNavigate();
+	let userRole = [];
+	if (localStorage.getItem('token')) {
+		let roles = jwt_decode(localStorage.getItem('token')).role
+		if (Array.isArray(roles)) {
+			userRole = [...roles]
+		}
+		else {
+			userRole.push(roles)
+		}
+	}
+
 	const handleClick = (e) => {
 		setCurrent(e.key);
 	};
@@ -34,7 +47,7 @@ function AppHeader() {
 		localStorage.removeItem('shippingAddress');
 	}
 	return (
-		<Menu onClick={handleClick} selectedKeys={[ current ]} mode="horizontal">
+		<Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
 			<Menu.Item key="homepage" icon={<HomeOutlined />}>
 				<a href="/">Homepage</a>
 			</Menu.Item>
@@ -63,6 +76,27 @@ function AppHeader() {
 					<a href="/get_order">Tiếp nhận đơn hàng</a>
 				</Menu.Item>
 			</SubMenu>
+			{userRole.includes(Constants.ROLE_ADMIN) ?
+				(<SubMenu key="Quanly" title="Quản lý">
+					<Menu.Item key="7">
+						<a href="/manage-register-shop">Quản lý đăng ký bán hàng</a>
+					</Menu.Item>
+					<Menu.Item key="8">
+						<a href="/manage-register-driver">Quản lý đăng ký giao hàng</a>
+					</Menu.Item>
+					<Menu.Item key="9">
+						<a href="/manage-product">Quản lý thông tin sản phẩm</a>
+					</Menu.Item>
+				</SubMenu>) : (false)}
+			{userRole.includes(Constants.ROLE_CUAHANG) ?
+				(<SubMenu key="cuahang" title="Quản lý cửa hàng">
+					<Menu.Item key="7">
+						<a href="/add-product">Đăng sản phẩm mới</a>
+					</Menu.Item>
+					<Menu.Item key="8">
+						<a href="/manage-product">Quản lý sản phẩm</a>
+					</Menu.Item>
+				</SubMenu>) : (false)}
 			{!localStorage.getItem('token') ? (
 				<Menu.Item className="login-space">
 					<Link to="/shipping">Cart</Link>

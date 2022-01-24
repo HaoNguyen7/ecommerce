@@ -16,7 +16,7 @@ public class SanPham {
     private String moTa;
     private Integer tonKho;
     private Integer donGia;
-    private Integer donVi;
+    private String donVi;
     private String loaiSanPhamLoaiId;
     private String cuaHangId;
     private Date ngayDang;
@@ -76,11 +76,11 @@ public class SanPham {
 
     @Basic
     @Column(name = "DonVi", nullable = false)
-    public Integer getDonVi() {
+    public String getDonVi() {
         return donVi;
     }
 
-    public void setDonVi(Integer donVi) {
+    public void setDonVi(String donVi) {
         this.donVi = donVi;
     }
 

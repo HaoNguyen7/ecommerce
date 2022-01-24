@@ -20,7 +20,7 @@ namespace backend_dotnet_r06_mall.Models
         [Required]
         public int DonGia { get; set; }
         [Required]
-        public int DonVi { get; set; }
+        public string DonVi { get; set; }
 
         [Required]
         public DateTime NgayDang { get; set; }
@@ -28,6 +28,8 @@ namespace backend_dotnet_r06_mall.Models
         public LoaiSanPham LoaiSanPham { get; set; }
 
         public CuaHang CuaHang { get; set; }
+        [MaxLength(2147483645)]
+        public string HinhMinhHoa { get; set; }
 
         [JsonIgnore]
         public virtual ICollection<DonHang> DonHang { get; set; }

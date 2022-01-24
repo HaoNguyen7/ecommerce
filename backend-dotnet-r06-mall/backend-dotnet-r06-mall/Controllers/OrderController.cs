@@ -38,7 +38,7 @@ namespace backend_dotnet_r06_mall.Controllers
         }
 
         [HttpGet("view/{orderId}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Khach)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Khach + "," + RoleConstants.TaiXe)]
         public async Task<IActionResult> GetUserOrderById(Guid orderId)
         {
             Guid userId = new Guid(User.FindFirst("Id")?.Value);
@@ -51,6 +51,20 @@ namespace backend_dotnet_r06_mall.Controllers
             if (order.KhachHang is null || !order.KhachHang.KhachHangId.Equals(userId))
             {
                 return Forbid();
+            }
+
+            return Ok(order);
+        }
+
+        [HttpGet("view/driver/{orderId}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.TaiXe)]
+        public async Task<IActionResult> GetDriverOrderById(Guid orderId)
+        {
+            Guid userId = new Guid(User.FindFirst("Id")?.Value);
+            var order = await _service.GetOrderDriverByID(orderId);
+            if (order is null)
+            {
+                return NotFound();
             }
 
             return Ok(order);

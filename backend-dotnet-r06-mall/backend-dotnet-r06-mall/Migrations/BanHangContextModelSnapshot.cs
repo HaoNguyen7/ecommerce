@@ -487,8 +487,13 @@ namespace backend_dotnet_r06_mall.Migrations
                     b.Property<int>("DonGia")
                         .HasColumnType("int");
 
-                    b.Property<int>("DonVi")
-                        .HasColumnType("int");
+                    b.Property<string>("DonVi")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HinhMinhHoa")
+                        .HasMaxLength(2147483645)
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("LoaiSanPhamLoaiId")
                         .HasColumnType("uniqueidentifier");
@@ -523,13 +528,16 @@ namespace backend_dotnet_r06_mall.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("HinhXacMinh")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("NgayCap")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("NgayHetHan")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("NguoiGiaoHangNguoiGiaoId")
+                    b.Property<Guid>("NguoiGiaoHangNguoiGiaoId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("TTTDId");
@@ -682,7 +690,9 @@ namespace backend_dotnet_r06_mall.Migrations
                 {
                     b.HasOne("backend_dotnet_r06_mall.Models.NguoiGiaoHang", null)
                         .WithMany("ThongTinDiDuong")
-                        .HasForeignKey("NguoiGiaoHangNguoiGiaoId");
+                        .HasForeignKey("NguoiGiaoHangNguoiGiaoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("backend_dotnet_r06_mall.Models.TinhTrangDonHang", b =>
