@@ -34,7 +34,7 @@ namespace backend_dotnet_r06_mall.Controllers
         {
             Guid shipperId = new Guid(User.FindFirst("Id")?.Value);
             var orders = await _service.GetDeliveredOrder(shipperId, query);
-            return Ok(new PagedListResponse<DonHang>(orders));
+            return Ok(orders);
         }
 
         [HttpGet("{orderId}")]
