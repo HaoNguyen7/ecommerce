@@ -32,7 +32,7 @@ namespace backend_dotnet_r06_mall.Controllers
         public async Task<IActionResult> GetProductList([FromQuery] ProductListRequest query)
         {
             PagedList<SanPham> listProducts = await _service.GetProducts(query);
-            return Ok(new PagedListResponse<SanPham>(listProducts));
+            return Ok(listProducts);
         }
 
 
