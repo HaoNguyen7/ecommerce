@@ -20,8 +20,8 @@ namespace backend_dotnet_r06_mall.Requests
             }
         }
 
-        public Guid cateoryIds { get; set; }
-        public Guid shopIds {get; set; }
+        public String categoryId { get; set; }
+        public String shopId { get; set; }
         public string sortOrder { get; set; } = "date_desc";
         public string searchString { get; set; }
     }

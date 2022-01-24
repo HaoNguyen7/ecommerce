@@ -31,8 +31,16 @@ namespace backend_dotnet_r06_mall.Controllers
         [HttpGet]
         public async Task<IActionResult> GetProductList([FromQuery] ProductListRequest query)
         {
-            PagedList<SanPham> listProducts = await _service.GetProducts(query);
-            return Ok(new PagedListResponse<SanPham>(listProducts));
+            List<SanPham> listProducts = await _service.GetProducts(query);
+            return Ok(listProducts);
+        }
+
+        [HttpGet]
+        [Route("categories")]
+        public async Task<IActionResult> GetCategoryList()
+        {
+            var list = await _service.getCategories();
+            return Ok(list);
         }
 
 
