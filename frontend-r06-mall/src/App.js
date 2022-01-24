@@ -20,6 +20,8 @@ import AddProduct from './views/AddProduct/addProduct';
 import ManageProduct from './views/ManageProduct/manageProduct';
 import UpdateProduct from './views/UpdateProduct/updateProduct';
 import Report from './views/Report/report';
+import OrderHistory from './views/OrderHistory/OrderHistory';
+import SingleOrder from './views/OrderHistory/SingleOrder';
 const { Header, Content, Footer } = Layout;
 function App() {
 	return (
@@ -39,6 +41,8 @@ function App() {
 						<Route path="/regist-seller" element={<SellRegister />} />
 						<Route path="/register_driver" element={<RegisterShipper />} />
 						<Route path="/get_order" element={<GetOrder />} />
+						<Route path="/order_history" element={<OrderHistory />} />
+						<Route path="/order_history/:DonHangId" element={<SingleOrder />} />
 						<Route path="/cart" element={<CartScreen />} />
 						<Route path="/shipping" element={<ShippingAddressScreen />} />
 						<Route path="/manage-register-shop" element={<ManageRegisterStore />}/>

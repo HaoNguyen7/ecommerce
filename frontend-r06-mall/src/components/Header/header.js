@@ -73,6 +73,15 @@ function AppHeader() {
 					<a href="/get_order">Tiếp nhận đơn hàng</a>
 				</Menu.Item>
 			</SubMenu>
+			{/* <SubMenu 
+				key='lichsumuahang' 
+				title='Lịch sử mua hàng' 
+				style={{ marginLeft: 10 }}
+			>
+				<Menu.Item key="4">
+					<a href="/order_history">Đơn hàng đã mua</a>
+				</Menu.Item>
+			</SubMenu> */}
 			{userRole.includes(Constants.ROLE_ADMIN) ?
 				(<SubMenu key="Quanly" title="Quản lý">
 					<Menu.Item key="7">
@@ -95,6 +104,12 @@ function AppHeader() {
 					</Menu.Item>
 					<Menu.Item key="9">
 						<a href="/report">Thống kê kinh doanh</a>
+					</Menu.Item>
+				</SubMenu>) : (false)}
+			{userRole.includes(Constants.ROLE_KHACH)?
+				(<SubMenu key="lichsumuahang" title="Lịch sử mua hàng" style={{ marginLeft: 10 }}>
+					<Menu.Item key="4">
+						<a href="/order_history">Đơn hàng đã mua</a>
 					</Menu.Item>
 				</SubMenu>) : (false)}
 			{!localStorage.getItem('token') ? (
