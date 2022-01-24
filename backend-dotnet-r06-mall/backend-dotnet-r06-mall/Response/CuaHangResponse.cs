@@ -19,6 +19,7 @@ namespace backend_dotnet_r06_mall.Response
         public string GiayPhepKinhDoanh { get; set; }
         public CuaHangResponse(CuaHang cuaHang)
         {
+            CuaHangId = cuaHang.CuaHangId;
             TenCuaHang = cuaHang.TenCuaHang;
             MoTa = cuaHang.MoTa;
             DanhGia = cuaHang.DanhGia;
