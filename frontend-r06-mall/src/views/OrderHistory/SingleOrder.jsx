@@ -30,7 +30,7 @@ export default function SingleOrder(){
     const getOrder = () => {
         axios({
             method: 'get',
-            url: `https://localhost:44391/api/Order/view/{DonHangId}`,
+            url: `https://localhost:44391/api/Order/view/{${DonHangId}}`,
             headers: { 'Authorization':`Bearer ${localStorage.getItem('token')}`}
         })
         .then(res=>{
@@ -48,7 +48,7 @@ export default function SingleOrder(){
     return(
         <Card title='Chi tiết đơn hàng'>
             <div className='order-detail'>
-                <h3>Mã đơn hàng: {order.DonHangId}</h3>
+                <h3>Mã đơn hàng: {DonHangId}</h3>
                 <p className='product-name'><span>Tên mặt hàng:</span> {order.DonHangSanPham.SanPham.TenSanPham}</p>
                 <p className='quantity'><span>Số lượng:</span> {order.DonHangSanPham.SoLuong} sản phẩm</p>
                 <p className='price'><span>Đơn giá:</span> đ{order.DonHangSanPham.SanPham.DonGia}</p>
