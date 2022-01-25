@@ -42,7 +42,12 @@ function AppHeader() {
     const onClickUpload = () => {
         navigate('/upload');
     };
-
+	function onClickLogOut() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userInfo');
+        localStorage.removeItem('cartItems');
+        localStorage.removeItem('shippingAddress');
+    }
     function onClickLogOut() {
         localStorage.removeItem('token');
         localStorage.removeItem('userInfo');

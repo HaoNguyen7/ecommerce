@@ -9,6 +9,7 @@ import SignUp from './views/SignUp/signUp';
 import LogIn from './views/Login/login';
 import Upload from './views/Upload/Upload.jsx';
 import Driver from './views/Driver/Driver.jsx';
+import ImportantItems from './views/Statistics/ImportantItems.jsx';
 import Shipper from './views/Driver/Shipper/Shipper.jsx';
 import SellRegister from './views/SellRegister/sellRegister';
 import RegisterShipper from './views/Driver/RegisterShipper/RegisterShipper.jsx';
@@ -32,6 +33,7 @@ import OrderTracking from './views/OrderTracking/OrderTracking';
 import CommissionAdmin from './views/CommissionAdmin/CommissionAdmin';
 const { Header, Content, Footer } = Layout;
 function App() {
+
     return (
         <Layout className="mainLayout">
             <Router>
@@ -69,7 +71,7 @@ function App() {
                         <Route path="/product/:id" element={<Product />} />
                         <Route path="/order/tracking/:id" element={<OrderTracking />} />
                         <Route path="/admin/commission" element={<CommissionAdmin />} />
-                        <Route path="/admin/commission" element={<CommissionAdmin />} />
+                        <Route path="/important_items" element={<ImportantItems />} />
                     </Routes>
                 </Content>
             </Router>
