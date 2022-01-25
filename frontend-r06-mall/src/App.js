@@ -29,6 +29,7 @@ import SingleOrder from './views/OrderHistory/SingleOrder';
 import Product from './views/Product/Product';
 import ProductSearch from './views/ProductSearch/ProductSearch';
 import OrderTracking from './views/OrderTracking/OrderTracking';
+import OrderStore from './views/OrderStore/OrderStore';
 const { Header, Content, Footer } = Layout;
 function App() {
 	return (
@@ -51,7 +52,8 @@ function App() {
 						<Route path="/delivered_order" element={<Delivered />} />
 						<Route path="/order_history" element={<OrderHistory />} />
 						<Route path="/order_history/:DonHangId" element={<SingleOrder />} />
-						<Route path="/cart" element={<CartScreen />} />
+						<Route path="/cart/" element={<CartScreen />} />
+						<Route path="/cart/:id" element={<CartScreen />} />
 						<Route path="/shipping" element={<ShippingAddressScreen />} />
 						<Route path="/payment" element={<PaymentScreen />} />
 						<Route path="/placeorder" element={<PlaceOrderScreen />} />
@@ -64,6 +66,7 @@ function App() {
 						<Route path="/search" element={<ProductSearch />} />
 						<Route path="/product/:id" element={<Product />} />
 						<Route path="/order/tracking/:id" element={<OrderTracking />} />
+						<Route path="/order/waiting" element={<OrderStore />} />
 					</Routes>
 				</Content>
 			</Router>

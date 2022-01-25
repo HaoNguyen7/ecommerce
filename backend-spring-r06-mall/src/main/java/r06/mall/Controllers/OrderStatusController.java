@@ -5,8 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.PathVariable;
 import r06.mall.Models.TinhTrangDonHang;
 import r06.mall.Services.OrderStatusService;
 
@@ -24,5 +25,11 @@ public class OrderStatusController {
     @PostMapping("/tinhtrang")
     public TinhTrangDonHang getSanPham(@RequestBody TinhTrangDonHang tinhTrangDonHang) {
         return tinhTrangDonHangService.updateTinhTrang(tinhTrangDonHang);
+    }
+
+    @PostMapping("/order/{donHangId}/update")
+    public TinhTrangDonHang updateTTDH(@PathVariable String donHangId, @RequestBody String ttdh) {
+        ttdh = ttdh.substring(1, ttdh.length() - 1);
+        return tinhTrangDonHangService.updateTinhTrangDonHang(donHangId, ttdh);
     }
 }

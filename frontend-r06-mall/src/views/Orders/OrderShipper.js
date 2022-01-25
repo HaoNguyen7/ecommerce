@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 //import './OrderShipper.css';
 export default function OrderShipper(props) {
-	const [ listdh, setListdh ] = useState([ 1, 2, 3, 4 ]);
+	const [ listdh, setListdh ] = useState([]);
 	const [ loading, setLoading ] = useState(true);
 	useEffect(
 		() => {
@@ -27,7 +27,7 @@ export default function OrderShipper(props) {
 				{listdh.map((dh) => (
 					<li key={dh.donHangId}>
 						<div>
-							<div className="row">{dh.tongTien} VNĐ</div>
+							<div className="row">Đơn Giá: {dh.tongTien} VNĐ</div>
 							<div>Mã đơn hàng :{dh.donHangId}</div>
 							<div>Địa chỉ nhận hàng: {dh.diaChi}</div>
 							<div>

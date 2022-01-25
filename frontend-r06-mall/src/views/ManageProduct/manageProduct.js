@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import "./manageProduct.css"
-import jwt_decode from "jwt-decode"
-import {
-  Form,
-  Input,
-  Button,
-  Select,
-  Row,
-  Col
-} from 'antd';
+import './manageProduct.css';
+import jwt_decode from 'jwt-decode';
+import { Form, Input, Button, Select, Row, Col } from 'antd';
 import { Constants } from '../../Constaints';
 import ProductBox from '../../components/ProductBox/productBox';
 const { Option } = Select;
@@ -21,23 +14,23 @@ function ManageProduct() {
   const [store, setStore] = useState("");
   let userRole = [];
   if (localStorage.getItem('token')) {
-		let roles = jwt_decode(localStorage.getItem('token')).role
-		if (Array.isArray(roles)) {
-			userRole = [...roles]
-		}
-		else {
-			userRole.push(roles)
-		}
-	}
+    let roles = jwt_decode(localStorage.getItem('token')).role
+    if (Array.isArray(roles)) {
+      userRole = [...roles]
+    }
+    else {
+      userRole.push(roles)
+    }
+  }
 
   let removeItem = (id) => {
     listProduct = listProduct.filter(value => value.sanPhamId !== id)
     setListProduct(listProduct)
   }
   useEffect(() => {
-    let params = {pageSize: 50};
-    if(userRole.includes(Constants.ROLE_CUAHANG)) {
-      params.id =  jwt_decode(localStorage.getItem('token')).Id;
+    let params = { pageSize: 50 };
+    if (userRole.includes(Constants.ROLE_CUAHANG)) {
+      params.id = jwt_decode(localStorage.getItem('token')).Id;
     }
     axios({
       method: "GET",
@@ -65,12 +58,16 @@ function ManageProduct() {
   let findProduct = () => {
 
     let params = { pageSize: 20 };
-    if (store !== "All") {
-      params.shopIds = store
+    console.log(store);
+    console.log(category);
+    
+    if (store != "All") {
+      params.shopId = store
     }
-    if (category !== "All") {
-      params.cateoryIds = category
+    if (category != "All") {
+      params.categoryId = category
     }
+    console.log(params)
     axios({
       method: "GET",
       url: "https://localhost:5001/api/Product",
@@ -116,7 +113,7 @@ function ManageProduct() {
       </div>
       <Row>
         {listProduct.map((product, i) =>
-          <Col xs={24} lg = {8}>
+          <Col xs={24} lg={8}>
             <ProductBox productInfor={product} key={product.sanPhamId} removeItem={removeItem} />
           </Col>
         )}
@@ -124,5 +121,4 @@ function ManageProduct() {
     </div>
   );
 }
-
 export default ManageProduct;
