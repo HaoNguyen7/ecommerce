@@ -89,15 +89,6 @@ function AppHeader() {
             ) : (
                 false
             )}
-            {/* <SubMenu 
-				key='lichsumuahang' 
-				title='Lịch sử mua hàng' 
-				style={{ marginLeft: 10 }}
-			>
-				<Menu.Item key="4">
-					<a href="/order_history">Đơn hàng đã mua</a>
-				</Menu.Item>
-			</SubMenu> */}
             {userRole.includes(Constants.ROLE_ADMIN) ? (
                 <SubMenu key="Quanly" title="Quản lý">
                     <Menu.Item key="7">
