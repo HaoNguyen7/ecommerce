@@ -81,11 +81,12 @@ const Delivered = () => {
     const getDeliveredItems = () => {
         axios({
             method: 'get',
-            url: `https://localhost:44391/api/Delivered/history`,
+            url: `https://localhost:5001/api/Delivered/history`,
             headers: { 'Authorization':`Bearer ${localStorage.getItem('token')}`}
         })
         .then(res=>{
             const result = res.data
+            console.log(result)
             setDeliveredItems(result)
         })
         .catch((error)=>{
@@ -103,24 +104,17 @@ const Delivered = () => {
     return(
         <div>
             <Card title="Đơn hàng đã giao">
-                <div className='delivered-list'>
+            <div className='delivered-list'>
                     {deliveredItems.map((item)=>{
-                        const {DonHangId, DonHangSanPham, TinhTrangThanhToan, TinhTrangGiao, KhachHang} = item
                         return(
                             <div className='delivered-items'>
-                                <h3><span className='label'>Mã đơn hàng:</span> {DonHangId}</h3>
-                                {/*<div>
-                                    <h3 className='label'>Thông tin sản phẩm</h3>
-                                    {DonHangSanPham.map((order)=>{
-                                        order.SanPham.map((product)=>{
-                                            return <h4 className='product'>{product.TenSanPham}</h4>
-                                        })
-                                    })}
-                                </div> */}
-                                <h3><span className='label'>Tình trạng thanh toán</span> {TinhTrangThanhToan}</h3>
-                                <h3><span className='label'>Tình trạng giao hàng</span> {TinhTrangGiao}</h3>
-                                <h3><span className='label'>Tên khách hàng</span> {KhachHang.TenKhachHang}</h3>
-                                <h3><span className='label'>Địa chỉ giao hàng</span> {KhachHang.DiaChi}</h3>
+                                <h3><span className='label'>Mã đơn hàng:</span> {item.donHangId}</h3>
+                                <h3><span className='label'>Tình trạng thanh toán</span> 
+                                    {item.tinhTrangThanhToan? 'Đã thanh toán' : 'Chưa thanh toán'}
+                                </h3>
+                                <h3><span className='label'>Tình trạng giao hàng</span> {item.tinhTrangGiao}</h3>
+                                <h3><span className='label'>Tên khách hàng</span> Tên khách hàng</h3>
+                                <h3><span className='label'>Địa chỉ giao hàng</span> {item.diaChi}</h3>
                             </div>
                         )
                     })}
