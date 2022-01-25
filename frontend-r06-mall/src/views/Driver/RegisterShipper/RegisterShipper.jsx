@@ -29,7 +29,7 @@ const RegisterShipper = () => {
         console.log(values)
         axios({
             method: 'post',
-            url: `https://localhost:44391/Driver/register_driver`,
+            url: `https://localhost:5001/Driver/register_driver`,
             headers: { 'Authorization':`Bearer ${localStorage.getItem('token')}`,"Content-Type": "application/json"},
             data: driver
         })
