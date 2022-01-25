@@ -51,10 +51,7 @@ export default function Product() {
 
       <div className="row">
         <div className="column">
-          <Image
-            width={400}
-            src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-          />
+          <Image width={400} src={product.hinhMinhHoa} />
         </div>
         <div className="column">
           <h1>{product.tenSanPham}</h1>

@@ -30,7 +30,7 @@ export default function SingleOrder(){
     const getOrder = () => {
         axios({
             method: 'get',
-            url: `https://localhost:44391/api/Order/view/${DonHangId}`,
+            url: `https://localhost:5001/api/Order/view/${DonHangId}`,
             headers: { 'Authorization':`Bearer ${localStorage.getItem('token')}`}
         })
         .then(res=>{
@@ -61,7 +61,7 @@ export default function SingleOrder(){
                     <p>{order.KhachHang.DiaChi}</p>
                 </div>
             </div>
-                    <Button type="primary" block>
+                    <Button type="primary"  href={`/order/tracking/${DonHangId}`}>
       Theo dõi đơn hàng
     </Button>
         </Card>

@@ -45,8 +45,6 @@ export default function ProductSearch({ location }) {
 
   return (
     <div>
-      <h1>{category}</h1>
-      <h1>{keyword}</h1>
       <SearchProduct setKeyword={setKeyword} />
 
       <span>Giá</span>
@@ -63,7 +61,7 @@ export default function ProductSearch({ location }) {
       <List
         header={
           <div>
-            <h1>Sản phẩm có thể bạn sẽ thích</h1>
+            <h1>Kết quả tìm kiếm</h1>
           </div>
         }
         bordered={true}

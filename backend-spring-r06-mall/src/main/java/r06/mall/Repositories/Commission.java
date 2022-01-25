@@ -12,4 +12,6 @@ public interface Commission {
     int getNam();
 
     int getThang();
+
+    double getHoaHong();
 }

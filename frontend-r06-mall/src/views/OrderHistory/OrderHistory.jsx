@@ -34,7 +34,7 @@ const OrderHistory = () =>{
     const getOrderItems = () => {
         axios({
             method: 'get',
-            url: `https://localhost:44391/api/Order/history`,
+            url: `https://localhost:5001/api/Order/history`,
             headers: { 'Authorization':`Bearer ${localStorage.getItem('token')}`}
         })
         .then(res=>{
@@ -54,19 +54,19 @@ const OrderHistory = () =>{
             <Card title="Đơn hàng đã mua">
                 <div className='order-list'>
                     {orderItems.map((item)=>{
-                        const {DonHangId, DonHangSanPham} = item
+                        const {donHangId, donHangSanPham} = item
                         return(
                             <div className='single-item'>
-                                <h3 className='product-name'>{DonHangSanPham.SanPham.TenSanPham}</h3>
-                                <p className='quantity'>x{DonHangSanPham.SoLuong}</p>
-                                <p className='price'>đ{DonHangSanPham.SanPham.DonGia}</p>
+                                <h3 className='product-name'>{donHangSanPham.sanPham? donHangSanPham.sanPham.tenSanPham : '' }</h3>
+                                <p className='quantity'>x{donHangSanPham.soLuong}</p>
+                                <p className='price'>đ{donHangSanPham.sanPham ? donHangSanPham.sanPham.donGia : ''}</p>
                                 <div className='total-section'>
-                                    <p>{DonHangSanPham.SoLuong} sản phẩm</p>
+                                    <p>{donHangSanPham.soLuong} sản phẩm</p>
                                     <h3>Thành tiền: 
-                                        <span className='total-price'> đ{DonHangSanPham.SoLuong*DonHangSanPham.SanPham.DonGia}</span>
+                                        <span className='total-price'> đ{donHangSanPham.sanPham ? donHangSanPham.SoLuong* donHangSanPham.sanPham.donGia : ''}</span>
                                     </h3>
                                 </div>
-                                <Link to={`/order_history/${DonHangId}`}>Xem chi tiết...</Link>
+                                <Link to={`/order_history/${donHangId}`}>Xem chi tiết...</Link>
                             </div>
                         )
                     })}

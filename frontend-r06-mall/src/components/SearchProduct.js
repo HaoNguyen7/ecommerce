@@ -7,7 +7,7 @@ export default function SearchProduct({ setKeyword }) {
   const navigate = useNavigate();
   const onSearch = (value) => {
     setKeyword(value);
-    console.log(navigate(`/search?keyword=${value}`));
+    navigate(`/search?keyword=${value}`);
   };
 
   return (

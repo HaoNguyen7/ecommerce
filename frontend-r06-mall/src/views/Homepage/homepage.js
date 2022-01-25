@@ -8,6 +8,7 @@ const { Content } = Layout;
 const { Meta } = Card;
 
 function HomePage() {
+  const [keyword, setKeyword] = useState('');
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -48,7 +49,7 @@ function HomePage() {
   return (
     <div>
       {/* {console.log(categories)} */}
-      <SearchProduct />
+      <SearchProduct setKeyword={setKeyword} />
       <Carousel afterChange={onChange}>
         <div>
           <h3 style={contentStyle}>1</h3>
