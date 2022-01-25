@@ -64,6 +64,7 @@ function AppHeader() {
 					<a href="/op4">Option 4</a>
 				</Menu.Item>
 			</SubMenu>
+			{userRole.includes(Constants.ROLE_TAIXI) ? (
 			<SubMenu key="Driver" title="Tài xế" style={{ marginLeft: 10 }}>
 				<Menu.Item key="4">
 					<a href="/nearest_store">Tìm cửa hàng gần nhất</a>
@@ -77,7 +78,10 @@ function AppHeader() {
 				<Menu.Item key="7">
 					<a href="/delivered_order">Đơn hàng đã giao</a>
 				</Menu.Item>
-			</SubMenu>
+				<Menu.Item key="7">
+					<a href="/order/unpicked">Nhận đơn hàng</a>
+				</Menu.Item>
+			</SubMenu>):(false)}
 			{/* <SubMenu 
 				key='lichsumuahang' 
 				title='Lịch sử mua hàng' 

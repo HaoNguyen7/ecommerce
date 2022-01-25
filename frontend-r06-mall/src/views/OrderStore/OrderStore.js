@@ -1,11 +1,12 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
-
+import jwt_decode from 'jwt-decode';
 export default function OrderStore(props) {
 	const [ listdh, setListdh ] = useState([]);
 	const [ loading, setLoading ] = useState(true);
 	const [ tinhtrang, setTinhtrang ] = useState(false); //khi update thi set tinhtrang = true =>> reload component
 	const [ idStore, setidStore ] = useState('');
+	let idUser = jwt_decode(localStorage.getItem('token')).Id;
 	useEffect(
 		() => {
 			let params = { pageSize: 50 };
@@ -20,7 +21,7 @@ export default function OrderStore(props) {
 					.then((res) => {
 						console.log(res);
 						console.log('cuaHangId:', res.data.data[0].cuaHangId); //đã có được cửa hàng id
-						setidStore(res.data.data[0].cuaHangId);
+						setidStore(localStorage.getItem('userInfo').id);
 						console.log(idStore);
 					})
 					.catch((err) => console.log(err));
@@ -39,7 +40,7 @@ export default function OrderStore(props) {
 		// });
 		await Axios({
 			method: 'GET',
-			url: `http://localhost:8080/order/waiting/${idStore}`,
+			url: `http://localhost:8080/order/waiting/${idUser}`,
 			headers: { Authorization: `Bearer ${localStorage.getItem('token')}`, 'Content-Type': 'application/json' }
 		}).then((res) => {
 			const { data } = res;
