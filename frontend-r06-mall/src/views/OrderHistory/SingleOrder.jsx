@@ -24,17 +24,18 @@ import axios from 'axios'
 // }
 
 export default function SingleOrder(){
-    const {DonHangId} = useParams()
+    const {donHangId} = useParams()
     const [order, setOrder] = useState(null)
 
     const getOrder = () => {
         axios({
             method: 'get',
-            url: `https://localhost:44391/api/Order/view/${DonHangId}`,
+            url: `https://localhost:5001/api/Order/view/${donHangId}`,
             headers: { 'Authorization':`Bearer ${localStorage.getItem('token')}`}
         })
         .then(res=>{
             const result = res.data
+            console.log(result)
             setOrder(result)
         })
         .catch((error)=>{
@@ -45,21 +46,23 @@ export default function SingleOrder(){
         getOrder()
     }, [])
 
+    console.log('Hi')
+
     return(
         <Card title='Chi tiết đơn hàng'>
             <div className='order-detail'>
-                <h3>Mã đơn hàng: {DonHangId}</h3>
-                <p className='product-name'><span>Tên mặt hàng:</span> {order.DonHangSanPham.SanPham.TenSanPham}</p>
+                <h3>Mã đơn hàng: {donHangId}</h3>
+                {/* <p className='product-name'><span>Tên mặt hàng:</span> {order.DonHangSanPham.SanPham.TenSanPham}</p>
                 <p className='quantity'><span>Số lượng:</span> {order.DonHangSanPham.SoLuong} sản phẩm</p>
                 <p className='price'><span>Đơn giá:</span> đ{order.DonHangSanPham.SanPham.DonGia}</p>
-                <p className='total'><span>Thành tiền:</span> đ{order.DonHangSanPham.SanPham.DonGia*order.DonHangSanPham.SoLuong}</p>
-                <p className='status'><span>Tình trạng đơn hàng:</span> {order.TinhTrangDonHang[order.TinhTrangDonHang.length-1]}</p>
+                <p className='total'><span>Thành tiền:</span> đ{order.DonHangSanPham.SanPham.DonGia*order.DonHangSanPham.SoLuong}</p> */}
+                {/* <p className='status'><span>Tình trạng đơn hàng:</span></p>
                 <div className='address'>
                     <span>Địa chỉ nhận hàng:</span>
-                    <p>{order.KhachHang.TenKhachHang}</p>
-                    <p>{order.KhachHang.SoDienThoai}</p>
-                    <p>{order.KhachHang.DiaChi}</p>
-                </div>
+                    <p>{order.khachHang.tenKhachHang}</p>
+                    <p>{order.khachHang.soDienThoai}</p>
+                    <p>{order.khachHang.diaChi}</p>
+                </div> */}
             </div>
         </Card>
     )

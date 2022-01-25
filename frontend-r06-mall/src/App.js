@@ -51,7 +51,7 @@ function App() {
 						<Route path="/get_order" element={<GetOrder />} />
 						<Route path="/delivered_order" element={<Delivered />} />
 						<Route path="/order_history" element={<OrderHistory />} />
-						<Route path="/order_history/:DonHangId" element={<SingleOrder />} />
+						<Route path="/order_history/:donHangId" element={<SingleOrder />} />
 						<Route path="/cart/" element={<CartScreen />} />
 						<Route path="/cart/:id" element={<CartScreen />} />
 						<Route path="/shipping" element={<ShippingAddressScreen />} />

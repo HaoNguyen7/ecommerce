@@ -67,9 +67,7 @@ const OrderHistory = () =>{
                                         <span className='total-price'> Tổng tiền</span>
                                     </h3>
                                 </div>
-                                {/* <p className='quantity'>x{DonHangSanPham.SoLuong}</p>
-                                <p className='price'>đ{DonHangSanPham.SanPham.DonGia}</p>
-                                {/* <Link to={`/order_history/${donHangId}`}>Xem chi tiết...</Link> */}
+                                <Link to={`/order_history/${item.donHangId}`}>Xem chi tiết...</Link>
                             </div>
                         )
                     })}
