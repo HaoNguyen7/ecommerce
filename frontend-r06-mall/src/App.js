@@ -34,48 +34,48 @@ import CommissionAdmin from './views/CommissionAdmin/CommissionAdmin';
 const { Header, Content, Footer } = Layout;
 function App() {
 
-    return (
-        <Layout className="mainLayout">
-            <Router>
-                <Header>
-                    <AppHeader />
-                </Header>
-                <Content>
-                    <Routes>
-                        <Route path="/" element={<HomePage />} />
-                        <Route path="/login" element={<LogIn />} />
-                        <Route path="/signup" element={<SignUp />} />
-                        <Route path="/upload" element={<Upload />} />
-                        <Route path="/nearest_store" element={<Driver />} />
-                        <Route path="/nearest_shipper" element={<Shipper />} />
-                        <Route path="/regist-seller" element={<SellRegister />} />
-                        <Route path="/register_driver" element={<RegisterShipper />} />
-                        <Route path="/get_order" element={<GetOrder />} />
-                        <Route path="/delivered_order" element={<Delivered />} />
-                        <Route path="/order_history" element={<OrderHistory />} />
-                        <Route path="/order_history/:DonHangId" element={<SingleOrder />} />
-                        <Route path="/cart" element={<CartScreen />} />
-                        <Route path="/shipping" element={<ShippingAddressScreen />} />
-                        <Route path="/payment" element={<PaymentScreen />} />
-                        <Route path="/placeorder" element={<PlaceOrderScreen />} />
-                        <Route path="/order/unpicked" element={<OrderShipper />} />
-                        <Route
-                            path="/manage-register-shop"
-                            element={<ManageRegisterStore />}
-                        />
-                        <Route path="/add-product" element={<AddProduct />} />
-                        <Route path="/manage-product" element={<ManageProduct />} />
-                        <Route path="/product-update/:id" element={<UpdateProduct />} />
-                        <Route path="/report" element={<Report />} />
-                        <Route path="/search" element={<ProductSearch />} />
-                        <Route path="/product/:id" element={<Product />} />
-                        <Route path="/order/tracking/:id" element={<OrderTracking />} />
-                        <Route path="/admin/commission" element={<CommissionAdmin />} />
-                        <Route path="/important_items" element={<ImportantItems />} />
-                    </Routes>
-                </Content>
-            </Router>
-        </Layout>
-    );
+  return (
+    <Layout className="mainLayout">
+      <Router>
+        <Header>
+          <AppHeader />
+        </Header>
+        <Content>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LogIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/upload" element={<Upload />} />
+            <Route path="/nearest_store" element={<Driver />} />
+            <Route path="/nearest_shipper" element={<Shipper />} />
+            <Route path="/regist-seller" element={<SellRegister />} />
+            <Route path="/register_driver" element={<RegisterShipper />} />
+            <Route path="/get_order" element={<GetOrder />} />
+            <Route path="/delivered_order" element={<Delivered />} />
+            <Route path="/order_history" element={<OrderHistory />} />
+            <Route path="/order_history/:DonHangId" element={<SingleOrder />} />
+            <Route path="/cart" element={<CartScreen />} />
+            <Route path="/shipping" element={<ShippingAddressScreen />} />
+            <Route path="/payment" element={<PaymentScreen />} />
+            <Route path="/placeorder" element={<PlaceOrderScreen />} />
+            <Route path="/order/unpicked" element={<OrderShipper />} />
+            <Route
+              path="/manage-register-shop"
+              element={<ManageRegisterStore />}
+            />
+            <Route path="/add-product" element={<AddProduct />} />
+            <Route path="/manage-product" element={<ManageProduct />} />
+            <Route path="/product-update/:id" element={<UpdateProduct />} />
+            <Route path="/report" element={<Report />} />
+            <Route path="/search" element={<ProductSearch />} />
+            <Route path="/product/:id" element={<Product />} />
+            <Route path="/order/tracking/:id" element={<OrderTracking />} />
+            <Route path="/admin/commission" element={<CommissionAdmin />} />
+            <Route path="/important_items" element={<ImportantItems />} />
+          </Routes>
+        </Content>
+      </Router>
+    </Layout>
+  );
 }
 export default App;
