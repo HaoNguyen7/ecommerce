@@ -109,6 +109,9 @@ function AppHeader() {
           <Menu.Item key="9">
             <a href="/manage-product">Quản lý thông tin sản phẩm</a>
           </Menu.Item>
+          <Menu.Item key="10">
+            <a href="/admin/commission">Quản lý hoa hồng</a>
+          </Menu.Item>
         </SubMenu>
       ) : (
         false
