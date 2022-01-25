@@ -78,4 +78,14 @@ public class OrderController {
         }
     }
     
+    @GetMapping("/order/waiting")
+    public ResponseEntity<Collection<DonHang>> getWaitingOrder(String id, Integer tinhtrang) {
+        try {
+            Collection<DonHang> listDh = _orderService.GetWaitingOrder();
+            return new ResponseEntity<>(listDh, HttpStatus.OK);
+        }catch(IllegalArgumentException exception) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
+
 }
