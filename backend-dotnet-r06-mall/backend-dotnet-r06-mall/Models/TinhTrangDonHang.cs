@@ -13,6 +13,8 @@ namespace backend_dotnet_r06_mall.Models
         [Required]
         public DateTime NgayThucHien { get; set; }
 
+        public Guid DonHangId { get; set; }
+
         public DonHang DonHang { get; set; }
     }
 }

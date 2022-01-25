@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { createOrder } from '../../actions/orderActions';
 import CheckoutSteps from '../../components/CheckoutSteps';
 import Axios from 'axios';
 import { emptyCart } from '../../actions/cartActions';
@@ -22,9 +21,8 @@ export default function PlaceOrderScreen(props) {
 	const orderCreate = useSelector((state) => state.orderCreate);
 	const toPrice = (num) => Number(num.toFixed(2));
 	cart.itemsPrice = toPrice(cart.cartItems.reduce((a, c) => a + c.qty * c.price, 0));
-	cart.shippingPrice = 0; //tien shipping chua biet?
+	cart.shippingPrice = 25000; //tien shipping chua biet?
 	cart.totalPrice = parseInt(cart.shippingPrice) + parseInt(cart.itemsPrice);
-	cart.totalPrice = 300000;
 	cart.paymentMethod == 'PayPal' ? (cart.isPaid = true) : (cart.isPaid = false);
 	const [ orderId, setOrderId ] = useState('');
 	const placeholderHandler = async () => {
@@ -44,6 +42,7 @@ export default function PlaceOrderScreen(props) {
 				console.error(error);
 			});
 		dispatch(emptyCart());
+		navigate('/');
 	};
 	const [ sdkReady, setSdkReady ] = useState(false);
 
@@ -135,7 +134,7 @@ export default function PlaceOrderScreen(props) {
 													<Link to={`/product/${item.product}`}>{item.name}</Link>
 												</div>
 												<div>
-													{item.qty} x ${item.price} = ${item.qty * item.price}
+													{item.qty} x {item.price} = {item.qty * item.price} VNĐ
 												</div>
 											</div>
 										</li>
@@ -154,13 +153,13 @@ export default function PlaceOrderScreen(props) {
 							<li>
 								<div className="row">
 									<div>Items</div>
-									<div>${cart.itemsPrice}</div>
+									<div>{cart.itemsPrice} VNĐ</div>
 								</div>
 							</li>
 							<li>
 								<div className="row">
 									<div>Shipping</div>
-									<div>${cart.shippingPrice}</div>
+									<div>{cart.shippingPrice} VNĐ</div>
 								</div>
 							</li>
 							<li>
@@ -169,7 +168,7 @@ export default function PlaceOrderScreen(props) {
 										<strong>Total</strong>
 									</div>
 									<div>
-										<strong>${cart.totalPrice}</strong>
+										<strong>{cart.totalPrice} VNĐ</strong>
 									</div>
 								</div>
 							</li>
@@ -184,11 +183,7 @@ export default function PlaceOrderScreen(props) {
 										Tao Don Hang
 									</button>
 								) : (
-									<PayPalButton
-										amount={cart.totalPrice}
-										onSuccess={successPaymentHandler}
-										onClick={placeholderHandler}
-									/>
+									<PayPalButton amount={cart.totalPrice} onSuccess={placeholderHandler} />
 								)}
 							</li>
 						</ul>

@@ -90,4 +90,15 @@ public class OrderController {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
+    
+    @GetMapping("/order/waiting/{idStore}")
+    public ResponseEntity<Collection<DonHang>> getWaitingOrder(@PathVariable String idStore) {
+        try {
+            Collection<DonHang> listDh = _orderService.GetWaitingOrder(idStore);
+            return new ResponseEntity<>(listDh, HttpStatus.OK);
+        }catch(IllegalArgumentException exception) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+    }
+
 }

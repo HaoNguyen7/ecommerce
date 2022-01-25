@@ -4,7 +4,9 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.sql.Date;
+import org.springframework.format.datetime.standard.DateTimeContext;
+
+import java.util.Date;
 import java.util.Objects;
 
 @Entity

@@ -2,6 +2,8 @@ package r06.mall.Services;
 import java.sql.Date;
 import java.util.Optional;
 import java.util.UUID;
+
+import org.springframework.format.datetime.standard.DateTimeContext;
 import org.springframework.stereotype.Service;
 
 import r06.mall.Models.DonHang;
@@ -30,5 +32,14 @@ public class OrderStatusService {
             _donHangRepository.save(_donhang);
 		}
         return tinhTrangDonHangRepository.save(entities);
+    }
+    public TinhTrangDonHang updateTinhTrangDonHang(String donHangId, String ttdh) {
+        TinhTrangDonHang a = new TinhTrangDonHang();
+        a.setTtdhId(UUID.randomUUID().toString());
+        a.setDonHangId(donHangId);
+        a.setNgayThucHien(new Date(System.currentTimeMillis()));
+        a.setTenTinhTrang(ttdh);
+        return tinhTrangDonHangRepository.save(a);
+
     }
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, Button, Badge } from 'antd';
-import jwt_decode from "jwt-decode"
+import jwt_decode from 'jwt-decode';
 import { HomeOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import './header.css';
@@ -8,16 +8,15 @@ import { Constants } from '../../Constaints';
 
 const { SubMenu } = Menu;
 function AppHeader() {
-	const [current, setCurrent] = useState('main');
+	const [ current, setCurrent ] = useState('main');
 	const navigate = useNavigate();
 	let userRole = [];
 	if (localStorage.getItem('token')) {
-		let roles = jwt_decode(localStorage.getItem('token')).role
+		let roles = jwt_decode(localStorage.getItem('token')).role;
 		if (Array.isArray(roles)) {
-			userRole = [...roles]
-		}
-		else {
-			userRole.push(roles)
+			userRole = [ ...roles ];
+		} else {
+			userRole.push(roles);
 		}
 	}
 
@@ -47,7 +46,7 @@ function AppHeader() {
 		localStorage.removeItem('shippingAddress');
 	}
 	return (
-		<Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
+		<Menu onClick={handleClick} selectedKeys={[ current ]} mode="horizontal">
 			<Menu.Item key="homepage" icon={<HomeOutlined />}>
 				<a href="/">Homepage</a>
 			</Menu.Item>
@@ -88,8 +87,8 @@ function AppHeader() {
 					<a href="/order_history">Đơn hàng đã mua</a>
 				</Menu.Item>
 			</SubMenu> */}
-			{userRole.includes(Constants.ROLE_ADMIN) ?
-				(<SubMenu key="Quanly" title="Quản lý">
+			{userRole.includes(Constants.ROLE_ADMIN) ? (
+				<SubMenu key="Quanly" title="Quản lý">
 					<Menu.Item key="7">
 						<a href="/manage-register-shop">Quản lý đăng ký bán hàng</a>
 					</Menu.Item>
@@ -99,9 +98,12 @@ function AppHeader() {
 					<Menu.Item key="9">
 						<a href="/manage-product">Quản lý thông tin sản phẩm</a>
 					</Menu.Item>
-				</SubMenu>) : (false)}
-			{userRole.includes(Constants.ROLE_CUAHANG) ?
-				(<SubMenu key="cuahang" title="Quản lý cửa hàng">
+				</SubMenu>
+			) : (
+				false
+			)}
+			{userRole.includes(Constants.ROLE_CUAHANG) ? (
+				<SubMenu key="cuahang" title="Quản lý cửa hàng">
 					<Menu.Item key="7">
 						<a href="/add-product">Đăng sản phẩm mới</a>
 					</Menu.Item>
@@ -111,16 +113,21 @@ function AppHeader() {
 					<Menu.Item key="9">
 						<a href="/report">Thống kê kinh doanh</a>
 					</Menu.Item>
-				</SubMenu>) : (false)}
-			{userRole.includes(Constants.ROLE_KHACH)?
-				(<SubMenu key="lichsumuahang" title="Lịch sử mua hàng" style={{ marginLeft: 10 }}>
+				</SubMenu>
+			) : (
+				false
+			)}
+			{userRole.includes(Constants.ROLE_KHACH) ? (
+				<SubMenu key="lichsumuahang" title="Lịch sử mua hàng" style={{ marginLeft: 10 }}>
 					<Menu.Item key="4">
 						<a href="/order_history">Đơn hàng đã mua</a>
 					</Menu.Item>
-				</SubMenu>) : (false)}
+				</SubMenu>
+			) : (
+				false
+			)}
 			{!localStorage.getItem('token') ? (
 				<Menu.Item className="login-space">
-					<Link to="/shipping">Cart</Link>
 					<Button className="login-button" type="primary" size="middle" onClick={onClickLogin}>
 						Đăng nhập
 					</Button>
@@ -142,6 +149,12 @@ function AppHeader() {
 						</Menu.Item>
 						<Menu.Item key="11">
 							<a href="/shipping">Shipping</a>
+						</Menu.Item>
+						<Menu.Item key="13">
+							<a href="/cart">Cart</a>
+						</Menu.Item>
+						<Menu.Item key="14">
+							<a href="/order/waiting">Xem đơn hàng chờ duyệt</a>
 						</Menu.Item>
 						<Menu.Item key="10">
 							<a href="/" onClick={onClickLogOut}>

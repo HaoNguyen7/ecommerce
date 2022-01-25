@@ -9,7 +9,7 @@ import {
 
 export const addToCart = (productId, qty) => async (dispatch, getState) => {
 	//const data = await Axios.get(`https://localhost:5001/api/Product/${productId}`);
-	const { data } = await Axios.get('https://localhost:5001/api/Product/3aa85f64-5717-4562-b3fc-2c963f66afa6');
+	const { data } = await Axios.get(`https://localhost:5001/api/Product/${productId}`);
 	const { cuaHang } = data;
 	console.log('cart action');
 	console.log('data:', data);
