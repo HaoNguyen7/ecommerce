@@ -10,12 +10,7 @@ export default function ItemCard({ item }) {
         <Card
           hoverable
           style={{ width: 250 }}
-          cover={
-            <img
-              alt="example"
-              src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-            />
-          }
+          cover={<img alt="example" src={item.hinhMinhHoa} />}
         >
           <Meta
             title={item.tenSanPham}

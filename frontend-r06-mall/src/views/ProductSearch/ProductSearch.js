@@ -45,16 +45,14 @@ export default function ProductSearch({ location }) {
 
   return (
     <div>
-      <h1>{category}</h1>
-      <h1>{keyword}</h1>
-      <SearchProduct setKeyword={setKeyword} />
+      <SearchProduct setKeyword={setKeyword} style={{ margin: 50 }} />
 
-      <span>Giá</span>
+      <span style={{ margin: 20 }}>Giá</span>
       <Select defaultValue="" style={{ width: 150 }} onChange={handleChange}>
         <Option value="price_asc">Thấp đến cao</Option>
         <Option value="price_desc">Cao đến thấp</Option>
       </Select>
-      <span>Ngày đăng</span>
+      <span style={{ margin: 20 }}>Ngày đăng</span>
       <Select defaultValue="" style={{ width: 150 }} onChange={handleChange}>
         <Option value="date_desc">Mới nhất xếp trước</Option>
         <Option value="date_asc">Cũ nhất xếp trước</Option>
@@ -63,7 +61,7 @@ export default function ProductSearch({ location }) {
       <List
         header={
           <div>
-            <h1>Sản phẩm có thể bạn sẽ thích</h1>
+            <h1>Kết quả tìm kiếm</h1>
           </div>
         }
         bordered={true}

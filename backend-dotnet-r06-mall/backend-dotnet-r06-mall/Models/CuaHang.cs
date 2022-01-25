@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -32,6 +33,8 @@ namespace backend_dotnet_r06_mall.Models
         public string DiaChi { get; set; }
         public double KinhDo { get; set; }
         public double ViDo { get; set; }
+        [DefaultValue(0.1)]
+        public double HoaHong { get; set; }
 
         public Guid UserId { get; set; }
     }

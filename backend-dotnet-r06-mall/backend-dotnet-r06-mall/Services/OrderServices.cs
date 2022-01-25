@@ -42,13 +42,15 @@ namespace backend_dotnet_r06_mall.Services
         {
             var latestState = await GetOrderLastestState(order.DonHangId);
 
-            if (latestState.TenTinhTrang == OrderStateConstants.ChoXacNhan || latestState.TenTinhTrang == OrderStateConstants.DangXuLy)
+            if (
+                latestState.TenTinhTrang != OrderStateConstants.DangVanChuyen && latestState.TenTinhTrang != OrderStateConstants.GiaoHangThanhCong && latestState.TenTinhTrang != OrderStateConstants.KhachHuyDon)
             {
                 TinhTrangDonHang tinhTrangDonHang = new TinhTrangDonHang()
                 {
                     TTDHId = new Guid(),
                     TenTinhTrang = OrderStateConstants.KhachHuyDon,
                     NgayThucHien = DateTime.UtcNow,
+                    GhiChu = "Khách huỷ đơn",
                     DonHang = order
                 };
 
