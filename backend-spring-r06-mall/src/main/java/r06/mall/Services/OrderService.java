@@ -43,8 +43,8 @@ public class OrderService {
         return _donHangRepository.findAllUnpickedOrder();
     }
 
-    public Collection<DonHang> GetWaitingOrder(){
-        return _donHangRepository.findAllWaitingOrder();
+    public Collection<DonHang> GetWaitingOrder(String idStore){
+        return _donHangRepository.findAllWaitingOrder(idStore);
     }
 
     // public Integer updateTinhTrangDon(String id){

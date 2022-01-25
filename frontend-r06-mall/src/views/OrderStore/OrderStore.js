@@ -5,18 +5,49 @@ export default function OrderStore(props) {
 	const [ listdh, setListdh ] = useState([]);
 	const [ loading, setLoading ] = useState(true);
 	const [ tinhtrang, setTinhtrang ] = useState(false); //khi update thi set tinhtrang = true =>> reload component
+	const [ idStore, setidStore ] = useState('');
 	useEffect(
 		() => {
-			console.log(1234);
-			Axios.get('http://localhost:8080/order/waiting').then((res) => {
-				const { data } = res;
-				console.log('data', data);
-				setListdh(data);
-				setLoading(false);
-			});
+			let params = { pageSize: 50 };
+			params.id = localStorage.getItem('userInfo').id;
+			const getStore = async () => {
+				await Axios({
+					method: 'GET',
+					url: 'https://localhost:5001/Store/get-store-by-user',
+					headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+					params: params
+				})
+					.then((res) => {
+						console.log(res);
+						console.log('cuaHangId:', res.data.data[0].cuaHangId); //đã có được cửa hàng id
+						setidStore(res.data.data[0].cuaHangId);
+						console.log(idStore);
+					})
+					.catch((err) => console.log(err));
+			};
+			getStore();
+			getOrder();
 		},
 		[ loading ]
 	);
+	const getOrder = async () => {
+		// await Axios.get(`http://localhost:8080/order/waiting/${idStore}`).then((res) => {
+		// 	const { data } = res;
+		// 	console.log('data', data);
+		// 	setListdh(data);
+		// 	setLoading(false);
+		// });
+		await Axios({
+			method: 'GET',
+			url: `http://localhost:8080/order/waiting/${idStore}`,
+			headers: { Authorization: `Bearer ${localStorage.getItem('token')}`, 'Content-Type': 'application/json' }
+		}).then((res) => {
+			const { data } = res;
+			console.log('data', data);
+			setListdh(data);
+			setLoading(false);
+		});
+	};
 	const updateOrderHandler = (id) => {
 		const ttdh = 'Đang đóng gói';
 		Axios({
@@ -37,6 +68,7 @@ export default function OrderStore(props) {
 	return (
 		<div className="row top">
 			<ul>
+				<button onClick={getOrder}>Load Đơn hàng</button>
 				{listdh.map((dh) => (
 					<li key={dh.donHangId}>
 						<div>

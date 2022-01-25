@@ -75,7 +75,7 @@ function AppHeader() {
 					<a href="/get_order">Tiếp nhận đơn hàng</a>
 				</Menu.Item>
 				<Menu.Item key="12">
-					<a href="/order/unpicked">Xem đơn hàng </a>
+					<a href="/order/unpicked">Xem đơn hàng chưa ship </a>
 				</Menu.Item>
 			</SubMenu>
 			{userRole.includes(Constants.ROLE_ADMIN) ? (
