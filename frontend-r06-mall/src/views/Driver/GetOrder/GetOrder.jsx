@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from 'react'
 import axios from 'axios'
-import {Card, Button, Table, Row, Col,Typography, Input, Tag} from 'antd'
+import {Card, Button, Table, Row, Col,Typography, Input, Tag, Alert} from 'antd'
 import {useSelector} from 'react-redux'
 import moment from 'moment'
 import './GetOrder.css'
@@ -13,6 +13,8 @@ const GetOrder = () => {
     const [note,setNote]=useState()
     const [customer,setCustomer] = useState()
     const [isAccept,setIsAccpet] = useState(false)
+    const [message,setMessage] = useState()
+    const [isSuccess,setIsSuccess] = useState(false);
     const columns = [
         {
           title: 'Tên sản phẩm',
@@ -62,6 +64,8 @@ const GetOrder = () => {
         })
         .then(res => {
             setOrder(res.data)
+            setMessage("Hoàn tất đơn hàng!")
+            setIsSuccess(true)
             console.log(res.data)
         })
         .catch((error) => {
@@ -116,6 +120,7 @@ const GetOrder = () => {
     return (
         <div>
             <Card title="Tiếp nhận đơn hàng">
+            {isSuccess && <Alert message={message} type="success" showIcon />}
               <Row>
                 <Col span={12} offset={8}>
                   <Card
