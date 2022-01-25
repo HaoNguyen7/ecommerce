@@ -47,6 +47,12 @@ namespace backend_dotnet_r06_mall.Services
             return await PagedList<CuaHang>.CreateAsync(stores.AsNoTracking(), query.pageIndex, query.pageSize);
         }
 
+        public async Task<CuaHang> GetInfoStore(GetStoreByIdRequest query)
+        {
+            var store = _context.CuaHang.Find(query.id);
+            return store;
+        }
+
         public async Task<PagedList<CuaHang>> GetStoreOfUser(ListStoreOfUserRequest query)
         {
             var stores = from s in _context.CuaHang

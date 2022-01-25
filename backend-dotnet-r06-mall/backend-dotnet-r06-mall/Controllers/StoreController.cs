@@ -50,6 +50,15 @@ namespace backend_dotnet_r06_mall.Controllers
         }
 
         [HttpGet]
+        [Route("get-store-info")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Admin)]
+        public async Task<IActionResult> GetInfoStore([FromQuery] GetStoreByIdRequest query)
+        {
+            CuaHang cuaHang = await _service.GetInfoStore(query);
+            return Ok(cuaHang);
+        }
+
+        [HttpGet]
         [Route("get-store-by-user")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> GetStoresOfUser([FromQuery] ListStoreOfUserRequest query)
