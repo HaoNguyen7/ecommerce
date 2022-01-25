@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import jwt_decode from 'jwt-decode';
 import { Navigate } from 'react-router-dom';
 //import './OrderShipper.css';
 export default function OrderShipper(props) {
@@ -18,9 +19,36 @@ export default function OrderShipper(props) {
 		[ loading ]
 	);
 
-	const toOrderHandler = (id) => {
-		//to order with specific id
+	const toOrderHandler = async (id) => {
+		const ttdh = 'Đang vận chuyển';
+		await Axios({
+			method: 'post',
+			url: `http://localhost:8080/order/${id}/update`,
+			headers: { Authorization: `Bearer ${localStorage.getItem('token')}`, 'Content-Type': 'application/json' },
+			data: ttdh
+		})
+			.then((res) => {
+				console.log(res);
+				console.log(res.data);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+			let idTaiXe = jwt_decode(localStorage.getItem("token")).Id;
+			await Axios({
+				method: 'put',
+				url: `http://localhost:8080/add-tx-for-dh/${idTaiXe}/${id}`,
+				})
+				.then((res) => {
+					alert("Nhận đơn thành công")
+				})
+				.catch((error) => {
+					alert("Nhận đơn thành công")
+					console.error(error);
+				});
 	};
+
+
 	return (
 		<div className="row top">
 			<ul>

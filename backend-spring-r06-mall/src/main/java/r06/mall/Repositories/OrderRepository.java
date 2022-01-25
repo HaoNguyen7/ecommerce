@@ -31,5 +31,7 @@ public interface OrderRepository extends JpaRepository<DonHang, String> {
     Collection<DonHang> findAllWaitingOrder(String idUser);
     @Query(value = "Insert into TinhTrangDonHang (TTDHId, TenTinhTrang, DonHangId, NgayThucHien) values (NEWID(), N'Đang đóng gói', ?1, getDate())", nativeQuery = true)
     Integer updateTinhTrangDon(String id, String tinhtrang);
+    @Query(value = "update DonHang set NguoiGiaoHangNguoiGiaoId = ?1 where DonHangId = ?2", nativeQuery = true)
+    void updateTaiXeDonHang(String idTaiXe, String idDonHang);
 };
 

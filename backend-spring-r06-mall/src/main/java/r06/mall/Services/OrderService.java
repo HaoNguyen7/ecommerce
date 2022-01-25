@@ -51,6 +51,10 @@ public class OrderService {
         return _donHangRepository.findAllWaitingOrder(idUser);
     }
 
+    public void updateTaiXeDonHang(String idTaiXe, String idDonHang) {
+        _donHangRepository.updateTaiXeDonHang(idTaiXe,idDonHang);
+    }
+
     // public Integer updateTinhTrangDon(String id){
     //     return _donHangRepository.updateTinhTrangDon(id)
     // }
