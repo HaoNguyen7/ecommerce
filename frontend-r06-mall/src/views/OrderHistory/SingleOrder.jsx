@@ -64,6 +64,10 @@ export default function SingleOrder(){
                     <p>{order.khachHang.diaChi}</p>
                 </div> */}
             </div>
+                    <Button type="primary"  href={`/order/tracking/${donHangId}`}>
+      Theo dõi đơn hàng
+    </Button>
         </Card>
+
     )
 }

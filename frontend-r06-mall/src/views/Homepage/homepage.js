@@ -8,6 +8,7 @@ const { Content } = Layout;
 const { Meta } = Card;
 
 function HomePage() {
+  const [keyword, setKeyword] = useState('');
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -34,6 +35,7 @@ function HomePage() {
 
   const contentStyle = {
     height: '360px',
+    width: '100%',
     color: '#fff',
     lineHeight: '360px',
     textAlign: 'center',
@@ -48,21 +50,24 @@ function HomePage() {
   return (
     <div>
       {/* {console.log(categories)} */}
-      <SearchProduct />
-      <Carousel afterChange={onChange}>
-        <div>
-          <h3 style={contentStyle}>1</h3>
-        </div>
-        <div>
-          <h3 style={contentStyle}>2</h3>
-        </div>
-        <div>
-          <h3 style={contentStyle}>3</h3>
-        </div>
-        <div>
-          <h3 style={contentStyle}>4</h3>
-        </div>
-      </Carousel>
+      <div style={{ width: 1080, margin: 'auto' }}>
+        <SearchProduct setKeyword={setKeyword} />
+
+        <Carousel afterChange={onChange}>
+          <div>
+            <h3 style={contentStyle}>1</h3>
+          </div>
+          <div>
+            <h3 style={contentStyle}>2</h3>
+          </div>
+          <div>
+            <h3 style={contentStyle}>3</h3>
+          </div>
+          <div>
+            <h3 style={contentStyle}>4</h3>
+          </div>
+        </Carousel>
+      </div>
       <Content
         className="site-layout"
         style={{

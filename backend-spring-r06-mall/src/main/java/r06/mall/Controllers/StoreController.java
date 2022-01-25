@@ -7,8 +7,10 @@ import java.util.Optional;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -30,6 +32,8 @@ import r06.mall.Services.ReportService;
 import r06.mall.Services.StoreService;
 
 @RestController
+@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4200" })
+@SpringBootApplication
 public class StoreController {
     private final CommissionService hoaHongService;
     private final StoreService storeService;
@@ -43,15 +47,14 @@ public class StoreController {
     }
 
     @GetMapping("/store/commission")
-    public ResponseEntity<HoaHongResponse> findHoaHongByNamAndThang(@RequestParam int year, @RequestParam int month,
-            @RequestHeader(name = "Authorization") String token) {
+    public ResponseEntity<HoaHongResponse> findHoaHong(@RequestHeader(name = "Authorization") String token) {
         try {
             JwtParser jwt = new JwtParser(token);
-            if (!jwt.isAdmin()) {
-                return new ResponseEntity<HoaHongResponse>(new HoaHongResponse(
-                        false), HttpStatus.FORBIDDEN);
-            }
-            List<Commission> list = hoaHongService.findHoaHongByNamAndThang(year, month);
+            // if (!jwt.isAdmin()) {
+            // return new ResponseEntity<HoaHongResponse>(new HoaHongResponse(
+            // false), HttpStatus.FORBIDDEN);
+            // }
+            List<Commission> list = hoaHongService.findAllHoaHong();
             return new ResponseEntity<HoaHongResponse>(new HoaHongResponse(
                     true, "", list), HttpStatus.OK);
         } catch (IllegalAccessError err) {

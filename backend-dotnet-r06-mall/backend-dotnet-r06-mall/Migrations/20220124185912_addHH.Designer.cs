@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using backend_dotnet_r06_mall.Data;
 
 namespace backend_dotnet_r06_mall.Migrations
 {
     [DbContext(typeof(BanHangContext))]
-    partial class BanHangContextModelSnapshot : ModelSnapshot
+    [Migration("20220124185912_addHH")]
+    partial class addHH
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -235,9 +237,6 @@ namespace backend_dotnet_r06_mall.Migrations
 
                     b.Property<double>("HoaHong")
                         .HasColumnType("float");
-                    b.Property<string>("GiayPhepKinhDoanh")
-                        .HasMaxLength(2147483645)
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("KinhDo")
                         .HasColumnType("float");
@@ -287,9 +286,6 @@ namespace backend_dotnet_r06_mall.Migrations
                     b.Property<string>("DanhGia")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DiaChi")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid?>("HinhThucThanhToanHinhThucId")
                         .HasColumnType("uniqueidentifier");
 
@@ -303,9 +299,6 @@ namespace backend_dotnet_r06_mall.Migrations
                         .IsRequired()
                         .HasColumnType("int");
 
-                    b.Property<string>("ThanhPho")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("ThoiGian")
                         .HasColumnType("datetime2");
 
@@ -314,9 +307,6 @@ namespace backend_dotnet_r06_mall.Migrations
 
                     b.Property<bool>("TinhTrangThanhToan")
                         .HasColumnType("bit");
-
-                    b.Property<int>("TongTien")
-                        .HasColumnType("int");
 
                     b.HasKey("DonHangId");
 
@@ -518,10 +508,6 @@ namespace backend_dotnet_r06_mall.Migrations
 
                     b.Property<int>("TonKho")
                         .HasColumnType("int");
-
-                    b.Property<string>("nguonGoc")
-                        .HasMaxLength(2147483645)
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("SanPhamId");
 

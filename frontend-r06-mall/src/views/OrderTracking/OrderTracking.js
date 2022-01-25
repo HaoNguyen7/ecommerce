@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Steps } from 'antd';
-import { Popconfirm, message, Button } from 'antd';
-
+import { Popconfirm, message, Button, Layout, Tag } from 'antd';
+import './OrderTracking.css';
 import axios from 'axios';
 const { Step } = Steps;
+const { Content } = Layout;
 export default function OrderTracking() {
   const [history, setHistory] = useState([]);
   const [order, setOrder] = useState({});
@@ -59,41 +60,55 @@ export default function OrderTracking() {
     );
   };
 
+  let isCompleted = false;
+  const testItem = history[0];
+  if (testItem) {
+    isCompleted =
+      testItem.tenTinhTrang === 'Giao hang thanh cong' ||
+      testItem.tenTinhTrang === 'Shop huy don' ||
+      testItem.tenTinhTrang === 'Khach huy don' ||
+      testItem.tenTinhTrang === 'Dang van chuyen';
+  }
   useEffect(() => {
     getOrder();
     getHistory();
   }, []);
   return (
     <>
-      <h1>{console.log(history)}</h1>
-      <h1>Theo dõi đơn hàng {id}</h1>
-      {order.nguoiGiaoHang ? (
-        <p>Đơn hàng được giao bởi {order.nguoiGiaoHang.tenNguoiGiaoHang}</p>
-      ) : (
-        ''
-      )}
+      <Layout style={{ margin: 50 }}>
+        <Content>
+          <h1>
+            Theo dõi đơn hàng <Tag color="magenta"> {id}</Tag>
+          </h1>
+          {order.nguoiGiaoHang ? (
+            <p>Đơn hàng được giao bởi {order.nguoiGiaoHang.tenNguoiGiaoHang}</p>
+          ) : (
+            ''
+          )}
 
-      <Steps direction="vertical" current={0}>
-        {history.map((item) => {
-          return (
-            <Step
-              key={item.ttdhId}
-              title={item.tenTinhTrang}
-              description={`${item.ghiChu}\n${item.ngayThucHien}`}
-            />
-          );
-        })}
-      </Steps>
+          <Steps direction="vertical" current={0}>
+            {history.map((item) => {
+              return (
+                <Step
+                  key={item.ttdhId}
+                  title={item.tenTinhTrang}
+                  description={`${item.ghiChu}\n${item.ngayThucHien}`}
+                />
+              );
+            })}
+          </Steps>
 
-      <Popconfirm
-        title="Bạn có muốn huỷ đơn hàng?"
-        onConfirm={confirm}
-        onCancel={cancel}
-        okText="Ok"
-        cancelText="Không"
-      >
-        <Button>Huỷ đơn hàng</Button>
-      </Popconfirm>
+          <Popconfirm
+            title="Bạn có muốn huỷ đơn hàng?"
+            onConfirm={confirm}
+            onCancel={cancel}
+            okText="Ok"
+            cancelText="Không"
+          >
+            {!isCompleted ? <Button>Huỷ đơn hàng</Button> : ''}
+          </Popconfirm>
+        </Content>
+      </Layout>
     </>
   );
 }
