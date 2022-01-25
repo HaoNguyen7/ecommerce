@@ -10,7 +10,8 @@ import {
     Col,
     Card,
     Button,
-    Image
+    Image,
+    Alert
 } from 'antd';
 import Upload from '../../Upload/Upload';
 const { Option } = Select;
@@ -18,7 +19,8 @@ const { Option } = Select;
 const RegisterShipper = () => {
     const [driver,setDriver] = useState({})
     const [image,setImage] = useState()
-
+    const [message,setMessage] = useState()
+    const [isSuccess,setIsSuccess] = useState(false)
     const [form] = Form.useForm();
 
     const userSignin = useSelector((state) => state.userSignin)
@@ -35,7 +37,8 @@ const RegisterShipper = () => {
         })
         .then(res => {
             setDriver(res.data)
-            console.log('Thành công')
+            setMessage('Đăng ký tài xế thành công!')
+            setIsSuccess(true)
         })
         .catch((error) => {
             console.error(error);
@@ -62,6 +65,7 @@ const RegisterShipper = () => {
       }, []);
     return (
         <div>
+            
             <Row style={{marginTop:100}}>
                 <Col span={12} offset={6}>
                     <Card title="Đăng ký tài xế">
@@ -126,6 +130,7 @@ const RegisterShipper = () => {
                                 </Button>
                             </Form.Item>
                         </Form>
+                        {isSuccess && <Alert message={message} type="success" showIcon />}
                     </Card>
                 </Col>
             </Row>
