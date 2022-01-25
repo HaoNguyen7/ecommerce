@@ -30,7 +30,7 @@ namespace backend_dotnet_r06_mall.Services
 
             if (query.shopId is not null && !query.shopId.Equals(""))
             {
-                products = products.Where(s => s.CuaHang.CuaHangId.Equals(query.shopId));
+                products = products.Where(s => s.CuaHang.CuaHangId.Equals(new Guid(query.shopId)));
             }
 
             if (!String.IsNullOrEmpty(query.categoryId))
