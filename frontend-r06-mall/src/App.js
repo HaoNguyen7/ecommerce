@@ -10,6 +10,7 @@ import LogIn from './views/Login/login';
 import Upload from './views/Upload/Upload.jsx';
 import Driver from './views/Driver/Driver.jsx';
 import ImportantItems from './views/Statistics/ImportantItems.jsx';
+import ImportantItemsByYear from './views/Statistics/ImportantItemsByYear.jsx'
 import Shipper from './views/Driver/Shipper/Shipper.jsx';
 import SellRegister from './views/SellRegister/sellRegister';
 import RegisterShipper from './views/Driver/RegisterShipper/RegisterShipper.jsx';
@@ -72,6 +73,7 @@ function App() {
             <Route path="/order/tracking/:id" element={<OrderTracking />} />
             <Route path="/admin/commission" element={<CommissionAdmin />} />
             <Route path="/important_items" element={<ImportantItems />} />
+            <Route path="/important_items_by_year" element={<ImportantItemsByYear />} />
           </Routes>
         </Content>
       </Router>

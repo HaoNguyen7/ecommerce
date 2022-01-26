@@ -133,6 +133,9 @@ function AppHeader() {
 				<Menu.Item key="1">
 					<a href="/important_items">Thống kê mặt hàng thiết yếu</a>
 				</Menu.Item>
+        <Menu.Item key="2">
+					<a href="/important_items_by_year">Thống kê mặt nhu cầu thực phẩm theo năm</a>
+				</Menu.Item>
 			</SubMenu>
       {!localStorage.getItem('token') ? (
         <Menu.Item className="login-space">
