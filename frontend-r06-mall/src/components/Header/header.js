@@ -59,20 +59,6 @@ function AppHeader() {
       <Menu.Item key="homepage" icon={<HomeOutlined />}>
         <a href="/">Homepage</a>
       </Menu.Item>
-      <SubMenu key="SubMenu" title="Loại hàng hóa">
-        <Menu.Item key="type:1">
-          <a href="/op1">Option 1</a>
-        </Menu.Item>
-        <Menu.Item key="type:2">
-          <a href="/op2">Option 2</a>
-        </Menu.Item>
-        <Menu.Item key="type:3">
-          <a href="/op3">Option 3</a>
-        </Menu.Item>
-        <Menu.Item key="type:4">
-          <a href="/op4">Option 4</a>
-        </Menu.Item>
-      </SubMenu>
       {userRole.includes(Constants.ROLE_TAIXI) ? (
         <SubMenu key="Driver" title="Tài xế" style={{ marginLeft: 10 }}>
           <Menu.Item key="4">
