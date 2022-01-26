@@ -49,7 +49,7 @@ const GetOrder = () => {
 
     const onClick = () => {
         const body = {
-            "tenTinhTrang":"Thanh cong",
+            "tenTinhTrang":"Thành công",
             "donHangId":order.donHangId,
             "ghiChu": note,
             "ngayThucHien":`${moment().format('YYYY-MM-DD')}`
