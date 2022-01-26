@@ -143,6 +143,11 @@ function AppHeader() {
       ) : (
         false
       )}
+      <SubMenu key="Statistic" title="Thống kê" style={{ marginLeft: 10 }}>
+				<Menu.Item key="1">
+					<a href="/important_items">Thống kê mặt hàng thiết yếu</a>
+				</Menu.Item>
+			</SubMenu>
       {!localStorage.getItem('token') ? (
         <Menu.Item className="login-space">
           <Button
