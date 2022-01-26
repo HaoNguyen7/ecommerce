@@ -60,13 +60,13 @@ const OrderHistory = () =>{
                             <div key={item.donHangId} className='single-item'>
                                 
                                 <p className='product-name'>Mã đơn hàng: {item.donHangId}</p>
-                                <div>Tên sản phẩm</div>
                                 <div className='total-section'>
                                     <p>{item.soLuong} sản phẩm</p>
-                                    <h3>Thành tiền: 
-                                        <span className='total-price'> Tổng tiền</span>
+                                    <h3>Tổng tiền: 
+                                        <span className='total-price'> {item.tongTien} VND</span>
                                     </h3>
                                 </div>
+                                <p>Tình trạng giao hàng: {item.tinhTrangGiao}</p>
                                 <Link to={`/order_history/${item.donHangId}`}>Xem chi tiết...</Link>
                             </div>
                         )
