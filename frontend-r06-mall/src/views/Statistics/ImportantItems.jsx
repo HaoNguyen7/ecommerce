@@ -64,10 +64,10 @@ const ImportantItems = () => {
     const getImportantItems = () => {
         axios({
             method: 'get',
-            url: `https://localhost:8080/importantItems`
+            url: `http://localhost:8080/importantItems`
         })
         .then(res=>{
-            const result = res.data
+            const result = res.data.data
             setItems(result)
         })
         .catch((error)=>{
