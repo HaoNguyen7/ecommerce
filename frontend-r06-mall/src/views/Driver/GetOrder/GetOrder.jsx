@@ -88,7 +88,7 @@ const GetOrder = () => {
             setOrder(res.data)
             axios({
                 method: 'get',
-                url: `https://localhost:44391/api/Order/view/driver/${res.data.donHangId}`,
+                url: `https://localhost:5001/api/Order/view/driver/${res.data.donHangId}`,
                 headers: { 'Authorization':`Bearer ${localStorage.getItem('token')}`},
             }).then(response =>{
                 setOrderDetail(response.data);
@@ -97,7 +97,7 @@ const GetOrder = () => {
             })
             axios({
               method: 'get',
-              url: `https://localhost:44391/customer/${res.data.khachHangId}`,
+              url: `https://localhost:5001/customer/${res.data.khachHangId}`,
               headers: { 'Authorization':`Bearer ${localStorage.getItem('token')}`},
               }).then(response =>{
                   setCustomer(response.data);
@@ -120,7 +120,7 @@ const GetOrder = () => {
     return (
         <div>
             <Card title="Tiếp nhận đơn hàng">
-            {isSuccess && <Alert message={message} type="success" showIcon />}
+            
               <Row>
                 <Col span={12} offset={8}>
                   <Card
@@ -154,7 +154,7 @@ const GetOrder = () => {
                       </Col>
                       <Row>
                           <Col>Địa chỉ: &ensp;</Col>
-                          <Col> {customer?.diaChi}</Col>
+                          <Col> {order?.diaChi}</Col>
                         </Row>
                     </Row>
                     <br />
@@ -183,6 +183,7 @@ const GetOrder = () => {
                   </Card>
                 </Col>
               </Row>
+              {isSuccess && <Alert message={message} type="success" showIcon />}
             </Card>
         </div>
     )
