@@ -32,7 +32,8 @@ namespace backend_dotnet_r06_mall.Services
                 MaSoThue = request.TaxId,
                 TinhTrang = false,
                 UserId = userId,
-                GiayPhepKinhDoanh = request.GiayPhepKinhDoanh
+                GiayPhepKinhDoanh = request.GiayPhepKinhDoanh,
+                HoaHong = 0.2
             };
 
             var createResult = await _context.CuaHang.AddAsync(store);
