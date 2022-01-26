@@ -64,10 +64,10 @@ export default function OrderTracking() {
   const testItem = history[0];
   if (testItem) {
     isCompleted =
-      testItem.tenTinhTrang === 'Giao hang thanh cong' ||
-      testItem.tenTinhTrang === 'Shop huy don' ||
-      testItem.tenTinhTrang === 'Khach huy don' ||
-      testItem.tenTinhTrang === 'Dang van chuyen';
+      testItem.tenTinhTrang === 'Giao hàng thành công' ||
+      testItem.tenTinhTrang === 'Shop huỷ đơn' ||
+      testItem.tenTinhTrang === 'Khách huỷ đơn' ||
+      testItem.tenTinhTrang === 'Đang vận chuyển';
   }
   useEffect(() => {
     getOrder();
