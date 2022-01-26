@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using backend_dotnet_r06_mall.Data;
@@ -39,12 +40,14 @@ namespace backend_dotnet_r06_mall.Services
             return createResult;
         }
 
-        public async Task<PagedList<CuaHang>> GetInactiveStores(GetInactiveStoreRequest query)
+        public async Task<List<CuaHang>> GetInactiveStores(GetInactiveStoreRequest query)
         {
             var stores = from s in _context.CuaHang 
                          select s;
             stores = stores.Where(s => s.TinhTrang.Equals(false));
-            return await PagedList<CuaHang>.CreateAsync(stores.AsNoTracking(), query.pageIndex, query.pageSize);
+            
+            var res = await stores.AsNoTracking().ToListAsync();
+            return res;
         }
 
         public async Task<CuaHang> GetInfoStore(GetStoreByIdRequest query)

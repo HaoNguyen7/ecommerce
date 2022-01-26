@@ -10,8 +10,8 @@ function ManageRegisterStore() {
       url: "https://localhost:5001/Store/get-inactive-store",
       headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
     }).then((res) => {
-      listStore = res.data.data;
-      setListStore(res.data.data)
+      listStore = res.data;
+      setListStore(res.data)
       console.log(listStore)
     }).catch((err) => console.log(err))
   }, []);

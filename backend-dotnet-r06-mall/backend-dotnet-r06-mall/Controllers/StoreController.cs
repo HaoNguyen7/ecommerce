@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using backend_dotnet_r06_mall.Response;
+using System.Collections.Generic;
 
 namespace backend_dotnet_r06_mall.Controllers
 {
@@ -45,8 +46,8 @@ namespace backend_dotnet_r06_mall.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Admin)]
         public async Task<IActionResult> GetInActiveShoptList([FromQuery] GetInactiveStoreRequest query)
         {
-            PagedList<CuaHang> listCuaHang = await _service.GetInactiveStores(query);
-            return Ok(new PagedListResponse<CuaHang>(listCuaHang));
+            List<CuaHang> listCuaHang = await _service.GetInactiveStores(query);
+            return Ok(new List<CuaHang>(listCuaHang));
         }
 
         [HttpGet]
