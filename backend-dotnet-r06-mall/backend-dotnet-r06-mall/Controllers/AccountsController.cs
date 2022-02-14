@@ -34,14 +34,14 @@ namespace backend_dotnet_r06_mall.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly JwtConfig _jwtConfig;
 
-        private readonly BanHangContext _context;
+        private readonly SaleContext _context;
 
         public AccountsController
         (
             UserManager<IdentityUser> userManager,
             IOptionsMonitor<JwtConfig> optionsMonitor,
             RoleManager<IdentityRole> roleManager,
-            BanHangContext context
+            SaleContext context
 
         )
         {
@@ -96,12 +96,12 @@ namespace backend_dotnet_r06_mall.Controllers
                     );
                 }
                 // Add Khach hang to db
-                var _khachHang = new KhachHang();
-                _khachHang.KhachHangId = new Guid(newUser.Id);
-                _khachHang.TenKhachHang = registrationDto.TenKhachHang;
+                var _khachHang = new Customer();
+                _khachHang.CustomerId = new Guid(newUser.Id);
+                _khachHang.CustomerName = registrationDto.TenKhachHang;
                 _khachHang.Email = registrationDto.Email;
 
-                await _context.KhachHang.AddAsync(_khachHang);
+                await _context.Customers.AddAsync(_khachHang);
                 await _context.SaveChangesAsync();
 
                 //Create Roles

@@ -46,8 +46,8 @@ namespace backend_dotnet_r06_mall.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Admin)]
         public async Task<IActionResult> GetInActiveShoptList([FromQuery] GetInactiveStoreRequest query)
         {
-            List<CuaHang> listCuaHang = await _service.GetInactiveStores(query);
-            return Ok(new List<CuaHang>(listCuaHang));
+            List<Store> listCuaHang = await _service.GetInactiveStores(query);
+            return Ok(new List<Store>(listCuaHang));
         }
 
         [HttpGet]
@@ -55,7 +55,7 @@ namespace backend_dotnet_r06_mall.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Admin)]
         public async Task<IActionResult> GetInfoStore([FromQuery] GetStoreByIdRequest query)
         {
-            CuaHang cuaHang = await _service.GetInfoStore(query);
+            Store cuaHang = await _service.GetInfoStore(query);
             return Ok(cuaHang);
         }
 
@@ -64,15 +64,15 @@ namespace backend_dotnet_r06_mall.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> GetStoresOfUser([FromQuery] ListStoreOfUserRequest query)
         {
-            PagedList<CuaHang> listCuaHang = await _service.GetStoreOfUser(query);
-            return Ok(new PagedListResponse<CuaHang>(listCuaHang));
+            PagedList<Store> listCuaHang = await _service.GetStoreOfUser(query);
+            return Ok(new PagedListResponse<Store>(listCuaHang));
         }
 
         [HttpPut]
         [Route("active-store")]
         public async Task<IActionResult> ActiveShop([FromBody] ActiveStoreRequest query)
         {
-            CuaHang cuaHang = await _service.ActiveStore(query);
+            Store cuaHang = await _service.ActiveStore(query);
             return Ok(cuaHang);
         }
         // [HttpPost]

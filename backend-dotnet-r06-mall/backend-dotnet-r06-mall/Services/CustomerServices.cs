@@ -11,18 +11,18 @@ namespace backend_dotnet_r06_mall.Services
 {
     public class CustomerServices
     {
-        private readonly BanHangContext _context;
+        private readonly SaleContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
 
-        public CustomerServices(UserManager<IdentityUser> userManager, BanHangContext context)
+        public CustomerServices(UserManager<IdentityUser> userManager, SaleContext context)
         {
             _context = context;
             _userManager = userManager;
         }
-        public async Task<KhachHang> UpdateCustomer(UpdateInfoCustomerRequest request, Guid KhachHangId)
+        public async Task<Customer> UpdateCustomer(UpdateInfoCustomerRequest request, Guid KhachHangId)
         {
-            KhachHang customer = _context.KhachHang.Find(KhachHangId);
+            Customer customer = _context.KhachHang.Find(KhachHangId);
             if (customer == null)
             {
                 return null;

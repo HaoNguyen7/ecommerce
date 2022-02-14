@@ -4,27 +4,27 @@ using Microsoft.AspNetCore.Identity;
 
 namespace backend_dotnet_r06_mall.Models
 {
-    public class KhachHang
+    public class Customer
     {
         [Key]
-        public Guid KhachHangId { get; set; }
+        public Guid CustomerId { get; set; }
 
         [MaxLength(50)]
         [Required]
-        public string TenKhachHang { get; set; }
+        public string CustomerName { get; set; }
 
         [Phone]
         [MaxLength(10)]
-        public string? SoDienThoai { get; set; }
+        public string? PhoneNumber { get; set; }
 
         [MaxLength(50)]
-        public string? DiaChi { get; set; }
+        public string? Address { get; set; }
 
         [MaxLength(12)]
-        public string? Cccd { get; set; }
+        public string? IdentityNumber { get; set; }
 
         [MaxLength(30)]
-        public string? STK { get; set; }
+        public string? CardNumber { get; set; }
 
         [MaxLength(30)]
         public string? Vung { get; set; }

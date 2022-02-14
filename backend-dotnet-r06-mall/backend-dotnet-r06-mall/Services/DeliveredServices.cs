@@ -11,21 +11,21 @@ namespace backend_dotnet_r06_mall.Services
 {
     public class DeliveredServices
     {
-     private readonly BanHangContext _context;
+     private readonly SaleContext _context;
 
-     public DeliveredServices(BanHangContext context)
+     public DeliveredServices(SaleContext context)
      {
          _context = context;
      }
 
-     public async Task<PagedList<DonHang>> GetDeliveredOrder(Guid shipperId, OrderDeliveredRequest query)
+     public async Task<PagedList<Order>> GetDeliveredOrder(Guid shipperId, OrderDeliveredRequest query)
      {
          var orders = _context.DonHang.Include(o => o.NguoiGiaoHang).Where(
              o => o.NguoiGiaoHang.NguoiGiaoId.Equals(shipperId)).OrderByDescending(o=>o.ThoiGian);
-        return await PagedList<DonHang>.CreateAsync(orders, query.pageIndex, query.pageSize);
+        return await PagedList<Order>.CreateAsync(orders, query.pageIndex, query.pageSize);
      }
 
-     public async Task<DonHang> GetDeliveredById(Guid orderId)
+     public async Task<Order> GetDeliveredById(Guid orderId)
      {
          return await _context.DonHang.Include(o=>o.NguoiGiaoHang).FirstOrDefaultAsync(p=>p.DonHangId==orderId);
      }

@@ -31,7 +31,7 @@ namespace backend_dotnet_r06_mall.Controllers
         [HttpGet]
         public async Task<IActionResult> GetProductList([FromQuery] ProductListRequest query)
         {
-            List<SanPham> listProducts = await _service.GetProducts(query);
+            List<Product> listProducts = await _service.GetProducts(query);
             return Ok(listProducts);
         }
 
@@ -75,7 +75,7 @@ namespace backend_dotnet_r06_mall.Controllers
         [Route("update-product")]
         public async Task<IActionResult> UpdateProduct([FromBody] UpdateProductRequest request)
         {
-            SanPham product = await _service.UpdateProduct(request);
+            Product product = await _service.UpdateProduct(request);
 
             if (product == null)
             {

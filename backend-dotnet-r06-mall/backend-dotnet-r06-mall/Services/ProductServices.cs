@@ -15,15 +15,15 @@ namespace backend_dotnet_r06_mall.Services
 {
     public class ProductServices
     {
-        private readonly BanHangContext _context;
+        private readonly SaleContext _context;
 
 
-        public ProductServices(BanHangContext context)
+        public ProductServices(SaleContext context)
         {
             _context = context;
         }
 
-        public async Task<List<SanPham>> GetProducts(ProductListRequest query)
+        public async Task<List<Product>> GetProducts(ProductListRequest query)
         {
             var products = from s in _context.SanPham
                            select s;
@@ -71,14 +71,14 @@ namespace backend_dotnet_r06_mall.Services
             return res;
 
         }
-        public async Task<SanPham> GetProductDetail(Guid productId)
+        public async Task<Product> GetProductDetail(Guid productId)
         {
             return await _context.SanPham.Include(o => o.CuaHang).Include(o => o.LoaiSanPham).AsNoTracking().FirstOrDefaultAsync(o => o.SanPhamId.Equals(productId));
         }
 
-        public async Task<EntityEntry<SanPham>> CreateProduct(RegisterProductRequest request)
+        public async Task<EntityEntry<Product>> CreateProduct(RegisterProductRequest request)
         {
-            SanPham sanpham = new SanPham
+            Product sanpham = new Product
             {
                 SanPhamId = new Guid(),
                 TenSanPham = request.TenSanPham,
@@ -98,9 +98,9 @@ namespace backend_dotnet_r06_mall.Services
             return createResult;
         }
 
-        public async Task<SanPham> UpdateProduct(UpdateProductRequest request)
+        public async Task<Product> UpdateProduct(UpdateProductRequest request)
         {
-            SanPham product = _context.SanPham.Find(request.id);
+            Product product = _context.SanPham.Find(request.id);
             if (product == null)
             {
                 return null;
@@ -143,7 +143,7 @@ namespace backend_dotnet_r06_mall.Services
 
         public async Task<bool> RemoveProduct(RemoveProductRequest request)
         {
-            SanPham product = _context.SanPham.Find(request.id);
+            Product product = _context.SanPham.Find(request.id);
             if (product == null)
             {
                 return false;
@@ -154,7 +154,7 @@ namespace backend_dotnet_r06_mall.Services
             return true;
         }
 
-        public async Task<List<LoaiSanPham>> getCategories()
+        public async Task<List<Category>> getCategories()
         {
             return await _context.LoaiSanPham.AsNoTracking().ToListAsync();
         }

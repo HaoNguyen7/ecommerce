@@ -13,15 +13,15 @@ namespace backend_dotnet_r06_mall.Services
 {
     public class StoreService
     {
-        private readonly BanHangContext _context;
-        public StoreService(BanHangContext context)
+        private readonly SaleContext _context;
+        public StoreService(SaleContext context)
         {
             _context = context;
         }
 
-        public async Task<EntityEntry<CuaHang>> CreateStore(Guid userId, RegisterStoreRequest request)
+        public async Task<EntityEntry<Store>> CreateStore(Guid userId, RegisterStoreRequest request)
         {
-            CuaHang store = new CuaHang
+            Store store = new Store
             {
                 CuaHangId = new Guid(),
                 TenCuaHang = request.Name,
@@ -41,7 +41,7 @@ namespace backend_dotnet_r06_mall.Services
             return createResult;
         }
 
-        public async Task<List<CuaHang>> GetInactiveStores(GetInactiveStoreRequest query)
+        public async Task<List<Store>> GetInactiveStores(GetInactiveStoreRequest query)
         {
             var stores = from s in _context.CuaHang 
                          select s;
@@ -51,22 +51,22 @@ namespace backend_dotnet_r06_mall.Services
             return res;
         }
 
-        public async Task<CuaHang> GetInfoStore(GetStoreByIdRequest query)
+        public async Task<Store> GetInfoStore(GetStoreByIdRequest query)
         {
             var store = _context.CuaHang.Find(query.id);
             return store;
         }
 
-        public async Task<PagedList<CuaHang>> GetStoreOfUser(ListStoreOfUserRequest query)
+        public async Task<PagedList<Store>> GetStoreOfUser(ListStoreOfUserRequest query)
         {
             var stores = from s in _context.CuaHang
                          select s;
             if(query.id != null && query.id != Guid.Empty) {
                 stores = stores.Where(s => s.UserId.Equals(query.id));
             }
-            return await PagedList<CuaHang>.CreateAsync(stores.AsNoTracking(), query.pageIndex, query.pageSize);
+            return await PagedList<Store>.CreateAsync(stores.AsNoTracking(), query.pageIndex, query.pageSize);
         }
-        public async Task<CuaHang> ActiveStore(ActiveStoreRequest query)
+        public async Task<Store> ActiveStore(ActiveStoreRequest query)
         {
             var store = _context.CuaHang.Find(query.id);
             store.TinhTrang = true;

@@ -14,20 +14,20 @@ namespace backend_dotnet_r06_mall.Services
 {
     public class CartServices
     {
-        private readonly BanHangContext _context;
+        private readonly SaleContext _context;
 
 
-        public CartServices(BanHangContext context)
+        public CartServices(SaleContext context)
         {
             _context = context;
         }
 
         public async Task<Guid> TaoDonHang(CartRequest gh, Guid userId)
         {
-            DonHang dh = new DonHang
+            Order dh = new Order
             {
-                DonHangId = new Guid(),
-                ThoiGian = DateTime.UtcNow,
+                OrderId = new Guid(),
+                CreatedDate = DateTime.UtcNow,
                 TinhTrangThanhToan = gh.isPaid,
                 KhachHang = await _context.KhachHang.FirstOrDefaultAsync(o => o.KhachHangId == userId),
                 SoLuong = 1,
@@ -37,11 +37,11 @@ namespace backend_dotnet_r06_mall.Services
                 HinhThucThanhToan = await _context.HinhThucThanhToan.FirstOrDefaultAsync(o=> o.TenHTTT == gh.paymentMethod)
             };
 
-            dh.DonHangSanPham = new List<DonHangSanPham>();
+            dh.DonHangSanPham = new List<OrderProduct>();
 
             foreach (var item in gh.cartItems)
             {
-                DonHangSanPham dhsp = new DonHangSanPham
+                OrderProduct dhsp = new OrderProduct
                 {
                     DonHang = dh,
                     SanPham = await _context.SanPham.FirstOrDefaultAsync(o => o.SanPhamId == item.product),
@@ -53,8 +53,8 @@ namespace backend_dotnet_r06_mall.Services
                 await _context.SaveChangesAsync();
             }
 
-            dh.TinhTrangDonHang = new List<TinhTrangDonHang>();
-            TinhTrangDonHang ttdh = new TinhTrangDonHang
+            dh.TinhTrangDonHang = new List<OrderStatus>();
+            OrderStatus ttdh = new OrderStatus
             {
                 TTDHId = new Guid(),
                 TenTinhTrang = "Chờ xác nhận",
@@ -70,7 +70,7 @@ namespace backend_dotnet_r06_mall.Services
             // return createResult is not null;
             return dh.DonHangId;
         }
-        public async Task<IList<DonHangSanPham>> loadDonHang(Guid donHangId)
+        public async Task<IList<OrderProduct>> loadDonHang(Guid donHangId)
         {
             //tra ve gio hang theo ma don hang trong bang DonHangSanPham
             var s = await _context.DonHang.Include(q => q.DonHangSanPham).FirstOrDefaultAsync(q => q.DonHangId == donHangId);

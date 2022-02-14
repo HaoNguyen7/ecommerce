@@ -14,11 +14,11 @@ namespace backend_dotnet_r06_mall.Services
 {
     public class DriverServices
     {
-        private readonly BanHangContext _context;
+        private readonly SaleContext _context;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public DriverServices(BanHangContext context, 
+        public DriverServices(SaleContext context, 
             UserManager<IdentityUser> userManager,
             RoleManager<IdentityRole> roleManager)
         {
@@ -29,9 +29,9 @@ namespace backend_dotnet_r06_mall.Services
 
         
 
-        public CuaHang FindNearestShop(SearchShortestStoreQuery query)
+        public Store FindNearestShop(SearchShortestStoreQuery query)
         {
-            var shortestStore = _context.CuaHang.AsQueryable().Select(x => new CuaHang
+            var shortestStore = _context.CuaHang.AsQueryable().Select(x => new Store
             {
                 CuaHangId = x.CuaHangId,
                 KinhDo = x.KinhDo,
@@ -121,7 +121,7 @@ namespace backend_dotnet_r06_mall.Services
             return await _context.NguoiGiaoHang.AsNoTracking().Include(o => o.DonHang).FirstOrDefaultAsync(o => o.NguoiGiaoId.Equals(shipperId));
         }
 
-        public async Task<KhachHang> GetKhachHangById(Guid orderId)
+        public async Task<Customer> GetKhachHangById(Guid orderId)
         {
             return await _context.KhachHang.AsNoTracking().FirstOrDefaultAsync(o => o.KhachHangId.Equals(orderId));
         }

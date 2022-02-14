@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace backend_dotnet_r06_mall.Models
 {
-    public class TinhTrangDonHang
+    public class OrderStatus
     {
         [Key]
         public Guid TTDHId { get; set; }
@@ -15,6 +15,6 @@ namespace backend_dotnet_r06_mall.Models
 
         public Guid DonHangId { get; set; }
 
-        public DonHang DonHang { get; set; }
+        public Order DonHang { get; set; }
     }
 }

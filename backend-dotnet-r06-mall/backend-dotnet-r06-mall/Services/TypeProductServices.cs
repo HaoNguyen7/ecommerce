@@ -15,22 +15,22 @@ namespace backend_dotnet_r06_mall.Services
 {
     public class TypeProductServices
     {
-        private readonly BanHangContext _context;
+        private readonly SaleContext _context;
 
 
-        public TypeProductServices(BanHangContext context)
+        public TypeProductServices(SaleContext context)
         {
             _context = context;
         }
 
-        public async Task<ICollection<LoaiSanPham>> GetLoaiSanPham()
+        public async Task<ICollection<Category>> GetLoaiSanPham()
         {
             return await _context.LoaiSanPham.ToListAsync();
         }
 
-        public async Task<EntityEntry<LoaiSanPham>> CreateLoaiSanPham(TypeProductRequest request)
+        public async Task<EntityEntry<Category>> CreateLoaiSanPham(TypeProductRequest request)
         {
-            LoaiSanPham loai = new LoaiSanPham
+            Category loai = new Category
             {
                 LoaiId = new Guid(),
                 Ten = request.LoaiSanPham,

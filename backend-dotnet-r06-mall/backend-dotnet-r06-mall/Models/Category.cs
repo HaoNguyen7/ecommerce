@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace backend_dotnet_r06_mall.Models
 {
-    public class LoaiSanPham
+    public class Category
     {
         [Key]
-        public Guid LoaiId { get; set; }
+        public Guid CategoryId { get; set; }
         [MaxLength(50)]
-        public string Ten { get; set; }
+        public string Name { get; set; }
     }
 }

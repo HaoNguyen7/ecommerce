@@ -27,7 +27,7 @@ namespace backend_dotnet_r06_mall.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly JwtConfig _jwtConfig;
 
-        private readonly BanHangContext _context;
+        private readonly SaleContext _context;
         private readonly CustomerServices _service;
         private readonly ILogger<ProductController> _logger;
 
@@ -36,7 +36,7 @@ namespace backend_dotnet_r06_mall.Controllers
             UserManager<IdentityUser> userManager,
             IOptionsMonitor<JwtConfig> optionsMonitor,
             RoleManager<IdentityRole> roleManager,
-            BanHangContext context,
+            SaleContext context,
             CustomerServices service,
             ILogger<ProductController> logger
 
@@ -59,7 +59,7 @@ namespace backend_dotnet_r06_mall.Controllers
             var existingUser = await _userManager.FindByIdAsync(KhachHangId.ToString());
             if (KhachHangId != null)
             {
-                KhachHang customer = await _service.UpdateCustomer(request, KhachHangId);
+                Customer customer = await _service.UpdateCustomer(request, KhachHangId);
                 return Ok(customer);
             }
             else
@@ -71,11 +71,11 @@ namespace backend_dotnet_r06_mall.Controllers
         [HttpGet]
         [Route("Get_Profile")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Khach)]
-        public async Task<KhachHang> GetProfile()
+        public async Task<Customer> GetProfile()
         {
             Guid KhachHangId = new Guid(User.FindFirst("Id")?.Value);
             var existingUser = await _userManager.FindByIdAsync(KhachHangId.ToString());
-            KhachHang kh = await _context.KhachHang.FindAsync(KhachHangId);
+            Customer kh = await _context.Customers.FindAsync(KhachHangId);
             return kh;
 
         }
@@ -84,10 +84,10 @@ namespace backend_dotnet_r06_mall.Controllers
         [HttpGet]
         [Route("ManageAccountByAdmin")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Admin)]
-        public async Task<List<KhachHang>> GetUsersAsync()
+        public async Task<List<Customer>> GetUsersAsync()
         {
 
-            return await _context.KhachHang.ToListAsync();
+            return await _context.Customers.ToListAsync();
 
         }
 

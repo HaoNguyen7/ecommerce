@@ -71,7 +71,7 @@ namespace backend_dotnet_r06_mall
             c.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
             c.AddSecurityRequirement(new OpenApiSecurityRequirement { { jwtSecurityScheme, Array.Empty<string>() } });
             });
-            services.AddDbContext<BanHangContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Database")));
+            services.AddDbContext<SaleContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Database")));
             services.AddScoped<ProductServices>();
             services.AddScoped<DriverServices>();
             services.AddScoped<DeliveredServices>();
@@ -102,7 +102,7 @@ namespace backend_dotnet_r06_mall
                     ValidateLifetime = true
                 };
             });
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>().AddEntityFrameworkStores<BanHangContext>();
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>().AddEntityFrameworkStores<SaleContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
