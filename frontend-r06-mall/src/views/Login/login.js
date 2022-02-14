@@ -20,7 +20,7 @@ function LogIn() {
 	const onClickSubmit = () => {
 		axios({
 			method: 'POST',
-			url: 'https://localhost:5001/Accounts/Login',
+			url: 'https://localhost:44391/Accounts/Login',
 			data: {
 				email: email,
 				password: password

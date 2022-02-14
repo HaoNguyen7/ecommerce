@@ -43,6 +43,11 @@ namespace backend_dotnet_r06_mall.Services
                     || s.LoaiSanPham.Ten.Contains(query.searchString));
             }
 
+            //if (query.status > 0)
+            //{
+            //    products = products.Where(s => s.TinhTrang.Equals(query.status));
+            //}
+
             switch (query.sortOrder)
             {
                 case "price_desc":

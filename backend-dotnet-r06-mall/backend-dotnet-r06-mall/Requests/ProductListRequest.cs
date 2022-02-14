@@ -24,6 +24,7 @@ namespace backend_dotnet_r06_mall.Requests
         public String shopId { get; set; }
         public string sortOrder { get; set; } = "date_desc";
         public string searchString { get; set; }
+        public int status { get; set; }
     }
 
 }

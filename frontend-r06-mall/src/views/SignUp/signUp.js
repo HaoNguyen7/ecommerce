@@ -21,7 +21,7 @@ function SignUp() {
   const onClickSubmit = () => {
     axios({
       method:"POST",
-      url: "https://localhost:5001/Accounts/Register",
+      url: "https://localhost:44391/Accounts/Register",
       data: {
         tenKhachHang: userName,
         email: email,

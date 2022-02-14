@@ -34,7 +34,7 @@ function ManageProduct() {
     }
     axios({
       method: "GET",
-      url: "https://localhost:5001/api/TypeProduct",
+      url: "https://localhost:44391/api/TypeProduct",
     }).then((res) => {
       listCategory.push({ loaiId: "All", ten: "All" })
       listCategory = res.data;
@@ -44,7 +44,7 @@ function ManageProduct() {
 
     axios({
       method: "GET",
-      url: "https://localhost:5001/Store/get-store-by-user",
+      url: "https://localhost:44391/Store/get-store-by-user",
       headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` },
       params: params,
     }).then((res) => {
@@ -70,7 +70,7 @@ function ManageProduct() {
     console.log(params)
     axios({
       method: "GET",
-      url: "https://localhost:5001/api/Product",
+      url: "https://localhost:44391/api/Product",
       params: params
     }).then((res) => {
       listProduct.push()

@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backend-dotnet-r06-mall", "backend-dotnet-r06-mall\backend-dotnet-r06-mall.csproj", "{BE780F62-D97E-4CF0-8766-17C9F3D544B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "backend-dotnet-r06-mall", "backend-dotnet-r06-mall\backend-dotnet-r06-mall.csproj", "{BE780F62-D97E-4CF0-8766-17C9F3D544B0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authentication", "Authentication\Authentication.csproj", "{6370D4A4-E04E-4595-B75B-DB741CF76D9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{BE780F62-D97E-4CF0-8766-17C9F3D544B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE780F62-D97E-4CF0-8766-17C9F3D544B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE780F62-D97E-4CF0-8766-17C9F3D544B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6370D4A4-E04E-4595-B75B-DB741CF76D9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6370D4A4-E04E-4595-B75B-DB741CF76D9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6370D4A4-E04E-4595-B75B-DB741CF76D9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6370D4A4-E04E-4595-B75B-DB741CF76D9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
