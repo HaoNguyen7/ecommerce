@@ -5,7 +5,7 @@ namespace backend_dotnet_r06_mall.Response
 {
     public class CuaHangResponse
     {
-        public Guid CuaHangId { get; set; }
+        public int CuaHangId { get; set; }
         public string TenCuaHang { get; set; }
         public string MoTa { get; set; }
         public string DanhGia { get; set; }
@@ -19,17 +19,13 @@ namespace backend_dotnet_r06_mall.Response
         public string GiayPhepKinhDoanh { get; set; }
         public CuaHangResponse(Store cuaHang)
         {
-            CuaHangId = cuaHang.CuaHangId;
-            TenCuaHang = cuaHang.TenCuaHang;
-            MoTa = cuaHang.MoTa;
-            DanhGia = cuaHang.DanhGia;
-            SoDienThoai = cuaHang.SoDienThoai;
-            STK = cuaHang. STK;
+            CuaHangId = cuaHang.StoreId;
+            TenCuaHang = cuaHang.StoreName;
+            MoTa = cuaHang.Description;
+            DanhGia = cuaHang.Comment;
+            SoDienThoai = cuaHang.PhoneNumber;
             DiaChi = cuaHang.DiaChi;
-            TinhTrang = cuaHang.TinhTrang;
-            KinhDo = cuaHang.KinhDo;
-            ViDo = cuaHang.ViDo;
-            GiayPhepKinhDoanh = cuaHang.GiayPhepKinhDoanh;
+            TinhTrang = cuaHang.Status;
         }
     }
 }

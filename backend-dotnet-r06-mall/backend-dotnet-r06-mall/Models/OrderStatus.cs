@@ -6,15 +6,15 @@ namespace backend_dotnet_r06_mall.Models
     public class OrderStatus
     {
         [Key]
-        public Guid TTDHId { get; set; }
+        public int OrderStatusId { get; set; }
         [MaxLength(30)]
-        public string TenTinhTrang { get; set; }
-        public string GhiChu { get; set; }
+        public string OrderStatusName { get; set; }
+        public string Note { get; set; }
         [Required]
-        public DateTime NgayThucHien { get; set; }
+        public DateTime CreatedDate { get; set; }
 
-        public Guid DonHangId { get; set; }
+        public int OrderId { get; set; }
 
-        public Order DonHang { get; set; }
+        public Order Order { get; set; }
     }
 }

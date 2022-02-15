@@ -97,7 +97,7 @@ namespace backend_dotnet_r06_mall.Controllers
                 }
                 // Add Khach hang to db
                 var _khachHang = new Customer();
-                _khachHang.CustomerId = new Guid(newUser.Id);
+                _khachHang.CustomerId = 1;
                 _khachHang.CustomerName = registrationDto.TenKhachHang;
                 _khachHang.Email = registrationDto.Email;
 

@@ -20,7 +20,7 @@ namespace backend_dotnet_r06_mall.Data
         public DbSet<OrderStatus>? OrderStatuses { get; set; }
 
         public DbSet<OrderProduct>? OrderProducts { get; set; }
-
+        public DbSet<SubCategory>? SubCategories { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Order>()

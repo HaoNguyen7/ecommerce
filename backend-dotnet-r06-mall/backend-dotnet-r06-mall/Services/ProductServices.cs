@@ -25,22 +25,22 @@ namespace backend_dotnet_r06_mall.Services
 
         public async Task<List<Product>> GetProducts(ProductListRequest query)
         {
-            var products = from s in _context.SanPham
+            var products = from s in _context.Products
                            select s;
 
             if (query.shopId is not null && !query.shopId.Equals(""))
             {
-                products = products.Where(s => s.CuaHang.CuaHangId.Equals(new Guid(query.shopId)));
+                products = products.Where(s => s.Store.StoreId.Equals(new Guid(query.shopId)));
             }
 
             if (!String.IsNullOrEmpty(query.categoryId))
             {
-                products = products.Where(s => s.LoaiSanPham.LoaiId.Equals(new Guid(query.categoryId)));
+                products = products.Where(s => s.Category.CategoryId.Equals(new Guid(query.categoryId)));
             }
             if (!String.IsNullOrEmpty(query.searchString))
             {
-                products = products.Where(s => s.TenSanPham.Contains(query.searchString)
-                    || s.LoaiSanPham.Ten.Contains(query.searchString));
+                products = products.Where(s => s.ProductName.Contains(query.searchString)
+                    || s.Category.CategoryName.Contains(query.searchString));
             }
 
             //if (query.status > 0)
@@ -51,91 +51,90 @@ namespace backend_dotnet_r06_mall.Services
             switch (query.sortOrder)
             {
                 case "price_desc":
-                    products = products.OrderByDescending(s => s.DonGia);
+                    products = products.OrderByDescending(s => s.UnitPrice);
                     break;
                 case "price_asc":
-                    products = products.OrderBy(s => s.DonGia);
+                    products = products.OrderBy(s => s.UnitPrice);
                     break;
                 case "date_desc":
-                    products = products.OrderByDescending(s => s.NgayDang);
+                    products = products.OrderByDescending(s => s.CreatedDate);
                     break;
                 case "date_asc":
-                    products = products.OrderBy(s => s.NgayDang);
+                    products = products.OrderBy(s => s.CreatedDate);
                     break;
                 default:
-                    products = products.OrderByDescending(s => s.NgayDang);
+                    products = products.OrderByDescending(s => s.CreatedDate);
                     break;
             }
 
-            var res = await products.Include(o => o.CuaHang).AsNoTracking().ToListAsync();
+            var res = await products.Include(o => o.Store).AsNoTracking().ToListAsync();
             return res;
 
         }
         public async Task<Product> GetProductDetail(Guid productId)
         {
-            return await _context.SanPham.Include(o => o.CuaHang).Include(o => o.LoaiSanPham).AsNoTracking().FirstOrDefaultAsync(o => o.SanPhamId.Equals(productId));
+            return await _context.Products.Include(o => o.Store).Include(o => o.Category).AsNoTracking().FirstOrDefaultAsync(o => o.ProductId.Equals(productId));
         }
 
         public async Task<EntityEntry<Product>> CreateProduct(RegisterProductRequest request)
         {
             Product sanpham = new Product
             {
-                SanPhamId = new Guid(),
-                TenSanPham = request.TenSanPham,
-                MoTa = request.MoTa,
-                DonVi = request.DonVi,
-                DonGia = request.DonGia,
-                LoaiSanPham = _context.LoaiSanPham.FirstOrDefault(o => o.LoaiId == request.LoaiSanPham),
-                TonKho = request.TonKho,
-                CuaHang = _context.CuaHang.FirstOrDefault(o => o.CuaHangId == request.CuaHang),
-                NgayDang = DateTime.Now,
-                HinhMinhHoa = request.HinhMinhHoa,
-                NguonGoc = request.NguonGoc
+                ProductName = request.TenSanPham,
+                Description = request.MoTa,
+                Unit = request.DonVi,
+                UnitPrice = request.DonGia,
+                Category = _context.Categories.FirstOrDefault(o => o.CategoryId == request.LoaiSanPham),
+                InventoryNumber = request.TonKho,
+                Store = _context.Stores.FirstOrDefault(o => o.StoreId == request.CuaHang),
+                CreatedDate = DateTime.Now,
+                Image = request.HinhMinhHoa,
+                Origin = request.NguonGoc
             };
 
-            var createResult = await _context.SanPham.AddAsync(sanpham);
+            var createResult = await _context.Products.AddAsync(sanpham);
             await _context.SaveChangesAsync();
             return createResult;
         }
 
         public async Task<Product> UpdateProduct(UpdateProductRequest request)
         {
-            Product product = _context.SanPham.Find(request.id);
+            Product product = _context.Products.Find(request.id);
             if (product == null)
             {
                 return null;
             }
             if (!String.IsNullOrEmpty(request.TenSanPham))
             {
-                product.TenSanPham = request.TenSanPham;
+                product.ProductName = request.TenSanPham;
             }
             if (!String.IsNullOrEmpty(request.MoTa))
             {
-                product.MoTa = request.MoTa;
+                product.Description = request.MoTa;
             }
             if (request.TonKho > 0)
             {
-                product.TonKho = request.TonKho;
+                product.InventoryNumber = request.TonKho;
             }
             if (request.DonVi != "")
             {
-                product.DonVi = request.DonVi;
+                product.Unit = request.DonVi;
             }
             if (request.TonKho > 0)
             {
-                product.DonGia = request.DonGia;
+                product.UnitPrice = request.DonGia;
             }
-            if (request.LoaiSanPham != Guid.Empty && _context.LoaiSanPham.FirstOrDefault(o => o.LoaiId == request.LoaiSanPham) != null)
+            if (request.LoaiSanPham > 0 && _context.Categories.FirstOrDefault(o => o.CategoryId == request.LoaiSanPham) != null)
             {
-                product.LoaiSanPham = _context.LoaiSanPham.FirstOrDefault(o => o.LoaiId == request.LoaiSanPham);
+                product.Category = _context.Categories.FirstOrDefault(o => o.CategoryId == request.LoaiSanPham);
             }
             if (request.HinhMinhHoa != "")
             {
-                product.HinhMinhHoa = request.HinhMinhHoa;
+                product.Image = request.HinhMinhHoa;
             }
 
             if(request.NguonGoc != "") {
-                product.NguonGoc = request.NguonGoc;
+                product.Origin = request.NguonGoc;
             }
             await _context.SaveChangesAsync();
             return product;
@@ -143,20 +142,20 @@ namespace backend_dotnet_r06_mall.Services
 
         public async Task<bool> RemoveProduct(RemoveProductRequest request)
         {
-            Product product = _context.SanPham.Find(request.id);
+            Product product = _context.Products.Find(request.id);
             if (product == null)
             {
                 return false;
             }
 
-            _context.SanPham.Remove(product);
+            _context.Products.Remove(product);
             await _context.SaveChangesAsync();
             return true;
         }
 
         public async Task<List<Category>> getCategories()
         {
-            return await _context.LoaiSanPham.AsNoTracking().ToListAsync();
+            return await _context.Categories.AsNoTracking().ToListAsync();
         }
     }
 }

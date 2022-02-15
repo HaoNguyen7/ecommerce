@@ -39,7 +39,7 @@ namespace backend_dotnet_r06_mall.Controllers
 
         [HttpGet("view/{orderId}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Khach + "," + RoleConstants.TaiXe)]
-        public async Task<IActionResult> GetUserOrderById(Guid orderId)
+        public async Task<IActionResult> GetUserOrderById(int orderId)
         {
             Guid userId = new Guid(User.FindFirst("Id")?.Value);
             var order = await _service.GetOrderById(orderId);
@@ -48,7 +48,7 @@ namespace backend_dotnet_r06_mall.Controllers
                 return NotFound();
             }
 
-            if (order.KhachHang is null || !order.KhachHang.KhachHangId.Equals(userId))
+            if (order.Customer is null || !order.Customer.CustomerId.Equals(userId))
             {
                 return Forbid();
             }
@@ -58,7 +58,7 @@ namespace backend_dotnet_r06_mall.Controllers
 
         [HttpGet("view/driver/{orderId}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.TaiXe)]
-        public async Task<IActionResult> GetDriverOrderById(Guid orderId)
+        public async Task<IActionResult> GetDriverOrderById(int orderId)
         {
             Guid userId = new Guid(User.FindFirst("Id")?.Value);
             var order = await _service.GetOrderDriverByID(orderId);
@@ -72,7 +72,7 @@ namespace backend_dotnet_r06_mall.Controllers
 
         [HttpDelete("tracking/{orderId}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Khach)]
-        public async Task<IActionResult> CancelUserOrder(Guid orderId)
+        public async Task<IActionResult> CancelUserOrder(int orderId)
         {
             Guid userId = new Guid(User.FindFirst("Id")?.Value);
             var order = await _service.GetOrderById(orderId);
@@ -81,7 +81,7 @@ namespace backend_dotnet_r06_mall.Controllers
                 return NotFound();
             }
 
-            if (order.KhachHang is null || !order.KhachHang.KhachHangId.Equals(userId))
+            if (order.Customer is null || !order.Customer.CustomerId.Equals(userId))
             {
                 return Forbid();
             }
@@ -99,7 +99,7 @@ namespace backend_dotnet_r06_mall.Controllers
 
         [HttpGet("tracking/{orderId}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Khach)]
-        public async Task<IActionResult> TrackUserOrder(Guid orderId)
+        public async Task<IActionResult> TrackUserOrder(int orderId)
         {
             Guid userId = new Guid(User.FindFirst("Id")?.Value);
             var order = await _service.GetOrderById(orderId);
@@ -108,7 +108,7 @@ namespace backend_dotnet_r06_mall.Controllers
                 return NotFound();
             }
 
-            if (order.KhachHang is null || !order.KhachHang.KhachHangId.Equals(userId))
+            if (order.Customer is null || !order.Customer.CustomerId.Equals(userId))
             {
                 return Forbid();
             }

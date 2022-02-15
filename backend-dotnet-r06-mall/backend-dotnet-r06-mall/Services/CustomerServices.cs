@@ -22,32 +22,28 @@ namespace backend_dotnet_r06_mall.Services
         }
         public async Task<Customer> UpdateCustomer(UpdateInfoCustomerRequest request, Guid KhachHangId)
         {
-            Customer customer = _context.KhachHang.Find(KhachHangId);
+            Customer customer = _context.Customers.Find(KhachHangId);
             if (customer == null)
             {
                 return null;
             }
             if (!String.IsNullOrEmpty(request.TenKhachHang))
             {
-                customer.TenKhachHang = request.TenKhachHang;
+                customer.CustomerName = request.TenKhachHang;
             }
             if (!String.IsNullOrEmpty(request.SoDienThoai))
             {
-                customer.SoDienThoai = request.SoDienThoai;
+                customer.PhoneNumber = request.SoDienThoai;
             }
 
             if (request.DiaChi != "")
             {
-                customer.DiaChi = request.DiaChi;
+                customer.Address = request.DiaChi;
             }
 
             if (request.Cccd != "")
             {
-                customer.Cccd = request.Cccd;
-            }
-            if (request.STK != "")
-            {
-                customer.STK = request.STK;
+                customer.IdentityNumber = request.Cccd;
             }
             if (request.Vung != "")
             {

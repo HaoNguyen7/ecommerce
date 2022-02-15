@@ -24,37 +24,36 @@ namespace backend_dotnet_r06_mall.Services
 
         public async Task<PagedList<Order>> GetUserOrder(Guid userId, OrderHistoryRequest query)
         {
-            var orders = _context.DonHang.Include(o => o.KhachHang).Where(o => o.KhachHang.KhachHangId.Equals(userId)).OrderByDescending(o => o.ThoiGian);
+            var orders = _context.Orders.Include(o => o.Customer).Where(o => o.Customer.CustomerId.Equals(userId)).OrderByDescending(o => o.CreatedDate);
             return await PagedList<Order>.CreateAsync(orders, query.pageIndex, query.pageSize);
         }
 
-        public async Task<Order> GetOrderById(Guid orderId)
+        public async Task<Order> GetOrderById(int orderId)
         {
-            return await _context.DonHang.Include(o => o.KhachHang).Include(o => o.DonHangSanPham).Include(o => o.SanPham).FirstOrDefaultAsync(p => p.DonHangId == orderId);
+            return await _context.Orders.Include(o => o.Customer).Include(o => o.OrderProduct).Include(o => o.Product).FirstOrDefaultAsync(p => p.OrderId == orderId);
         }
 
-        public async Task<OrderStatus> GetOrderLastestState(Guid orderId)
+        public async Task<OrderStatus> GetOrderLastestState(int orderId)
         {
-            return await _context.TinhTrangDonHang.AsNoTracking().OrderByDescending(k => k.NgayThucHien).FirstOrDefaultAsync(o => o.DonHang.DonHangId == orderId);
+            return await _context.OrderStatuses.AsNoTracking().OrderByDescending(k => k.CreatedDate).FirstOrDefaultAsync(o => o.Order.OrderId == orderId);
         }
 
         public async Task<Boolean> UserCancelOrder(Order order)
         {
-            var latestState = await GetOrderLastestState(order.DonHangId);
+            var latestState = await GetOrderLastestState(order.OrderId);
 
             if (
-                latestState.TenTinhTrang != OrderStateConstants.DangVanChuyen && latestState.TenTinhTrang != OrderStateConstants.GiaoHangThanhCong && latestState.TenTinhTrang != OrderStateConstants.KhachHuyDon)
+                latestState.OrderStatusName != OrderStateConstants.DangVanChuyen && latestState.OrderStatusName != OrderStateConstants.GiaoHangThanhCong && latestState.OrderStatusName != OrderStateConstants.KhachHuyDon)
             {
                 OrderStatus tinhTrangDonHang = new OrderStatus()
                 {
-                    TTDHId = new Guid(),
-                    TenTinhTrang = OrderStateConstants.KhachHuyDon,
-                    NgayThucHien = DateTime.UtcNow,
-                    GhiChu = "Khách huỷ đơn",
-                    DonHang = order
+                    OrderStatusName = OrderStateConstants.KhachHuyDon,
+                    CreatedDate = DateTime.UtcNow,
+                    Note = "Khách huỷ đơn",
+                    Order = order
                 };
 
-                var AddResult = _context.TinhTrangDonHang.AddAsync(tinhTrangDonHang);
+                var AddResult = _context.OrderStatuses.AddAsync(tinhTrangDonHang);
                 await _context.SaveChangesAsync();
 
                 return AddResult.IsCompletedSuccessfully;
@@ -62,9 +61,9 @@ namespace backend_dotnet_r06_mall.Services
             return false;
         }
 
-        public async Task<IList<OrderProduct>> GetOrderDriverByID(Guid orderId)
+        public async Task<IList<OrderProduct>> GetOrderDriverByID(int orderId)
         {
-            return await _context.DonHangSanPham.Include(o => o.SanPham).Where(p => p.DonHangId == orderId).ToListAsync();
+            return await _context.OrderProducts.Include(o => o.Product).Where(p => p.OrderId == orderId).ToListAsync();
         }
 
     }

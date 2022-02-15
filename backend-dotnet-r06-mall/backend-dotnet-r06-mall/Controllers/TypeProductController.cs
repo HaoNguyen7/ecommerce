@@ -24,7 +24,7 @@ namespace backend_dotnet_r06_mall.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllTypeProduct()
         {
-            var result = await _service.GetLoaiSanPham();
+            var result = await _service.GetCategoriesAsync();
             return Ok(result);
         }
 

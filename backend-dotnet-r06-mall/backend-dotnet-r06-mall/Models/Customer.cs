@@ -7,7 +7,7 @@ namespace backend_dotnet_r06_mall.Models
     public class Customer
     {
         [Key]
-        public Guid CustomerId { get; set; }
+        public int CustomerId { get; set; }
 
         [MaxLength(50)]
         [Required]

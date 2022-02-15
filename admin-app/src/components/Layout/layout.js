@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import {
   DesktopOutlined,
   PieChartOutlined,
-  FileOutlined,
+  BarsOutlined,
   TeamOutlined,
   UserOutlined,
 } from '@ant-design/icons';
@@ -42,8 +42,20 @@ const Dashboard = () => {
               <Menu.Item key="6">Team 1</Menu.Item>
               <Menu.Item key="8">Team 2</Menu.Item>
             </SubMenu>
-            <Menu.Item key="9" icon={<FileOutlined />}>
-              Files
+            <Menu.Item key="9" icon={<BarsOutlined />}>
+              <Link to="category">
+                Category              
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="10" icon={<BarsOutlined />}>
+              <Link to="customer">
+                Customer              
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="11" icon={<BarsOutlined />}>
+              <Link to="order">
+                Order              
+              </Link>
             </Menu.Item>
           </Menu>
         </nav>

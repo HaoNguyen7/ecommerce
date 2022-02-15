@@ -22,66 +22,64 @@ namespace backend_dotnet_r06_mall.Services
             _context = context;
         }
 
-        public async Task<Guid> TaoDonHang(CartRequest gh, Guid userId)
+        public async Task<int> TaoDonHang(CartRequest gh, int userId)
         {
             Order dh = new Order
             {
-                OrderId = new Guid(),
                 CreatedDate = DateTime.UtcNow,
-                TinhTrangThanhToan = gh.isPaid,
-                KhachHang = await _context.KhachHang.FirstOrDefaultAsync(o => o.KhachHangId == userId),
-                SoLuong = 1,
-                DiaChi = gh.shippingAddress.address,
-                ThanhPho = gh.shippingAddress.city,
-                TongTien = gh.totalPrice,
-                HinhThucThanhToan = await _context.HinhThucThanhToan.FirstOrDefaultAsync(o=> o.TenHTTT == gh.paymentMethod)
+                PaymentStatus = gh.isPaid,
+                Customer = await _context.Customers.FirstOrDefaultAsync(o => o.CustomerId == userId),
+                Amount = 1,
+                Address = gh.shippingAddress.address,
+                City = gh.shippingAddress.city,
+                TotalPrice = gh.totalPrice,
+                PaymentType = await _context.PaymentTypes.FirstOrDefaultAsync(o=> o.PaymentName == gh.paymentMethod)
             };
 
-            dh.DonHangSanPham = new List<OrderProduct>();
+            dh.OrderProduct = new List<OrderProduct>();
 
             foreach (var item in gh.cartItems)
             {
                 OrderProduct dhsp = new OrderProduct
                 {
-                    DonHang = dh,
-                    SanPham = await _context.SanPham.FirstOrDefaultAsync(o => o.SanPhamId == item.product),
-                    SoLuong = item.qty
+                    Order = dh,
+                    Product = await _context.Products.FirstOrDefaultAsync(o => o.ProductId == item.product),
+                    Amount = item.qty
                 };
-                dh.DonHangSanPham.Add(dhsp);
-                var x = await _context.SanPham.FirstOrDefaultAsync(o => o.SanPhamId == item.product);
-                x.TonKho = x.TonKho - item.qty;
+                dh.OrderProduct.Add(dhsp);
+                var x = await _context.Products.FirstOrDefaultAsync(o => o.ProductId == item.product);
+                x.InventoryNumber = x.InventoryNumber - item.qty;
                 await _context.SaveChangesAsync();
             }
 
-            dh.TinhTrangDonHang = new List<OrderStatus>();
+            dh.OrderStatus = new List<OrderStatus>();
             OrderStatus ttdh = new OrderStatus
             {
-                TTDHId = new Guid(),
-                TenTinhTrang = "Chờ xác nhận",
-                DonHangId = dh.DonHangId,
-                NgayThucHien = DateTime.UtcNow,
-                DonHang = dh
+                OrderStatusName = "Chờ xác nhận",
+                OrderId = dh.OrderId,
+                CreatedDate = DateTime.UtcNow,
+                Order = dh
             };
-            dh.TinhTrangDonHang.Add(ttdh);
+            dh.OrderStatus.Add(ttdh);
             await _context.SaveChangesAsync();
 
-            var createResult = await _context.DonHang.AddAsync(dh);
+            var createResult = await _context.Orders.AddAsync(dh);
             await _context.SaveChangesAsync();
             // return createResult is not null;
-            return dh.DonHangId;
+            return dh.OrderId;
         }
-        public async Task<IList<OrderProduct>> loadDonHang(Guid donHangId)
+        public async Task<IList<OrderProduct>> loadDonHang(int donHangId)
         {
             //tra ve gio hang theo ma don hang trong bang DonHangSanPham
-            var s = await _context.DonHang.Include(q => q.DonHangSanPham).FirstOrDefaultAsync(q => q.DonHangId == donHangId);
-            return s.DonHangSanPham;
+            var s = await _context.Orders.Include(q => q.OrderProduct).FirstOrDefaultAsync(q => q.OrderId == donHangId);
+            return s.OrderProduct;
             
         }
         // update tinh trang don hang = da thanh toan
-        public async Task<bool> thanhToan(Guid orderId)
+        public async Task<bool> thanhToan(int orderId)
         {
-            var createdResult = await _context.DonHang.FirstOrDefaultAsync(o => o.DonHangId == orderId);
-            createdResult.TinhTrangThanhToan = true;
+            var createdResult = await _context.Orders.FirstOrDefaultAsync(o => o.OrderId == orderId);
+            createdResult.PaymentStatus = true;
             await _context.SaveChangesAsync();
             return createdResult is not null;
         }

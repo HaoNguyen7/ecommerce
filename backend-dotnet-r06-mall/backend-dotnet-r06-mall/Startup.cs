@@ -73,8 +73,6 @@ namespace backend_dotnet_r06_mall
             });
             services.AddDbContext<SaleContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Database")));
             services.AddScoped<ProductServices>();
-            services.AddScoped<DriverServices>();
-            services.AddScoped<DeliveredServices>();
             services.AddScoped<CartServices>();
             services.AddScoped<OrderServices>();
             services.AddScoped<StoreService>();

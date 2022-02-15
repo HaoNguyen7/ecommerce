@@ -1,8 +1,8 @@
 import React from 'react'
-
+import ListLayout from '../../components/List/ListLayout'
 const Product = () => {
   return (
-    <div>Product</div>
+    <ListLayout />
   )
 }
 

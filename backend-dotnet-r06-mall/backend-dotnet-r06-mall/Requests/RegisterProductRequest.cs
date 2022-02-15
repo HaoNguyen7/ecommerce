@@ -8,8 +8,8 @@ namespace backend_dotnet_r06_mall.Requests
         public int TonKho { get; set; }
         public string DonVi { get; set; }
         public int DonGia { get; set; }
-        public Guid LoaiSanPham { get; set; }
-        public Guid CuaHang { get; set; }
+        public int LoaiSanPham { get; set; }
+        public int CuaHang { get; set; }
         public string HinhMinhHoa  { get; set; }
         public string NguonGoc { get; set; }
     }

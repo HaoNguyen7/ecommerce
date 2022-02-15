@@ -23,20 +23,19 @@ namespace backend_dotnet_r06_mall.Services
             _context = context;
         }
 
-        public async Task<ICollection<Category>> GetLoaiSanPham()
+        public async Task<ICollection<Category>> GetCategoriesAsync()
         {
-            return await _context.LoaiSanPham.ToListAsync();
+            return await _context.Categories.ToListAsync();
         }
 
         public async Task<EntityEntry<Category>> CreateLoaiSanPham(TypeProductRequest request)
         {
             Category loai = new Category
             {
-                LoaiId = new Guid(),
-                Ten = request.LoaiSanPham,
+                CategoryName = request.LoaiSanPham,
             };
 
-            var createResult = await _context.LoaiSanPham.AddAsync(loai);
+            var createResult = await _context.Categories.AddAsync(loai);
             await _context.SaveChangesAsync();
             return createResult;
         }

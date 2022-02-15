@@ -37,10 +37,10 @@ namespace backend_dotnet_r06_mall.Controllers
 
         [HttpPost("Create")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Khach)]
-        public async Task<Guid> TaoDonHang([FromBody] CartRequest gh)
+        public async Task<int> TaoDonHang([FromBody] CartRequest gh)
         {
-            Guid userId = new Guid(User.FindFirst("Id")?.Value);
-            var dh = await _service.TaoDonHang(gh, userId);
+            //Guid userId = new Guid(User.FindFirst("Id")?.Value);
+            var dh = await _service.TaoDonHang(gh, 1);
             // return dh ? Ok() : BadRequest();
             return dh;
         }
@@ -52,7 +52,7 @@ namespace backend_dotnet_r06_mall.Controllers
         }
         [HttpPut("{orderId}/pay")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = RoleConstants.Khach)]
-        public async Task<IActionResult> ThanhToan(Guid orderId)
+        public async Task<IActionResult> ThanhToan(int orderId)
         {
             Guid userId = new Guid(User.FindFirst("Id")?.Value);
             var temp = await _service.thanhToan(orderId);
