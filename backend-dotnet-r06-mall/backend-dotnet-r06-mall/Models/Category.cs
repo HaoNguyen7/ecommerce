@@ -9,5 +9,7 @@ namespace backend_dotnet_r06_mall.Models
         public int CategoryId { get; set; }
         [MaxLength(50)]
         public string CategoryName { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime UpdatedDate { get; set; }
     }
 }

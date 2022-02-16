@@ -29,15 +29,24 @@ namespace backend_dotnet_r06_mall.Controllers
         }
 
         [HttpPost]
-        [Route("register")]
+        [Route("create")]
         public async Task<IActionResult> TypeProductRegister([FromBody] TypeProductRequest request)
         {
             var createStore = await _service.CreateLoaiSanPham(request);
             if (createStore is null)
             {
-                return BadRequest();
+                return BadRequest("Danh mục đã tồn tại");
             }
             return Ok("Good");
+        }
+
+        [HttpGet]
+        [Route("subcategory")]
+        public async Task<IActionResult> GetSubCategory(int categoryId)
+        {
+            var subCategoryList = await _service.GetSubCategoriesAsync(categoryId);
+
+            return Ok(subCategoryList);
         }
 
     }

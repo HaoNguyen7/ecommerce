@@ -28,11 +28,22 @@ namespace backend_dotnet_r06_mall.Services
             return await _context.Categories.ToListAsync();
         }
 
+        public async Task<ICollection<SubCategory>> GetSubCategoriesAsync(int categoryId)
+        {
+            return await _context.SubCategories.Where(x => x.CategoriId == categoryId).ToListAsync();
+        }
+
         public async Task<EntityEntry<Category>> CreateLoaiSanPham(TypeProductRequest request)
         {
+            var isDuplicate = _context.Categories.Any(x => x.CategoryName == request.CategoryName);
+            if (isDuplicate)
+            {
+                return null;
+            }
             Category loai = new Category
             {
-                CategoryName = request.LoaiSanPham,
+                CategoryName = request.CategoryName,
+                CreatedDate = DateTime.Now
             };
 
             var createResult = await _context.Categories.AddAsync(loai);

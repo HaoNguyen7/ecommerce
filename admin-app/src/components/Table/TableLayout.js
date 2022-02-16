@@ -63,9 +63,7 @@ const EditableTable = (props) => {
 
   const edit = (record) => {
     form.setFieldsValue({
-      name: '',
-      age: '',
-      address: '',
+      categoryName: '',
       ...record,
     });
     setEditingKey(record.key);
@@ -98,12 +96,20 @@ const EditableTable = (props) => {
 
   const columns = [
     {
+      title: 'Số thứ tự',
+      dataIndex: 'categoryId',
+      width: '20%',
+      editable: true,
+      render: 
+        text => <Link to={`${text}`}>{text}</Link>
+    },
+    {
       title: 'Tên danh mục',
       dataIndex: 'categoryName',
       width: '70%',
       editable: true,
       render: 
-        text => <Link to={`${props}/`}>{text}</Link>
+        text => <Link to={`${text}`}>{text}</Link>
     },
     {
       title: 'Thao tác',

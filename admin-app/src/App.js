@@ -8,8 +8,9 @@ import Login from './views/Login/Login';
 import Category from './views/Category/Category'
 import Customer from './views/Customer/Customer'
 import Order from './views/Order/Order'
+import CreateCategory from './views/Category/CreateCategory';
 function App() {
-  return (
+  return (<>
       <Routes>
         <Route path="/" element={<Dashboard />}>
           <Route index element={<HomePage />} />
@@ -17,13 +18,19 @@ function App() {
           <Route path="user">
             <Route path=":id" element={<Product />} />
           </Route>
-          <Route path="category" element={<Category />} />
+          <Route path="category">
+            <Route path="" element={<Category />} />
+            <Route path=":id" element={<Product />} />
+            <Route path="create" element={<CreateCategory />} />
+
+          </Route>
           <Route path="customer" element={<Customer />} />
           <Route path="order" element={<Order />} />
 
         </Route>
         <Route path='/login' element={<Login />} />
       </Routes>
+  </>
   );
 }
 

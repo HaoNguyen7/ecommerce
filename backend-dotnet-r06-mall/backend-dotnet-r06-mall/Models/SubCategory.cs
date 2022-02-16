@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace backend_dotnet_r06_mall.Models
 {
@@ -10,5 +11,7 @@ namespace backend_dotnet_r06_mall.Models
         public string SubCategoryName { get; set; }
         public int CategoriId { get; set; }
         public Category Category { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime UpdatedDate { get; set; }
     }
 }

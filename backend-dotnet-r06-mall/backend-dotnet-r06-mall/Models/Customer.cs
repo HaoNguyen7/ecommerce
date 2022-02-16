@@ -32,5 +32,8 @@ namespace backend_dotnet_r06_mall.Models
         [EmailAddress]
         public string? Email { get; set; }
 
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+
     }
 }

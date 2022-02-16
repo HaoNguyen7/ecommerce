@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { Layout, Menu, Breadcrumb } from 'antd';
 import 'antd/dist/antd.css';
 import {
@@ -9,10 +9,13 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { Link, Outlet } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
+
 const Dashboard = () => {
-  const [collapsed,setCollapsed] = useState(false)
+  const [collapsed, setCollapsed] = useState(false)
 
   const onCollapse = collapsed => {
     console.log(collapsed);
@@ -26,14 +29,14 @@ const Dashboard = () => {
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item key="1" icon={<PieChartOutlined />}>
               Home
-              <Link to="/"/>
+              <Link to="/" />
             </Menu.Item>
             <Menu.Item key="2" icon={<DesktopOutlined />}>
-              <Link to="product"/>
+              <Link to="product" />
               Product
             </Menu.Item>
             <SubMenu key="sub1" icon={<UserOutlined />} title="User">
-              
+
               <Menu.Item key="3"><Link to="user/tom" >Tom</Link></Menu.Item>
               <Menu.Item key="4">Bill</Menu.Item>
               <Menu.Item key="5">Alex</Menu.Item>
@@ -44,17 +47,17 @@ const Dashboard = () => {
             </SubMenu>
             <Menu.Item key="9" icon={<BarsOutlined />}>
               <Link to="category">
-                Category              
+                Category
               </Link>
             </Menu.Item>
             <Menu.Item key="10" icon={<BarsOutlined />}>
               <Link to="customer">
-                Customer              
+                Customer
               </Link>
             </Menu.Item>
             <Menu.Item key="11" icon={<BarsOutlined />}>
               <Link to="order">
-                Order              
+                Order
               </Link>
             </Menu.Item>
           </Menu>
@@ -68,11 +71,22 @@ const Dashboard = () => {
             <Breadcrumb.Item>Bill</Breadcrumb.Item>
           </Breadcrumb>
           <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-          <Outlet />
+            <Outlet />
           </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>General Store 2022</Footer>
       </Layout>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </Layout>
   )
 }

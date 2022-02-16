@@ -2,6 +2,6 @@
 {
     public class TypeProductRequest
     {
-        public string LoaiSanPham { get; set; }
+        public string CategoryName { get; set; }
     }
 }

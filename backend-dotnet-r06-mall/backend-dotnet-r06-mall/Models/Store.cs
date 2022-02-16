@@ -23,5 +23,7 @@ namespace backend_dotnet_r06_mall.Models
         [MaxLength(30)]
         public Boolean Status { get; set; }
         public string DiaChi { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime UpdatedDate { get; set; }
     }
 }

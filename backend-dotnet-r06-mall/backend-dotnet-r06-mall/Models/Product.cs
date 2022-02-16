@@ -38,6 +38,7 @@ namespace backend_dotnet_r06_mall.Models
         public virtual ICollection<Order> Order { get; set; }
         [JsonIgnore]
         public List<OrderProduct> OrderProduct { get; set; }
+        public virtual Distributor Distributor { get; set; }
 
     }
 }
